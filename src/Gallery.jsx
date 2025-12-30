@@ -21,10 +21,13 @@ function Gallery() {
   const sortedGroups = Object.values(groupedPhotos).sort((a, b) => b.year - a.year);
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4">
       {sortedGroups.map((group) => (
         <section key={`${group.location}-${group.year}`} className="mb-24">
-          <h2 className="font-light text-2xl mb-6">{group.location} {group.year}</h2>
+          <h2 className="font-light text-2xl mb-6">
+            {group.location} {group.year}
+          </h2>
+
           <div className="grid grid-cols-1 gap-12">
             {group.photos.map((photo) => {
               const isActive = activePhotoId === photo.id;
