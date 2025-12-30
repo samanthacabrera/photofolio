@@ -1,7 +1,7 @@
 import Header from "./Header"
 import Gallery from "./Gallery"
 import About from "./About"
-import Contact from "./Contact"
+import Footer from "./Footer"
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Gallery />
       <About />
-      <Contact />
+      <Footer />
     </div>
   )
 }

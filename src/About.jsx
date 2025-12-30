@@ -7,10 +7,11 @@ function About() {
 
       <p className="text-base leading-relaxed font-light">
         This is a personal archive of places visited that felt worth holding onto.
-        I'm drawn to landscapes and botanical details.
-        <br/><br/>
         I am self-taught and began photographing in 2020.
-        Everything here is shot on a Sony Alpha a6000.
+        <br/><br/>
+        All the photos you see are captured with a Sony Alpha a6000 under natural light and unaltered. 
+        <br/><br/>
+        You can reach me at <a>justinamiller1023@gmail.com</a>.
       </p>
     </section>
   );
