@@ -1,61 +1,5 @@
-const photos = [
-  {
-    id: 1,
-    src: "/ireland/DSC04136.JPG",
-    location: "Ireland",
-    year: 2025,
-    desc: "Cliffs along the Irish coast"
-  },
-  {
-    id: 2,
-    src: "/ireland/DSC03798.JPG",
-    location: "Ireland",
-    year: 2025,
-    desc: "Morning light over a green field"
-  },
-  {
-    id: 3,
-    src: "/ireland/DSC04133.JPG",
-    location: "Ireland",
-    year: 2025,
-    desc: "Old stone walls in the countryside"
-  },
-  {
-    id: 4,
-    src: "/ireland/DSC04158.JPG",
-    location: "Ireland",
-    year: 2025,
-    desc: "A quiet coastal path"
-  },
-  {
-    id: 5,
-    src: "/portugal/DSC02534.JPG",
-    location: "Portugal",
-    year: 2025,
-    desc: "Golden hour over a vineyard"
-  },
-  {
-    id: 6,
-    src: "/portugal/DSC02552.JPG",
-    location: "Portugal",
-    year: 2025,
-    desc: "Rolling hills and olive trees"
-  },
-  {
-    id: 7,
-    src: "/portugal/DSC02615.JPG",
-    location: "Portugal",
-    year: 2025,
-    desc: "A quiet path through the countryside"
-  },
-  {
-    id: 8,
-    src: "/portugal/DSC02620.JPG",
-    location: "Portugal",
-    year: 2025,
-    desc: "Sunlight over coastal cliffs"
-  },
-];
+import { useState } from "react";
+import photos from "./photos";
 
 function groupPhotosByLocationAndYear(photos) {
   return photos.reduce((acc, photo) => {
@@ -67,26 +11,41 @@ function groupPhotosByLocationAndYear(photos) {
 }
 
 function Gallery() {
+  const [activePhotoId, setActivePhotoId] = useState(null);
+
+  const handleClick = (id) => {
+    setActivePhotoId(activePhotoId === id ? null : id);
+  };
+
   const groupedPhotos = groupPhotosByLocationAndYear(photos);
+  const sortedGroups = Object.values(groupedPhotos).sort((a, b) => b.year - a.year);
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      {Object.values(groupedPhotos).map((group) => (
+      {sortedGroups.map((group) => (
         <section key={`${group.location}-${group.year}`} className="mb-24">
-          <h2 className="mb-6 text-2xl">
-            {group.location} {group.year}
-          </h2>
-
+          <h2 className="font-light text-2xl mb-6">{group.location} {group.year}</h2>
           <div className="grid grid-cols-1 gap-12">
-            {group.photos.map((pic) => (
-              <div key={pic.id} className="overflow-hidden">
-                <img
-                  src={pic.src}
-                  alt={pic.desc}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            ))}
+            {group.photos.map((photo) => {
+              const isActive = activePhotoId === photo.id;
+              return (
+                <div key={photo.id} className="cursor-pointer">
+                  <img
+                    src={photo.src}
+                    alt={photo.desc}
+                    className="w-full object-cover"
+                    onClick={() => handleClick(photo.id)}
+                  />
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      isActive ? "max-h-40 mt-2 opacity-100 scale-100" : "max-h-0 opacity-0 scale-95"
+                    }`}
+                  >
+                    <p className="text-sm text-gray-700">📍{photo.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       ))}
