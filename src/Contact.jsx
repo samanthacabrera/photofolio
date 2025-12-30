@@ -2,7 +2,7 @@ function Contact() {
   return (
     <section className="pb-24 text-center">
       <p className="text-sm uppercase tracking-widest">
-        Work with me
+        Wanna get in touch?
       </p>
       <a
         href="mailto:your@email.com"

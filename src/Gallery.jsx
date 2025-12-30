@@ -57,7 +57,7 @@ function Gallery() {
   }, {});
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-4">
       {Object.entries(photosByLocation).map(([location, pics]) => {
         const year = pics[0].year; 
 
@@ -67,7 +67,7 @@ function Gallery() {
               {location} {year}
             </h2>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-12">
               {pics.map((pic) => (
                 <div
                   key={pic.id}
