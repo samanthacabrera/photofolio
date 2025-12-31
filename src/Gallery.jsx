@@ -21,7 +21,12 @@ function Gallery() {
   const sortedGroups = Object.values(groupedPhotos).sort((a, b) => b.year - a.year);
 
   return (
-    <div className="w-full h-[80vh] -translate-x-[25vw] overflow-x-auto no-scrollbar py-12">
+    <div className="flex items-center w-full h-[80vh] -translate-x-[35vw] overflow-x-auto no-scrollbar">
+      <div className="flex-shrink-0 w-[20vw] h-full flex items-center justify-center p-4">
+        <p className="text-center text-sm md:text-base font-light text-gray-700 uppercase tracking-wide">
+          Scroll to see more →
+        </p>
+      </div>
       <div className="flex gap-16 items-start px-4">
         {sortedGroups.map((group) => (
           <div
