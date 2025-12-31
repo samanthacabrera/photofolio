@@ -1,5 +1,5 @@
 const photos = [
-    { id: 1, src: "/california/IMG_4427.jpeg", location: "California", year: 2025, desc: "El Segundo Beach" },
+    // { id: 1, src: "/california/IMG_4427.jpeg", location: "California", year: 2025, desc: "El Segundo Beach" },
     { id: 2, src: "/ireland/DSC04136.JPG", location: "Ireland", year: 2025, desc: "Cliffs of Moher" },
     { id: 3, src: "/ireland/DSC03798.JPG", location: "Ireland", year: 2025, desc: "Howth Cliff Walkway" },
     { id: 4, src: "/ireland/DSC04133.JPG", location: "Ireland", year: 2025, desc: "Cliffs of Moher" },

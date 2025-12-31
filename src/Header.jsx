@@ -1,12 +1,9 @@
 function Header() {
   return (
-    <header className="py-24 text-center">
-      <h1 className="text-4xl sm:text-5xl font-light">
-        JM
+    <header className="w-full py-4">
+      <h1 className="text-5xl font-light">
+        JM <span className="text-xl uppercase tracking-[0.3em]">Photography</span>
       </h1>
-      <p className="mt-2 text-sm uppercase tracking-[0.3em]">
-        Photography
-      </p>
     </header>
   );
 }

@@ -21,37 +21,45 @@ function Gallery() {
   const sortedGroups = Object.values(groupedPhotos).sort((a, b) => b.year - a.year);
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      {sortedGroups.map((group) => (
-        <section key={`${group.location}-${group.year}`} className="mb-24">
-          <h2 className="font-light text-2xl mb-6">
-            {group.location} {group.year}
-          </h2>
+    <div className="w-full h-[80vh] -translate-x-[25vw] overflow-x-auto no-scrollbar py-12">
+      <div className="flex gap-16 items-start px-4">
+        {sortedGroups.map((group) => (
+          <div
+            key={`${group.location}-${group.year}`}
+            className="flex-shrink-0 flex flex-col gap-8"
+          >
+            <h2 className="text-2xl md:text-4xl font-light tracking-wide uppercase transform whitespace-nowrap">
+              {group.location} <span className="text-gray-400">{group.year}</span>
+            </h2>
 
-          <div className="grid grid-cols-1 gap-12">
-            {group.photos.map((photo) => {
-              const isActive = activePhotoId === photo.id;
-              return (
-                <div key={photo.id} className="cursor-pointer">
-                  <img
-                    src={photo.src}
-                    alt={photo.desc}
-                    className="w-full object-cover"
-                    onClick={() => handleClick(photo.id)}
-                  />
+            <div className="flex gap-8">
+              {group.photos.map((photo, idx) => {
+                const isActive = activePhotoId === photo.id;
+                return (
                   <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      isActive ? "max-h-40 mt-2 opacity-100 scale-100" : "max-h-0 opacity-0 scale-95"
-                    }`}
+                    key={photo.id}
+                    className="cursor-pointer flex-shrink-0 relative w-[60vw] md:w-[35vw] transform transition-transform duration-500 hover:scale-105"
                   >
-                    <p className="text-sm text-gray-700">📍{photo.desc}</p>
+                    <img
+                      src={photo.src}
+                      alt={photo.desc}
+                      className="w-full h-full object-cover rounded-sm shadow"
+                      onClick={() => handleClick(photo.id)}
+                    />
+                    <div
+                      className={`absolute bottom-4 left-4 right-4 bg-white/80 rounded-sm p-2 text-sm transition-all duration-300 ${
+                        isActive ? "max-h-32 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                      }`}
+                    >
+                      📍 {photo.desc}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </section>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
