@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="w-screen flex items-center text-xs pl-4 pt-2">
+    <footer className="w-screen flex justify-center text-xs pb-2">
         <p className="font-light">
         Made by{" "}
         <a

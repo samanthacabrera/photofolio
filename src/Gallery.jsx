@@ -45,7 +45,7 @@ function Gallery() {
   return (
     <>
     <div ref={scrollRef} className="flex items-center w-full h-full justify-start overflow-x-auto no-scrollbar">
-      <div className="flex gap-16 items-start px-1 min-w-max">
+      <div className="flex gap-16 items-start px-4 min-w-max">
         {sortedGroups.map((group) => (
           <div
             ref={(el) => (groupRefs.current[`${group.location}-${group.year}`] = el)}
@@ -68,7 +68,7 @@ function Gallery() {
                     />
                     <div
                     >
-                      {photo.desc}
+                    <span className="italic">{photo.desc}</span>
                     </div>
                   </div>
                 );
