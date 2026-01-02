@@ -21,13 +21,8 @@ function Gallery() {
   const sortedGroups = Object.values(groupedPhotos).sort((a, b) => b.year - a.year);
 
   return (
-    <div className="flex items-center w-full h-[80vh] -translate-x-[35vw] overflow-x-auto no-scrollbar">
-      <div className="flex-shrink-0 w-[20vw] h-full flex items-center justify-center p-4">
-        <p className="text-center text-sm md:text-base font-light text-gray-700 uppercase tracking-wide">
-          Scroll to see more →
-        </p>
-      </div>
-      <div className="flex gap-16 items-start px-4">
+    <div className="flex items-center w-full h-[80vh] justify-start overflow-x-auto no-scrollbar">
+      <div className="flex gap-16 items-start px-1 min-w-max">
         {sortedGroups.map((group) => (
           <div
             key={`${group.location}-${group.year}`}
@@ -43,18 +38,15 @@ function Gallery() {
                 return (
                   <div
                     key={photo.id}
-                    className="cursor-pointer flex-shrink-0 relative w-[60vw] md:w-[35vw] transform transition-transform duration-500 hover:scale-105"
+                    className="cursor-pointer flex-shrink-0 relative"
                   >
                     <img
                       src={photo.src}
                       alt={photo.desc}
-                      className="w-full h-full object-cover rounded-sm shadow"
+                      className="w-[70vw] h-[70vh] object-cover rounded-sm shadow"
                       onClick={() => handleClick(photo.id)}
                     />
                     <div
-                      className={`absolute bottom-4 left-4 right-4 bg-white/80 rounded-sm p-2 text-sm transition-all duration-300 ${
-                        isActive ? "max-h-32 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-                      }`}
                     >
                       📍 {photo.desc}
                     </div>

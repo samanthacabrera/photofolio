@@ -5,16 +5,11 @@ import Footer from "./Footer";
 
 function App() {
   return (
-    <div className="flex h-screen overflow-x-auto no-scrollbar">
-      <div className="flex-shrink-0 w-[75vw] flex flex-col justify-between sticky top-0 left-0 h-screen z-20 p-2">
+    <div className="flex flex-col min-h-screen min-w-screen no-scrollbar">
         <Header />
+        <Gallery />
         <About />
         <Footer />
-      </div>
-
-      <div className="flex-1 flex items-center">
-        <Gallery />
-      </div>
     </div>
   );
 }
