@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen min-w-screen no-scrollbar">
+    <div className="flex flex-col min-h-screen min-w-screen overflow-y-scroll snap-y snap-mandatory no-scrollbar">
         <Header />
         <Gallery />
         <About />

@@ -1,6 +1,6 @@
 function About() {
   return (
-    <section className="w-screen h-screen flex items-center justify-center px-12 md:px-24">
+    <section className="w-screen h-screen snap-start flex items-center justify-center px-12 md:px-24">
       <div className="max-w-sm text-center">
         <p className="uppercase italic tracking-wide text-2xl mb-8">
           About
