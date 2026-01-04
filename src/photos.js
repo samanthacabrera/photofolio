@@ -1,5 +1,4 @@
 const photos = [
-    // { id: 1, src: "/california/IMG_4427.jpeg", location: "California", year: 2025, desc: "El Segundo Beach" },
     { id: 2, src: "/ireland/DSC04136.JPG", location: "Ireland", year: 2025, desc: "Cliffs of Moher" },
     { id: 3, src: "/ireland/DSC03798.JPG", location: "Ireland", year: 2025, desc: "Howth Cliff" },
     { id: 4, src: "/ireland/DSC04133.JPG", location: "Ireland", year: 2025, desc: "Cliffs of Moher" },
@@ -11,6 +10,7 @@ const photos = [
     { id: 10, src: "/netherlands/DSC01816.jpg", location: "The Netherlands", year: 2025, desc: "Zaanse Schans" },
     { id: 11, src: "/netherlands/DSC02088.JPG", location: "The Netherlands", year: 2025, desc: "Utrecht" },
     { id: 12, src: "/colorado/DSC01205.jpg", location: "Colorado", year: 2025, desc: "Red Rocks Amphitheatre" },
+    { id: 13, src: "/california/IMG_4607.jpg", location: "California", year: 2025, desc: "Newport Beach" },
 ];
 
 export default photos;
