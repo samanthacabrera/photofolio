@@ -12,6 +12,9 @@ const groupPhotosByLocationAndYear = (items) =>
 function Gallery() {
   const [activeGroupKey, setActiveGroupKey] = useState(null);
   const [showLocation, setShowLocation] = useState(true);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const scrollRef = useRef(null);
 
   const sortedGroups = useMemo(() => {
@@ -19,6 +22,38 @@ function Gallery() {
       (a, b) => b.year - a.year
     );
   }, []);
+
+  const flatPhotos = useMemo(
+    () => sortedGroups.flatMap((g) => g.photos),
+    [sortedGroups]
+  );
+
+  const handleClick = (id) => {
+    const index = flatPhotos.findIndex((p) => p.id === id);
+    if (index !== -1) {
+      setCurrentIndex(index);
+      setLightboxOpen(true);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (!lightboxOpen) return;
+
+    if (e.key === "ArrowRight") {
+      setCurrentIndex((prev) => (prev + 1) % flatPhotos.length);
+    } else if (e.key === "ArrowLeft") {
+      setCurrentIndex(
+        (prev) => (prev - 1 + flatPhotos.length) % flatPhotos.length
+      );
+    } else if (e.key === "Escape") {
+      setLightboxOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen, flatPhotos]);
 
   useEffect(() => {
     if (sortedGroups.length) {
@@ -45,9 +80,8 @@ function Gallery() {
 
   useEffect(() => {
     const onScroll = () => {
-      const max =
-        document.documentElement.scrollHeight - window.innerHeight;
-      setShowLocation((window.scrollY / max || 0) <= 0.10);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setShowLocation((window.scrollY / max || 0) <= 0.1);
     };
 
     window.addEventListener("scroll", onScroll);
@@ -69,14 +103,11 @@ function Gallery() {
             >
               <div className="flex gap-8">
                 {photos.map(({ id, src, desc }) => (
-                  <div
-                    key={id}
-                    className="flex-shrink-0 relative pt-[13vh]"
-                  >
+                  <div key={id} className="flex-shrink-0 relative pt-[13vh]">
                     <img
                       src={src}
                       alt={desc}
-                      className="w-[85vw] h-[80vh] object-cover rounded-sm"
+                      className="w-[85vw] h-[80vh] object-cover rounded-sm cursor-pointer"
                       onClick={() => handleClick(id)}
                     />
                     <p className="uppercase text-sm tracking-[0.35em] pt-2">{desc}</p>
@@ -92,10 +123,24 @@ function Gallery() {
         <div className="fixed top-4 right-4 z-40 pointer-events-none">
           <h2 className="text-4xl font-light uppercase tracking-wider">
             {activeGroupKey.split("-")[0]}{" "}
-            <span className="">
-              {activeGroupKey.split("-")[1]}
-            </span>
+            <span>{activeGroupKey.split("-")[1]}</span>
           </h2>
+        </div>
+      )}
+
+      {lightboxOpen && (
+        <div className="fixed inset-0 bg-white bg-opacity-90 z-50 flex flex-col items-center justify-around">
+          <img
+            src={flatPhotos[currentIndex].src}
+            alt={flatPhotos[currentIndex].desc}
+            className="w-screen max-h-full object-cover"
+          />
+          <button
+            className="absolute top-2 right-4 text-xl font-light bg-white px-2 rounded "
+            onClick={() => setLightboxOpen(false)}
+          >
+            &times;
+          </button>
         </div>
       )}
     </>

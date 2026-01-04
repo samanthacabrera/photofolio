@@ -7,7 +7,7 @@ function Footer() {
         href="https://samoontha.com/"
         target="_blank" 
         rel="noopener noreferrer"
-        className="text-blue-500 hover:text-blue-400 hover:underline transition-all duration-200"
+        className="hover:underline transition-all duration-200"
         >
           Sam Cabrera
         </a>
