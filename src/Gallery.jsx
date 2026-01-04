@@ -47,7 +47,7 @@ function Gallery() {
     const onScroll = () => {
       const max =
         document.documentElement.scrollHeight - window.innerHeight;
-      setShowLocation((window.scrollY / max || 0) <= 0.75);
+      setShowLocation((window.scrollY / max || 0) <= 0.10);
     };
 
     window.addEventListener("scroll", onScroll);
@@ -79,7 +79,7 @@ function Gallery() {
                       className="w-[85vw] h-[80vh] object-cover rounded-sm"
                       onClick={() => handleClick(id)}
                     />
-                    <span className="italic">{desc}</span>
+                    <p className="uppercase text-sm tracking-[0.35em] pt-2">{desc}</p>
                   </div>
                 ))}
               </div>
@@ -90,9 +90,9 @@ function Gallery() {
 
       {activeGroupKey && showLocation && (
         <div className="fixed top-4 right-4 z-40 pointer-events-none">
-          <h2 className="text-2xl md:text-4xl font-light tracking-wide uppercase">
+          <h2 className="text-4xl font-light uppercase tracking-wider">
             {activeGroupKey.split("-")[0]}{" "}
-            <span className="text-gray-400">
+            <span className="">
               {activeGroupKey.split("-")[1]}
             </span>
           </h2>
