@@ -11,7 +11,6 @@ const groupPhotosByLocationAndYear = (items) =>
 
 function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
-  const [showLocation, setShowLocation] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const scrollRef = useRef(null);
 
@@ -60,34 +59,25 @@ function Gallery() {
     return () => el.removeEventListener("scroll", onScroll);
   }, [flatPhotos]);
 
-  useEffect(() => {
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setShowLocation((window.scrollY / max || 0) <= 0.5);
-    };
-    window.addEventListener("scroll", onScroll);
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   const activePhoto = flatPhotos[activePhotoIndex];
 
   return (
     <>
       <div
         ref={scrollRef}
-        className="flex items-center w-full h-full justify-start overflow-x-auto scroll-snap-x snap-mandatory no-scrollbar"
+        className="h-screen w-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar"
       >
-        <div className="flex gap-16 items-start min-w-max">
+        <div className="flex flex-col gap-24 items-start mt-[10vh] min-w-max z-20">
           {sortedGroups.map(({ location, year, photos }) => (
-            <div key={`${location}-${year}`} className="flex-shrink-0 flex flex-col gap-8">
-              <div className="flex gap-8">
+            <div key={`${location}-${year}`}>
+              <div className="flex flex-col gap-[10vh]">
                 {photos.map(({ id, src, desc }) => (
-                  <div key={id} className="snap-start flex-shrink-0 relative pt-[10vh]">
+                  <div key={id} className="flex-shrink-0 snap-end relative z-20"
+                  >
                     <img
                       src={src}
                       alt={desc}
-                      className="w-screen h-[90vh] object-cover rounded-sm cursor-pointer"
+                      className="w-screen h-[92vh] p-2 object-cover rounded-sm cursor-pointer"
                       onClick={() => handleClick(id)}
                     />
                   </div>
@@ -98,15 +88,15 @@ function Gallery() {
         </div>
       </div>
 
-      {activePhoto && showLocation && (
+      {activePhoto && (
         <>
-        <div className="fixed top-4 left-4 z-40 pointer-events-none">
-          <h2 className="text-xl font-light uppercase tracking-wider">
+        <div className="fixed top-4 left-4 z-10 pointer-events-none">
+          <h2 className="text-xl md:text-3xl font-light uppercase tracking-wider">
             {activePhoto.location} <span>{activePhoto.year}</span>  
           </h2>
         </div>
-        <div className="fixed top-4 right-4 z-40 pointer-events-none">
-          <h2 className="text-xl font-light uppercase tracking-wider">
+        <div className="fixed top-4 right-4 z-10 pointer-events-none">
+          <h2 className="text-xl md:text-3xl font-light uppercase tracking-wider">
             {activePhoto.desc}
           </h2>
         </div>
@@ -121,7 +111,7 @@ function Gallery() {
             className="w-screen max-h-full object-cover"
           />
           <button
-            className="absolute top-2 right-4 text-xl font-light bg-white px-2 rounded"
+            className="absolute top-2 right-4 text-xl font-light bg-white/40 backdrop-blur-sm rounded-sm px-2 rounded"
             onClick={() => setLightboxOpen(false)}
           >
             &times;

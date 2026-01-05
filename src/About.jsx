@@ -1,19 +1,17 @@
 function About() {
   return (
-    <section className="w-screen h-screen snap-start flex items-center justify-center px-12 md:px-24">
-      <div className="max-w-sm text-center">
-        <p className="uppercase italic tracking-wide text-2xl mb-8">
+    <section className="w-screen h-screen flex items-center justify-center bg-white z-20">
+      <div className="flex flex-col space-y-6 max-w-sm text-center text-xs leading-loose tracking-wider font-light">
+        <p className="text-lg uppercase mb-2">
           About
         </p>
-
-        <p className="leading-relaxed font-light mb-6">
+        <p>
           This is a personal archive of places I’ve visited that felt worth holding onto. 
           I am self-taught and began photographing in 2020.
         </p>
-
-        <p className="leading-relaxed font-light">
+        <p>
           All the photos you see are captured with a Sony Alpha a6000
-          under natural light and left unaltered. You can reach me at{" "}
+          under natural light. You can reach me at{" "}
           <a 
             href="mailto:justinamiller1023@gmail.com" 
             className="italic hover:underline"
@@ -22,6 +20,12 @@ function About() {
           </a>.
         </p>
       </div>
+
+      {/* <button
+        className="fixed bottom-6 right-6 bg-white px-3 py-2 -rotate-90 border border-black rounded-full hover:bg-black hover:text-white transition-all"
+      >
+        ➔
+      </button> */}
     </section>
   );
 }
