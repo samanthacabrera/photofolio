@@ -62,25 +62,25 @@ function Hero() {
         </h1>
       </header>
 
-      <div className="fixed top-4 left-4 z-10 text-white uppercase tracking-[0.35em] text-xl after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer ">
+      <div className="fixed top-4 left-4 z-10 text-neutral-300 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer ">
         <Link to="/photofolio/featured">
           <ScrambleText text="Featured" />
         </Link>
       </div>
       <div
         onClick={() => setOpenModal("about")}
-        className="fixed bottom-4 left-4 z-10 text-white uppercase tracking-[0.35em] text-xl after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer "
+        className="fixed bottom-4 left-4 z-10 text-neutral-300 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer "
       >
         <ScrambleText text="About" />
       </div>
-      <div className="fixed top-4 right-4 z-10 text-neutral-600 uppercase tracking-[0.35em] text-xl after:block after:h-[1px] after:w-full after:bg-neutral-600 after:mt-1 hover:opacity-70 transition cursor-pointer ">
+      <div className="fixed top-4 right-4 z-10 text-neutral-600 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-600 after:mt-1 hover:opacity-70 transition cursor-pointer ">
         <Link to="/photofolio/gallery">
           <ScrambleText text="Gallery" />
         </Link>
       </div>
       <div
         onClick={() => setOpenModal("contact")}
-        className="fixed bottom-4 right-4 z-10 text-white uppercase tracking-[0.35em] text-xl after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer "
+        className="fixed bottom-4 right-4 z-10 text-neutral-300 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer "
       >
         <ScrambleText text="Contact" />
       </div>
@@ -108,7 +108,7 @@ function Hero() {
             {openModal === "contact" && (
               <div className="text-sm tracking-wide leading-[18px] space-y-4">
                 <p className="text-lg text-center tracking-widest uppercase">Contact</p>
-                <p>Based in Utrecht, Netherlands. Happy to connect with fellow travelers and photography enthusiasts.</p>
+                <p>Based in Utrecht, Netherlands. I am happy to connect with fellow travelers and photography enthusiasts.</p>
                 <p>
                   You can reach me at{" "}
                   <span className="italic hover:underline">

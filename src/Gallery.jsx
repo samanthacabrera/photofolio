@@ -73,8 +73,8 @@ function Gallery() {
   const activePhoto = flatPhotos[activePhotoIndex];
 
   return (
-    <section className="min-h-screen p-6">
-      <h1 className="sticky top-0 z-10 w-screen bg-white text-2xl md:text-4xl font-light my-12 py-4 text-center">
+    <section className="min-h-screen overflow-x-hidden p-6">
+      <h1 className="sticky top-0 z-10 w-screen bg-white text-2xl md:text-4xl font-light my-4 md:my-12 py-4 text-center">
         Gallery
       </h1>
 
@@ -112,7 +112,7 @@ function Gallery() {
         return (
           <div key={`${location}-${year}`} className="mb-24">
             <div className={`w-full mb-8 ${alignLeft ? "text-left" : "text-right"}`}>
-              <h2 className="text-6xl md:text-8xl whitespace-nowrap">
+              <h2 className="text-4xl whitespace-nowrap">
                 {location} {year}
               </h2>
             </div>
@@ -123,13 +123,13 @@ function Gallery() {
                   <img
                     src={photos[0].src}
                     alt={photos[0].desc}
-                    className="w-full max-h-[90vh] object-cover cursor-pointer"
+                    className="max-w-[47vw] max-h-[90vh] object-cover cursor-pointer"
                     onClick={() => handleClick(photos[0].id)}
                   />
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-8">
                 {photos.map(({ id, src, desc }) => (
                   <div key={id}>
                     <img
@@ -163,7 +163,7 @@ function Gallery() {
             className="w-screen max-h-full object-cover"
           />
           <button
-            className="absolute top-2 right-4 text-xl font-light bg-white/40 backdrop-blur-sm rounded-sm px-2 rounded"
+            className="absolute top-2 right-2 text-xl font-light bg-white/40 backdrop-blur-sm rounded-sm px-2 rounded"
             onClick={() => setLightboxOpen(false)}
           >
             &times;
