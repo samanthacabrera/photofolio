@@ -1,12 +1,17 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Hero from "./Hero";
 import Gallery from "./Gallery";
+import Featured from "./Featured";
 
 function App() {
   return (
-    <div className="flex flex-col">
-        <Hero />
-        {/* <Gallery /> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/photofolio" element={<Hero />} />
+        <Route path="/photofolio/featured" element={<Featured />} />
+        <Route path="/photofolio/gallery" element={<Gallery />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import photos from "./photos";
 
 const groupPhotosByLocationAndYear = (items) =>
@@ -12,6 +13,7 @@ const groupPhotosByLocationAndYear = (items) =>
 function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const navigate = useNavigate();
 
   const sortedGroups = useMemo(() => {
     return Object.values(groupPhotosByLocationAndYear(photos)).sort(
@@ -34,8 +36,12 @@ function Gallery() {
 
   const handleKeyDown = (e) => {
     if (!lightboxOpen) return;
-    if (e.key === "ArrowRight") setActivePhotoIndex((prev) => (prev + 1) % flatPhotos.length);
-    else if (e.key === "ArrowLeft") setActivePhotoIndex((prev) => (prev - 1 + flatPhotos.length) % flatPhotos.length);
+    if (e.key === "ArrowRight")
+      setActivePhotoIndex((prev) => (prev + 1) % flatPhotos.length);
+    else if (e.key === "ArrowLeft")
+      setActivePhotoIndex(
+        (prev) => (prev - 1 + flatPhotos.length) % flatPhotos.length
+      );
     else if (e.key === "Escape") setLightboxOpen(false);
   };
 
@@ -47,24 +53,53 @@ function Gallery() {
   const activePhoto = flatPhotos[activePhotoIndex];
 
   return (
-    <section className="min-h-screen snap-start">
-          {sortedGroups.map(({ location, year, photos }) => (
-            <div key={`${location}-${year}`}>
-              <div className="flex flex-col">
+    <section className="min-h-screen p-6">
+      <button
+        className="text-xs uppercase hover:underline hover:-translate-y-1 transition mb-6"
+        onClick={() => navigate("/photofolio")}
+      >
+        Back Home
+      </button>
+
+      <h1 className="text-5xl md:text-6xl font-light my-24 text-center">
+        Gallery
+      </h1>
+
+      {sortedGroups.map(({ location, year, photos }, index) => {
+        const isLeft = index % 2 === 0;
+        return (
+          <div key={`${location}-${year}`} className="mb-24">
+            <div className="grid grid-cols-3 gap-8 items-start">
+              {isLeft && (
+                <h2 className="text-6xl md:text-8xl whitespace-nowrap self-start">
+                  {location} <br /> {year}
+                </h2>
+              )}
+
+              <div className="col-span-2 grid grid-cols-2 gap-8 p-8">
                 {photos.map(({ id, src, desc }) => (
                   <div key={id}>
                     <img
                       src={src}
                       alt={desc}
-                      className="w-[60vw] h-[50vh] p-2 object-cover cursor-pointer"
+                      className="w-full max-h-[90vh] object-cover cursor-pointer"
                       onClick={() => handleClick(id)}
                     />
                   </div>
                 ))}
               </div>
-            </div>
-          ))}
 
+              {!isLeft && (
+                <h2 className="text-6xl md:text-8xl whitespace-nowrap self-start text-right">
+                  {location} <br /> {year}
+                </h2>
+              )}
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Lightbox */}
       {lightboxOpen && activePhoto && (
         <div className="fixed inset-0 bg-white bg-opacity-90 z-50 flex flex-col items-center justify-around">
           <img
