@@ -149,7 +149,7 @@ function Gallery() {
 
       <button
         className="text-xs uppercase block mx-auto hover:underline hover:-translate-y-1 transition mb-6"
-        onClick={() => navigate("/photofolio")}
+        onClick={() => navigate("/photofolio/")}
       >
         Back Home
       </button>
