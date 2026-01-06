@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/photofolio" element={<Hero />} />
+        <Route path="/photofolio/" element={<Hero />} />
         <Route path="/photofolio/featured" element={<Featured />} />
         <Route path="/photofolio/gallery" element={<Gallery />} />
       </Routes>

@@ -54,31 +54,31 @@ function Hero() {
       <div className="absolute inset-0 bg-black/10" />
 
       <header className="relative flex flex-col items-center justify-center h-screen">
-        <h1 className="font-light uppercase text-neutral-800 text-xl md:text-xl text-center tracking-[0.3em]">
+        <h1 className="font-light uppercase text-neutral-800 text-xl md:text-2xl text-center tracking-[0.2em] pl-8 ">
           <span className="text-neutral-300">JM</span>Photography
         </h1>
       </header>
 
       {/* Nav */}
-      <div className="fixed top-4 left-4 z-10 text-white uppercase tracking-[0.35em] text-xs after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer">
+      <div className="fixed top-4 left-4 z-10 text-white uppercase tracking-[0.35em] text-xl after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer ">
         <Link to="/photofolio/featured">
           <ScrambleText text="Featured" />
         </Link>
       </div>
       <div
         onClick={() => setOpenModal("about")}
-        className="fixed bottom-4 left-4 z-10 text-white uppercase tracking-[0.35em] text-xs after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer"
+        className="fixed bottom-4 left-4 z-10 text-white uppercase tracking-[0.35em] text-xl after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer "
       >
         <ScrambleText text="About" />
       </div>
-      <div className="fixed top-4 right-4 z-10 text-neutral-600 uppercase tracking-[0.35em] text-xs after:block after:h-[1px] after:w-full after:bg-neutral-600 after:mt-1 hover:opacity-70 transition cursor-pointer">
+      <div className="fixed top-4 right-4 z-10 text-neutral-600 uppercase tracking-[0.35em] text-xl after:block after:h-[1px] after:w-full after:bg-neutral-600 after:mt-1 hover:opacity-70 transition cursor-pointer ">
         <Link to="/photofolio/gallery">
           <ScrambleText text="Gallery" />
         </Link>
       </div>
       <div
         onClick={() => setOpenModal("contact")}
-        className="fixed bottom-4 right-4 z-10 text-white uppercase tracking-[0.35em] text-xs after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer"
+        className="fixed bottom-4 right-4 z-10 text-white uppercase tracking-[0.35em] text-xl after:block after:h-[1px] after:w-full after:bg-white after:mt-1 hover:opacity-70 transition cursor-pointer "
       >
         <ScrambleText text="Contact" />
       </div>
@@ -90,22 +90,15 @@ function Hero() {
             className="absolute inset-0 bg-black/40"
             onClick={closeModal}
           />
-          <div className="relative bg-white p-8 max-w-md w-full rounded-lg z-10">
-            <button
-              onClick={closeModal}
-              className="absolute top-3 right-4 text-sm hover:scale-110 transition"
-            >
-              x
-            </button>
-
+          <div className="relative bg-white space-y-4 p-8 max-w-lg w-full text-sm z-10">
             {openModal === "about" && (
               <>
-                <p className="font-medium mb-4">About</p>
+                <p className="text-lg text-center tracking-widest uppercase">About</p>
                 <p>
                   This is a personal archive of places I’ve visited that felt worth holding onto.
                   I am self-taught and began photographing in 2020.
                 </p>
-                <p className="mt-4">
+                <p>
                   All photos are captured with a Sony Alpha a6000 under natural light.
                 </p>
               </>
@@ -113,7 +106,8 @@ function Hero() {
 
             {openModal === "contact" && (
               <>
-                <p className="font-medium mb-4">Contact</p>
+                <p className="text-lg text-center tracking-widest uppercase">Contact</p>
+                <p>Based in Utrecht, Netherlands. Happy to connect with fellow travelers and photography enthusiasts.</p>
                 <p>
                   You can reach me at{" "}
                   <span className="italic hover:underline">
