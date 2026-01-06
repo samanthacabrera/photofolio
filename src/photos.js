@@ -7,8 +7,8 @@ const photos = [
     { id: 7, src: "/photofolio/portugal/DSC02283.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys" },
     { id: 8, src: "/photofolio/portugal/DSC02552.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys" },
     { id: 9, src: "/photofolio/portugal/DSC02615.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys" },
-    { id: 10, src: "/photofolio/netherlands/DSC01816.jpg", location: "The Netherlands", year: 2025, desc: "Zaanse Schans" },
-    { id: 11, src: "/photofolio/netherlands/DSC02088.JPG", location: "The Netherlands", year: 2025, desc: "Utrecht" },
+    // { id: 10, src: "/photofolio/netherlands/DSC01816.jpg", location: "The Netherlands", year: 2025, desc: "Zaanse Schans" },
+    // { id: 11, src: "/photofolio/netherlands/DSC02088.JPG", location: "The Netherlands", year: 2025, desc: "Utrecht" },
     { id: 12, src: "/photofolio/colorado/DSC01205.jpg", location: "Colorado", year: 2025, desc: "Red Rocks Amphitheatre" },
     { id: 13, src: "/photofolio/california/IMG_4607.jpg", location: "California", year: 2025, desc: "Newport Beach" },
 ];
