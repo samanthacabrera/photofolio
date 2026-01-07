@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import photos from "./photos";
+import ScrollToTop from "./ScrollToTop";
 
 const groupPhotosByLocationAndYear = (items) =>
   items.reduce((acc, { location, year, ...rest }) => {
@@ -74,7 +75,7 @@ function Gallery() {
 
   return (
     <section className="min-h-screen overflow-x-hidden p-6">
-      <h1 className="sticky top-0 z-10 w-screen bg-white text-2xl md:text-4xl font-light my-4 md:my-12 py-4 text-center">
+      <h1 className="sticky top-0 z-10 w-screen bg-white text-2xl md:text-4xl font-light my-0 md:my-12 py-4 text-center">
         Gallery
       </h1>
 
@@ -110,7 +111,7 @@ function Gallery() {
         const isSingle = photos.length === 1;
 
         return (
-          <div key={`${location}-${year}`} className="mb-24">
+          <div key={`${location}-${year}`}>
             <div className={`w-full mb-8 ${alignLeft ? "text-left" : "text-right"}`}>
               <h2 className="text-4xl whitespace-nowrap">
                 {location} {year}
@@ -148,7 +149,7 @@ function Gallery() {
       })}
 
       <button
-        className="text-xs uppercase block mx-auto hover:underline hover:-translate-y-1 transition mb-6"
+        className="text-xs uppercase block mx-auto hover:underline hover:-translate-y-1 transition py-12 md:py-24"
         onClick={() => navigate("/photofolio/")}
       >
         Back Home
@@ -170,6 +171,7 @@ function Gallery() {
           </button>
         </div>
       )}
+      <ScrollToTop />
     </section>
   );
 }

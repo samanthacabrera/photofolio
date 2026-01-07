@@ -9,7 +9,7 @@ function About() {
         
         <div className="text-sm tracking-wide leading-[18px] space-y-6">
             <p>This is a personal archive of places I’ve visited that felt worth holding onto. I am self-taught and began photographing in 2020. All photos are captured with a Sony Alpha a6000 under natural light.</p>
-            <p>Based in Utrecht, Netherlands. I am happy to connect with fellow travelers and photography enthusiasts. You can reach me at{" "}<span className="italic hover:underline">justinamiller1023@gmail.com</span></p>
+            <p>Based in Utrecht, Netherlands. You can reach me at{" "}<span className="italic hover:underline">justinamiller1023@gmail.com</span></p>
         </div>
         
         <button

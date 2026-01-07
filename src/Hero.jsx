@@ -38,6 +38,8 @@ const ScrambleText = ({ text }) => {
     <span
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleMouseEnter}
+      onTouchEnd={handleMouseLeave}
       className="select-none"
     >
       {displayText}
@@ -54,8 +56,6 @@ function Hero() {
     <>
     {/* Desktop Layout */}
     <section className="hidden md:flex justify-center relative w-screen h-screen bg-cover bg-center" style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}>
-      <div className="absolute inset-0 bg-black/10" />
-
       <header className="relative flex flex-col items-center justify-center h-screen">
         <h1 className="font-light uppercase text-neutral-800 text-xl md:text-2xl text-center tracking-[0.2em] pl-8 ">
           <span className="text-neutral-300">JM</span>Photography
@@ -73,7 +73,7 @@ function Hero() {
       >
         <ScrambleText text="About" />
       </div>
-      <div className="fixed top-4 right-4 z-10 text-neutral-600 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-600 after:mt-1 hover:opacity-70 transition cursor-pointer ">
+      <div className="fixed top-4 right-4 z-10 text-neutral-800 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-600 after:mt-1 hover:opacity-70 transition cursor-pointer ">
         <Link to="/photofolio/gallery">
           <ScrambleText text="Gallery" />
         </Link>
@@ -108,12 +108,12 @@ function Hero() {
             {openModal === "contact" && (
               <div className="text-sm tracking-wide leading-[18px] space-y-4">
                 <p className="text-lg text-center tracking-widest uppercase">Contact</p>
-                <p>Based in Utrecht, Netherlands. I am happy to connect with fellow travelers and photography enthusiasts.</p>
+                <p>Based in Utrecht, Netherlands.</p>
                 <p>
                   You can reach me at{" "}
                   <span className="italic hover:underline">
                     justinamiller1023@gmail.com
-                  </span>
+                  </span>.
                 </p>
               </div>
             )}
@@ -127,30 +127,30 @@ function Hero() {
         className="md:hidden flex flex-col items-center relative w-screen h-screen bg-cover bg-center p-8"
         style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}
       >
-
       <h1 className="font-light uppercase text-neutral-800 text-xl md:text-2xl text-center tracking-[0.2em] pl-8 ">
-        <span className="text-neutral-500">JM</span>Photography
+        <span className="text-neutral-400">JM</span>Photography
       </h1>
 
       <div className="flex flex-col gap-4 py-8 w-full items-center">
-        <button
-          className="text-xs uppercase hover:underline hover:-translate-y-1 transition w-full"
-          onClick={() => navigate("/photofolio/featured")}
+        <Link
+          to="/photofolio/featured"
+          className="text-xs text-center uppercase w-full"
         >
           <ScrambleText text="Featured" />
-        </button>
-        <button
-          className="text-xs uppercase hover:underline hover:-translate-y-1 transition w-full"
-          onClick={() => navigate("/photofolio/gallery")}
+        </Link>
+        <Link
+          to="/photofolio/gallery"
+          className="text-xs text-center uppercase w-full"
         >
           <ScrambleText text="Gallery" />
-        </button>
-        <button
-          className="text-xs uppercase hover:underline hover:-translate-y-1 transition w-full"
-          onClick={() => navigate("/photofolio/about")}
+        </Link>
+
+        <Link
+          to="/photofolio/about"
+          className="text-xs text-center uppercase w-full"
         >
           <ScrambleText text="About" />
-        </button>
+        </Link>
       </div>
     </section>
     </>
