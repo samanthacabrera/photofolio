@@ -26,6 +26,5 @@ html.dark select {
 
 html.dark .no-toggle,
 html.dark .no-toggle * {
-  background-color: initial !important;
   color: initial !important;
 }

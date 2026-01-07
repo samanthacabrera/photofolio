@@ -106,7 +106,7 @@ function Gallery() {
         const isSingle = photos.length === 1;
 
         return (
-          <div key={`${location}-${year}`} className="py-24 p-4">
+          <div key={`${location}-${year}`} className="pt-20 md:pt-32 px-4">
             <div className={`w-full my-4 ${alignLeft ? "text-left" : "text-right"}`}>
               <h2 className="text-2xl md:text-4xl font-light whitespace-nowrap">
                 {location} {year}
@@ -131,7 +131,7 @@ function Gallery() {
                     <img
                       src={src}
                       alt={desc}
-                      className="w-full max-h-[90vh] object-cover cursor-pointer"
+                      className="w-full max-h-[90vh] object-cover cursor-pointer hover:scale-[101%] hover:opacity-90 transition-all duration-300"
                       onClick={() => handleClick(id)}
                     />
                   </div>
@@ -144,7 +144,7 @@ function Gallery() {
       })}
 
       <button
-        className="text-xs  block mx-auto p-12 hover:underline hover:-translate-y-1 transition"
+        className="text-xs block mx-auto p-12 hover:underline hover:-translate-y-1 transition"
         onClick={() => navigate("/photofolio/")}
       >
         Back Home
