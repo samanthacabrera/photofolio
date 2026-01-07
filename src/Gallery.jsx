@@ -74,13 +74,9 @@ function Gallery() {
   const activePhoto = flatPhotos[activePhotoIndex];
 
   return (
-    <section className="min-h-screen overflow-x-hidden p-6">
-      <h1 className="sticky top-0 z-10 w-screen bg-white text-2xl md:text-4xl font-light my-0 md:my-12 py-4 text-center">
-        Gallery
-      </h1>
-
+    <section className="min-h-screen">
       {/* Filters */}
-      <div className="flex gap-4 mb-12 justify-center">
+      <div className="flex gap-4 translate-y-[8vh] justify-center">
         <select
           className="border p-2 rounded"
           value={filterLocation}
@@ -92,7 +88,6 @@ function Gallery() {
             </option>
           ))}
         </select>
-
         <select
           className="border p-2 rounded"
           value={filterYear}
@@ -111,9 +106,9 @@ function Gallery() {
         const isSingle = photos.length === 1;
 
         return (
-          <div key={`${location}-${year}`}>
-            <div className={`w-full my-4 mt-16 md:mt-24 ${alignLeft ? "text-left" : "text-right"}`}>
-              <h2 className="text-4xl md:text-6xl whitespace-nowrap">
+          <div key={`${location}-${year}`} className="py-24 p-4">
+            <div className={`w-full my-4 ${alignLeft ? "text-left" : "text-right"}`}>
+              <h2 className="text-2xl md:text-4xl font-light whitespace-nowrap">
                 {location} {year}
               </h2>
             </div>
@@ -130,7 +125,7 @@ function Gallery() {
                 </div>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 gap-8 mb-12 md:mb-24">
+              <div className="grid md:grid-cols-2 gap-4">
                 {photos.map(({ id, src, desc }) => (
                   <div key={id}>
                     <img
@@ -149,7 +144,7 @@ function Gallery() {
       })}
 
       <button
-        className="text-xs uppercase block mx-auto hover:underline hover:-translate-y-1 transition"
+        className="text-xs  block mx-auto p-12 hover:underline hover:-translate-y-1 transition"
         onClick={() => navigate("/photofolio/")}
       >
         Back Home
@@ -164,18 +159,16 @@ function Gallery() {
             className="w-screen max-h-full object-cover"
           />
 
-          <div className="absolute top-6 left-6 text-[11px] tracking-[0.3em] text-neutral-800 uppercase">
+          <div className="absolute top-6 left-6 text-xs tracking-[0.3em] text-neutral-800 bg-white/20 py-1 px-1.5 rounded">
             {activePhotoIndex + 1} / {flatPhotos.length}
           </div>
 
-          <div className="absolute top-6 text-[11px] tracking-wide text-neutral-800">
-            <div className="uppercase tracking-[0.3em]">
+          <div className="absolute top-6 text-xs tracking-wide text-neutral-800  tracking-[0.3em] bg-white/20 py-1 px-1.5 rounded">
               {activePhoto.location} {activePhoto.year}
-            </div>
           </div>
           
           <button
-            className="absolute top-6 right-6 text-[12px] uppercase tracking-[0.4em] text-neutral-800 hover:scale-110 transition duration-200"
+            className="absolute top-6 right-6 text-xs  text-neutral-800 bg-white/20 py-1 px-1.5 rounded hover:scale-110 transition duration-200"
             onClick={() => setLightboxOpen(false)}
           >
             x

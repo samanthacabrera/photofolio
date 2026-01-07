@@ -55,32 +55,32 @@ function Hero() {
   return (
     <>
     {/* Desktop Layout */}
-    <section className="hidden md:flex justify-center relative w-screen h-screen bg-cover bg-center" style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}>
-      <header className="relative flex flex-col items-center justify-center h-screen">
-        <h1 className="font-light uppercase text-neutral-800 text-xl md:text-2xl text-center tracking-[0.2em] pl-8 ">
+    <section className="no toggle hidden md:flex justify-center relative w-screen h-screen bg-cover bg-center" style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}>
+      <div className="relative flex flex-col items-center justify-center h-screen">
+        <h1 className="font-light text-neutral-800 text-xl md:text-2xl text-center tracking-[0.2em] pl-8">
           <span className="text-neutral-300">JM</span>Photography
         </h1>
-      </header>
+      </div>
 
-      <div className="fixed top-4 left-4 z-10 text-neutral-300 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer ">
+      <div className="fixed top-4 left-4 z-10 text-neutral-300  tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer ">
         <Link to="/photofolio/featured">
           <ScrambleText text="Featured" />
         </Link>
       </div>
       <div
         onClick={() => setOpenModal("about")}
-        className="fixed bottom-4 left-4 z-10 text-neutral-300 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer "
+        className="fixed bottom-4 left-4 z-10 text-neutral-300  tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer "
       >
         <ScrambleText text="About" />
       </div>
-      <div className="fixed top-4 right-4 z-10 text-neutral-800 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-600 after:mt-1 hover:opacity-70 transition cursor-pointer ">
+      <div className="fixed top-4 right-4 z-10 text-neutral-800  tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-600 after:mt-1 hover:opacity-70 transition cursor-pointer ">
         <Link to="/photofolio/gallery">
           <ScrambleText text="Gallery" />
         </Link>
       </div>
       <div
         onClick={() => setOpenModal("contact")}
-        className="fixed bottom-4 right-4 z-10 text-neutral-300 uppercase tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer "
+        className="fixed bottom-4 right-4 z-10 text-neutral-300  tracking-[0.35em] after:block after:h-[1px] after:w-full after:bg-neutral-300 after:mt-1 hover:opacity-70 transition cursor-pointer "
       >
         <ScrambleText text="Contact" />
       </div>
@@ -91,10 +91,10 @@ function Hero() {
             className="absolute inset-0 bg-black/40"
             onClick={closeModal}
           />
-          <div className="relative bg-white space-y-4 p-8 max-w-lg w-full text-sm z-10">
+          <div className="relative bg-current text-current space-y-4 p-8 max-w-lg w-full text-sm z-10">
             {openModal === "about" && (
-              <div className="text-sm tracking-wide leading-[18px] space-y-4">
-                <p className="text-lg text-center uppercase mb-4">About</p>
+              <div className="no-toggle text-sm tracking-wide leading-[18px] space-y-4">
+                <p className="text-lg text-center  mb-4">About</p>
                 <p>
                   This is a personal archive of places I’ve visited that felt worth holding onto.
                   I am self-taught and began photographing in 2020.
@@ -106,8 +106,8 @@ function Hero() {
             )}
 
             {openModal === "contact" && (
-              <div className="text-sm tracking-wide leading-[18px] space-y-4">
-                <p className="text-lg text-center tracking-widest uppercase">Contact</p>
+              <div className="no-toggle text-sm tracking-wide leading-[18px] space-y-4">
+                <p className="text-lg text-center tracking-widest ">Contact</p>
                 <p>Based in Utrecht, Netherlands.</p>
                 <p>
                   You can reach me at{" "}
@@ -124,30 +124,31 @@ function Hero() {
 
     {/* Mobile Layout */}
       <section
-        className="md:hidden flex flex-col items-center relative w-screen h-screen bg-cover bg-center p-8"
+        // className="no-toggle flex flex-col items-center relative w-screen h-screen bg-cover bg-center p-8"
+        className="no-toggle md:hidden flex flex-col items-center relative w-screen h-screen bg-cover bg-center p-8"
         style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}
       >
-      <h1 className="font-light uppercase text-neutral-800 text-xl md:text-2xl text-center tracking-[0.2em] pl-8 ">
+      <h1 className="font-light text-neutral-800 text-xl md:text-2xl text-center tracking-[0.2em] pl-8 ">
         <span className="text-neutral-400">JM</span>Photography
       </h1>
 
       <div className="flex flex-col gap-4 py-8 w-full items-center">
         <Link
           to="/photofolio/featured"
-          className="text-xs text-center uppercase w-full"
+          className="text-xs text-center  w-full"
         >
           <ScrambleText text="Featured" />
         </Link>
         <Link
           to="/photofolio/gallery"
-          className="text-xs text-center uppercase w-full"
+          className="text-xs text-center  w-full"
         >
           <ScrambleText text="Gallery" />
         </Link>
 
         <Link
           to="/photofolio/about"
-          className="text-xs text-center uppercase w-full"
+          className="text-xs text-center  w-full"
         >
           <ScrambleText text="About" />
         </Link>
