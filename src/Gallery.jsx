@@ -112,8 +112,8 @@ function Gallery() {
 
         return (
           <div key={`${location}-${year}`}>
-            <div className={`w-full mb-8 ${alignLeft ? "text-left" : "text-right"}`}>
-              <h2 className="text-4xl whitespace-nowrap">
+            <div className={`w-full my-4 mt-16 md:mt-24 ${alignLeft ? "text-left" : "text-right"}`}>
+              <h2 className="text-4xl md:text-6xl whitespace-nowrap">
                 {location} {year}
               </h2>
             </div>
@@ -130,7 +130,7 @@ function Gallery() {
                 </div>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-8 mb-12 md:mb-24">
                 {photos.map(({ id, src, desc }) => (
                   <div key={id}>
                     <img
@@ -149,7 +149,7 @@ function Gallery() {
       })}
 
       <button
-        className="text-xs uppercase block mx-auto hover:underline hover:-translate-y-1 transition py-12 md:py-24"
+        className="text-xs uppercase block mx-auto hover:underline hover:-translate-y-1 transition"
         onClick={() => navigate("/photofolio/")}
       >
         Back Home
@@ -157,20 +157,32 @@ function Gallery() {
 
       {/* Lightbox */}
       {lightboxOpen && activePhoto && (
-        <div className="fixed inset-0 bg-white bg-opacity-90 z-50 flex flex-col items-center justify-around">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           <img
             src={activePhoto.src}
             alt={activePhoto.desc}
             className="w-screen max-h-full object-cover"
           />
+
+          <div className="absolute top-6 left-6 text-[11px] tracking-[0.3em] text-neutral-800 uppercase">
+            {activePhotoIndex + 1} / {flatPhotos.length}
+          </div>
+
+          <div className="absolute top-6 text-[11px] tracking-wide text-neutral-800">
+            <div className="uppercase tracking-[0.3em]">
+              {activePhoto.location} {activePhoto.year}
+            </div>
+          </div>
+          
           <button
-            className="absolute top-2 right-2 text-xl font-light bg-white/40 backdrop-blur-sm rounded-sm px-2 rounded"
+            className="absolute top-6 right-6 text-[12px] uppercase tracking-[0.4em] text-neutral-800 hover:scale-110 transition duration-200"
             onClick={() => setLightboxOpen(false)}
           >
-            &times;
+            x
           </button>
         </div>
       )}
+
       <ScrollToTop />
     </section>
   );

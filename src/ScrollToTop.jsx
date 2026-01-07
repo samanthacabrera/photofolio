@@ -30,14 +30,8 @@ export default function ScrollToTop() {
     <button
       onClick={scrollToTop}
       aria-label="Scroll to top"
-      className={`
-        fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50
-        w-9 h-9 md:w-10 md:h-10
-        flex items-center justify-center
-        transition-opacity duration-500
-        ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}
-        hover:opacity-80
-      `}
+      className={`hidden md:flex fixed bottom-4 right-4 z-50 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center transition-opacity duration-500 hover:opacity-80
+        ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
     >
       <svg
         width="24"
