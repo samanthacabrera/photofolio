@@ -1,19 +1,15 @@
 import { Link } from "react-router-dom";
 
-export default function Header({ darkMode, setDarkMode, pageName }) {
+export default function Header({ darkMode, setDarkMode }) {
 
     return (
-    <header className="sticky top-0 z-50 w-screen bg-white flex items-center justify-center py-3 px-4 text-neutral-800 text-[10px] md:text-sm tracking-[0.2em]">
+    <header className="sticky top-0 z-50 w-screen h-[8vh] bg-white flex items-center justify-center text-neutral-800 text-[10px] md:text-sm tracking-[0.2em]">
         <Link
             to="/photofolio/"
-            className="absolute left-4 hover:opacity-70 transition-opacity"
+            className="absolute left-4 text-[10px] md:text-sm hover:opacity-70 transition-opacity"
         >
-            <span className="text-neutral-500">JM</span>Photography
+            <span className="font-medium">JM</span>Photography
         </Link>
-
-        <h1 className="text-center">
-            {pageName}
-        </h1>
             
         <button
             onClick={() => setDarkMode(!darkMode)}

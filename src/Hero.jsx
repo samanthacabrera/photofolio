@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ScrambleText = ({ text }) => {
   const [displayText, setDisplayText] = useState(text);
@@ -50,36 +51,47 @@ const ScrambleText = ({ text }) => {
 function Hero() {
   return (
     <>
-      <section
-        className="no-toggle flex flex-col items-center relative w-screen h-screen bg-cover bg-center p-8"
+      <motion.section
+        id="hero"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        className="flex flex-col items-center justify-center relative w-screen h-screen bg-cover bg-center"
         style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}
       >
-      <h1 className="no-toggle font-light text-xl text-center tracking-[0.2em] pl-8">
-        <span className="text-neutral-400">JM</span>Photography
-      </h1>
-
-      <div className="flex flex-col gap-4 py-8 w-full">
-        <Link
-          to="/photofolio/featured"
-          className="text-xs md:text-sm text-center w-full"
-        >
-          <ScrambleText text="Featured" />
-        </Link>
-        <Link
-          to="/photofolio/gallery"
-          className="text-xs md:text-sm text-center w-full"
-        >
-          <ScrambleText text="Gallery" />
-        </Link>
-
-        <Link
-          to="/photofolio/about"
-          className="text-xs md:text-sm text-center w-full"
-        >
-          <ScrambleText text="About" />
-        </Link>
+      <div className="backdrop-blur-sm bg-black/5 p-12">
+        <h1 className="text-xl text-center tracking-[0.2em]">
+          <span className="text-neutral-500">JM</span>Photos
+        </h1>
+        <div className="flex flex-col gap-4 py-8 w-full text-center">
+          <motion.div whileTap={{ opacity: 0.6 }}>
+            <Link
+              to="/photofolio/featured"
+              className="text-xs md:text-sm"
+            >
+              <ScrambleText text="Featured" />
+            </Link>
+          </motion.div>
+          <motion.div whileTap={{ opacity: 0.6 }}>
+            <Link
+              to="/photofolio/gallery"
+              className="text-xs md:text-sm"
+            >
+              <ScrambleText text="Gallery" />
+            </Link>
+          </motion.div>
+          <motion.div whileTap={{ opacity: 0.6 }}>
+            <Link
+              to="/photofolio/about"
+              className="text-xs md:text-sm"
+            >
+              <ScrambleText text="About" />
+            </Link>
+          </motion.div>
+        </div>
       </div>
-    </section>
+    </motion.section>
     </>
   );
 }

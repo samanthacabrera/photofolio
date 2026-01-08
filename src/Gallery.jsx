@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import photos from "./photos";
+import Header from "./Header";
 import ScrollToTop from "./ScrollToTop";
 
 const groupPhotosByLocationAndYear = (items) =>
@@ -11,13 +12,11 @@ const groupPhotosByLocationAndYear = (items) =>
     return acc;
   }, {});
 
-function Gallery() {
+function Gallery({ darkMode, setDarkMode }) {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [filterLocation, setFilterLocation] = useState("All");
   const [filterYear, setFilterYear] = useState("All");
-
-  const navigate = useNavigate();
 
   const locations = useMemo(
     () => ["All", ...new Set(photos.map((p) => p.location))],
@@ -74,9 +73,15 @@ function Gallery() {
   const activePhoto = flatPhotos[activePhotoIndex];
 
   return (
-    <section className="min-h-screen">
+    <>
+    <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+    <motion.section 
+        id="gallery"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+        className="flex flex-col items-center min-h-screen max-w-5xl mx-4 md:mx-auto">
+      <h1 className="heading text-2xl md:text-4xl tracking-widest py-4 md:py-12">Gallery</h1>
       {/* Filters */}
-      <div className="flex gap-4 translate-y-[8vh] justify-center">
+      <div className="flex gap-4">
         <select
           className="border p-2 rounded"
           value={filterLocation}
@@ -106,7 +111,7 @@ function Gallery() {
         const isSingle = photos.length === 1;
 
         return (
-          <div key={`${location}-${year}`} className="pt-20 md:pt-32 px-4">
+          <div key={`${location}-${year}`} className="pt-20 p-6">
             <div className={`w-full my-4 ${alignLeft ? "text-left" : "text-right"}`}>
               <h2 className="text-2xl md:text-4xl font-light whitespace-nowrap">
                 {location} {year}
@@ -143,16 +148,12 @@ function Gallery() {
         );
       })}
 
-      <button
-        className="text-xs block mx-auto p-12 hover:underline hover:-translate-y-1 transition"
-        onClick={() => navigate("/photofolio/")}
-      >
-        Back Home
-      </button>
-
       {/* Lightbox */}
       {lightboxOpen && activePhoto && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <motion.div 
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-50 flex items-center justify-center"
+        >
           <img
             src={activePhoto.src}
             alt={activePhoto.desc}
@@ -173,11 +174,11 @@ function Gallery() {
           >
             x
           </button>
-        </div>
+        </motion.div>
       )}
-
-      <ScrollToTop />
-    </section>
+    </motion.section>
+    <ScrollToTop />
+    </>
   );
 }
 

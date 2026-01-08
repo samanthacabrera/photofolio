@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,8 +7,10 @@ body,
 html {
   padding: 0;
   margin: 0;
-  font-family: "Zalando Sans Expanded", sans-serif;
+  font-family: "Quicksand", sans-serif;
   text-transform: uppercase;
+  color: rgb(32, 32, 47);
+  background-color: #fdfdff;
 }
 
 body,
@@ -20,11 +22,15 @@ select {
 html.dark body,
 html.dark header,
 html.dark select {
-  background-color: #1f1f1f;
+  /* background-color: #1f1f1f; */
+  background-color: #0a0a0a;
   color: #f5f5f5;
 }
 
-html.dark .no-toggle,
-html.dark .no-toggle * {
-  color: initial !important;
+#hero {
+  color: #000 !important;
+}
+
+.heading {
+  font-style: italic;
 }

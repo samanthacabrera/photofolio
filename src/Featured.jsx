@@ -1,19 +1,25 @@
-import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import photos from "./photos"; 
+import Header from "./Header";
 import ScrollToTop from "./ScrollToTop";
 
-
-function Featured() {
-    const navigate = useNavigate();
+function Featured({ darkMode, setDarkMode }) {
     const featuredPhotos = photos.filter((photo) => photo.featured);
 
     return (
-    <section className="min-h-screen">        
-        <div className="grid grid-cols-1 gap-24 my-6 md:my-24 p-6">
+    <>
+    <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+    <motion.section 
+        id="featured" 
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+        className="flex flex-col items-center min-h-screen max-w-5xl mx-4 md:mx-auto"
+    > 
+        <h1 className="heading text-2xl md:text-4xl tracking-widest py-4 md:py-12">Featured</h1>      
+        <div className="grid grid-cols-1 gap-24 my-6 p-6">
             {featuredPhotos.map((photo) => (
             <div
                 key={photo.id}
-                className="max-w-5xl mx-auto relative group"
+                className="w-full mx-auto relative group"
             >
                 <div className="flex flex-col space-y-4 my-4 text-sm text-center tracking-wider">
                     <p>{photo.location} {photo.year}</p>
@@ -35,15 +41,9 @@ function Featured() {
             </div>
             ))}
         </div>
-        
-        <button
-            className="text-xs  block mx-auto hover:underline hover:-translate-y-1 transition p-12"
-            onClick={() => navigate("/photofolio/")}
-        >
-            Back Home
-        </button>
-        <ScrollToTop />
-    </section>
+    </motion.section>
+    <ScrollToTop />
+    </>
   );
 }
 
