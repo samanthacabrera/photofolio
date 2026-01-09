@@ -71,14 +71,20 @@ export default function Header({ darkMode, setDarkMode }) {
     </div>
 
     {currentTitle && (
-    <h2
+      <h2
         className={`absolute left-1/2 -translate-x-1/2 text-sm md:text-base tracking-widest
-        transition-all duration-300 ease-out
-        ${showTitle ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1 pointer-events-none"}
+          transition-all duration-300 ease-out
+          ${
+            currentTitle === "About"
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : showTitle
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-1 pointer-events-none"
+          }
         `}
-    >
+      >
         {currentTitle}
-    </h2>
+      </h2>
     )}
 
     <button
