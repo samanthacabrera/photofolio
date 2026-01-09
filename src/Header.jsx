@@ -8,7 +8,7 @@ export default function Header({ darkMode, setDarkMode }) {
             to="/photofolio/"
             className="absolute left-4 text-[10px] md:text-sm hover:opacity-70 transition-opacity"
         >
-            <span className="font-medium">JM</span>Photography
+            <span className="font-medium">JM</span>Photos
         </Link>
             
         <button

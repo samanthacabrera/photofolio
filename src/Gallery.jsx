@@ -79,7 +79,7 @@ function Gallery({ darkMode, setDarkMode }) {
         id="gallery"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
         className="flex flex-col items-center min-h-screen max-w-5xl mx-4 md:mx-auto">
-      <h1 className="heading text-2xl md:text-4xl tracking-widest py-4 md:py-12">Gallery</h1>
+      <h1 className="text-2xl md:text-4xl tracking-widest py-4 md:py-12">Gallery</h1>
       {/* Filters */}
       <div className="flex gap-4">
         <select

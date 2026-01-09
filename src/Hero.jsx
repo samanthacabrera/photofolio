@@ -60,37 +60,37 @@ function Hero() {
         className="flex flex-col items-center justify-center relative w-screen h-screen bg-cover bg-center"
         style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}
       >
-      <div className="backdrop-blur-sm bg-black/5 p-12">
-        <h1 className="text-xl text-center tracking-[0.2em]">
-          <span className="text-neutral-500">JM</span>Photos
+      
+        <h1 className="text-7xl md:text-9xl text-center text-neutral-800 tracking-wide font-bold">
+          <span className="text-neutral-300">JM</span>Photos
         </h1>
-        <div className="flex flex-col gap-4 py-8 w-full text-center">
-          <motion.div whileTap={{ opacity: 0.6 }}>
+      
+        <div className="fixed top-1 flex justify-around w-full max-w-5xl font-medium">
+          <motion.div whileTap={{ opacity: 0.6 }} className="w-[5vw]">
             <Link
               to="/photofolio/featured"
-              className="text-xs md:text-sm"
+              className="text-xs md:text-sm tracking-wide"
             >
               <ScrambleText text="Featured" />
             </Link>
           </motion.div>
-          <motion.div whileTap={{ opacity: 0.6 }}>
+          <motion.div whileTap={{ opacity: 0.6 }} className="w-[5vw]">
             <Link
               to="/photofolio/gallery"
-              className="text-xs md:text-sm"
+              className="text-xs md:text-sm tracking-wide"
             >
               <ScrambleText text="Gallery" />
             </Link>
           </motion.div>
-          <motion.div whileTap={{ opacity: 0.6 }}>
+          <motion.div whileTap={{ opacity: 0.6 }} className="w-[5vw]">
             <Link
               to="/photofolio/about"
-              className="text-xs md:text-sm"
+              className="text-xs md:text-sm tracking-wide"
             >
               <ScrambleText text="About" />
             </Link>
           </motion.div>
         </div>
-      </div>
     </motion.section>
     </>
   );
