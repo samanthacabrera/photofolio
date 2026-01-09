@@ -65,7 +65,7 @@ function Hero() {
           <span className="text-neutral-300">JM</span>Photos
         </h1>
       
-        <div className="fixed top-1 flex justify-around w-full max-w-5xl font-medium">
+        <div className="fixed top-1 flex justify-around w-full max-w-5xl text-neutral-800 font-medium">
           <motion.div whileTap={{ opacity: 0.6 }} className="w-[5vw]">
             <Link
               to="/photofolio/featured"

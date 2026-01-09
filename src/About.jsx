@@ -1,5 +1,5 @@
-import Header from "./Header";
 import { motion } from "framer-motion";
+import Header from "./Header";
 
 function About({ darkMode, setDarkMode }) {
 
@@ -9,12 +9,17 @@ return (
         className="h-screen overflow-hidden"
     >
         <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-        <div id="about" className="flex flex-col items-center justify-center max-w-md mx-6 md:mx-auto">   
+        <div id="about" className="flex flex-col items-center justify-center max-w-lg mx-4 md:mx-auto">   
             <h1 className="text-2xl md:text-4xl mt-12 py-16 md:py-20">About</h1>
-            <div className="tracking-widest normal-case space-y-6">
-                <p className="text-justify">This is a personal archive of places I’ve visited that felt worth holding onto. I am self-taught and began photographing in 2020. All photos are captured with a Sony Alpha a6000 under natural light.</p>
-                <p className="text-left">Based in Utrecht, Netherlands. You can reach me at{" "}<span className="italic hover:underline">justinamiller1023@gmail.com</span>.</p>
+            <div className="text-center tracking-wide normal-case space-y-4">
+                <p>Based in Utrecht, Netherlands. </p>
+                <p>This is a personal archive of places I’ve visited that felt worth holding onto.</p>
+                <p>I am self-taught and began photographing in 2020. All photos are captured with a Sony Alpha a6000 under natural light.</p>
+                <p>You can reach me at{" "}<span className="italic hover:underline">justinamiller1023@gmail.com</span>.</p>
             </div>
+            <p className="fixed bottom-2 text-[10px] md:text-xs">This site was made by
+                <a href="https://samoontha.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition pl-1">Sam Cabrera</a>
+            </p>
         </div>
     </motion.div>
   );
