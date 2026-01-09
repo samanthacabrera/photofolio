@@ -43,7 +43,7 @@ export default function Header({ darkMode, setDarkMode }) {
     <div ref={menuRef} className="absolute left-4">
     <button
         onClick={() => setMenuOpen((prev) => !prev)}
-        className="hover:opacity-70 transition-opacity"
+        className="text-xs md:text-sm hover:opacity-70 transition-opacity uppercase"
         aria-label="Open menu"
     >
         <span className="font-medium">JM</span>Photos
@@ -70,15 +70,20 @@ export default function Header({ darkMode, setDarkMode }) {
     )}
     </div>
 
-    {currentTitle && showTitle && (
-    <h2 className="absolute left-1/2 -translate-x-1/2 text-sm md:text-base font-semibold tracking-widest transition-opacity duration-300">
+    {currentTitle && (
+    <h2
+        className={`absolute left-1/2 -translate-x-1/2 text-sm md:text-base tracking-widest
+        transition-all duration-300 ease-out
+        ${showTitle ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1 pointer-events-none"}
+        `}
+    >
         {currentTitle}
     </h2>
     )}
 
     <button
     onClick={() => setDarkMode(!darkMode)}
-    className="absolute right-4 flex items-center space-x-1 hover:opacity-70 transition-opacity"
+    className="absolute right-4 flex items-center space-x-1 hover:opacity-70 transition-opacity uppercase"
     aria-label="Toggle dark mode"
     >
         {darkMode ? (

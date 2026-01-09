@@ -57,15 +57,17 @@ function Hero() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
-        className="flex flex-col items-center justify-center relative w-screen h-screen bg-cover bg-center"
+        className="flex flex-col items-center justify-center relative w-screen h-screen bg-cover bg-center z-10"
         style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}
       >
       
-        <h1 className="text-7xl md:text-9xl text-center text-neutral-800 tracking-wide font-bold">
+        <div className="absolute inset-0 bg-black/10" />
+
+        <h1 className="text-7xl md:text-9xl text-center text-neutral-900 tracking-wide font-bold">
           <span className="text-neutral-300">JM</span>Photos
         </h1>
       
-        <div className="fixed top-1 flex justify-around w-full max-w-5xl text-neutral-800 font-medium">
+        <div className="fixed top-1 flex justify-around w-full max-w-5xl text-neutral-900 font-semibold">
           <motion.div whileTap={{ opacity: 0.6 }} className="w-[5vw]">
             <Link
               to="/photofolio/featured"

@@ -66,11 +66,23 @@ function Gallery({ darkMode, setDarkMode }) {
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxOpen, flatPhotos]);
+      window.addEventListener("keydown", handleKeyDown);
+      return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [lightboxOpen, flatPhotos]);
 
-  const activePhoto = flatPhotos[activePhotoIndex];
+    const activePhoto = flatPhotos[activePhotoIndex];
+
+    useEffect(() => {
+    if (lightboxOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxOpen]);
 
   return (
     <>
@@ -79,7 +91,7 @@ function Gallery({ darkMode, setDarkMode }) {
         id="gallery"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
         className="flex flex-col items-center min-h-screen max-w-5xl mx-4 md:mx-auto">
-      <h1 className="text-2xl md:text-8xl tracking-widest m-12 px-4 py-4 md:py-8">Gallery</h1>
+      <h1 className="text-2xl md:text-8xl tracking-wider m-12 px-4 py-4 md:py-8">Gallery</h1>
       {/* Filters */}
       <div className="flex gap-4">
         <select
@@ -113,7 +125,7 @@ function Gallery({ darkMode, setDarkMode }) {
         return (
           <div key={`${location}-${year}`} className="pt-20 p-6">
             <div className={`w-full my-4 ${alignLeft ? "text-left" : "text-right"}`}>
-              <h2 className="text-2xl md:text-4xl font-light whitespace-nowrap">
+              <h2 className="text-2xl md:text-4xl whitespace-nowrap">
                 {location} {year}
               </h2>
             </div>
@@ -152,24 +164,24 @@ function Gallery({ darkMode, setDarkMode }) {
       {lightboxOpen && activePhoto && (
         <motion.div 
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-50 flex items-center justify-center"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
         >
           <img
             src={activePhoto.src}
             alt={activePhoto.desc}
-            className="w-screen max-h-full object-cover"
+            className="max-w-full max-h-full object-contain md:w-screen md:h-screen md:object-cover"
           />
 
-          <div className="absolute top-6 left-6 text-xs tracking-[0.3em] text-neutral-800 bg-white/20 py-1 px-1.5 rounded">
+          <div className="absolute top-4 left-2 text-xs tracking-[0.3em] text-neutral-300 md:text-neutral-800 bg-white/20 py-1 px-1.5 rounded">
             {activePhotoIndex + 1} / {flatPhotos.length}
           </div>
 
-          <div className="absolute top-6 text-xs tracking-wide text-neutral-800  tracking-[0.3em] bg-white/20 py-1 px-1.5 rounded">
+          <div className="absolute top-4 text-xs tracking-wide text-neutral-300 md:text-neutral-800  tracking-[0.3em] bg-white/20 py-1 px-1.5 rounded">
               {activePhoto.location} {activePhoto.year}
           </div>
           
           <button
-            className="absolute top-6 right-6 text-xs  text-neutral-800 bg-white/20 py-1 px-1.5 rounded hover:scale-110 transition duration-200"
+            className="absolute top-4 right-2 text-xs text-neutral-300 md:text-neutral-800 bg-white/20 py-1 px-1.5 rounded hover:scale-110 transition duration-200"
             onClick={() => setLightboxOpen(false)}
           >
             x
