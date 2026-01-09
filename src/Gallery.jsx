@@ -91,31 +91,41 @@ function Gallery({ darkMode, setDarkMode }) {
         id="gallery"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
         className="flex flex-col items-center min-h-screen max-w-5xl mx-4 md:mx-auto">
-      <h1 className="text-2xl md:text-8xl tracking-wider m-12 px-4 py-4 md:py-8">Gallery</h1>
+      <h1 className="text-4xl md:text-8xl tracking-wider m-12 px-4 py-4 md:py-8">Gallery</h1>
       {/* Filters */}
-      <div className="flex gap-4">
-        <select
-          className="border p-2 rounded"
-          value={filterLocation}
-          onChange={(e) => setFilterLocation(e.target.value)}
-        >
-          {locations.map((loc) => (
-            <option key={loc} value={loc}>
-              {loc}
-            </option>
-          ))}
-        </select>
-        <select
-          className="border p-2 rounded"
-          value={filterYear}
-          onChange={(e) => setFilterYear(e.target.value)}
-        >
-          {years.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
+      <div className="flex flex-col items-center gap-6 md:gap-8 my-6 text-sm md:text-base">
+        <div className="flex items-center gap-3">
+          <span className="uppercase tracking-widest">
+            Location
+          </span>
+          <select
+            value={filterLocation}
+            onChange={(e) => setFilterLocation(e.target.value)}
+            className="bg-transparent border-b pb-1 focus:outline-none tracking-wide cursor-pointer"
+          >
+            {locations.map((loc) => (
+              <option key={loc} value={loc}>
+                {loc}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="uppercase tracking-widest">
+            Year
+          </span>
+          <select
+            value={filterYear}
+            onChange={(e) => setFilterYear(e.target.value)}
+            className="bg-transparent border-b pb-1 focus:outline-none tracking-wide cursor-pointer"
+          >
+            {years.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {sortedGroups.map(({ location, year, photos }, index) => {
@@ -123,7 +133,7 @@ function Gallery({ darkMode, setDarkMode }) {
         const isSingle = photos.length === 1;
 
         return (
-          <div key={`${location}-${year}`} className="pt-20 p-6">
+          <div key={`${location}-${year}`} className="pt-16 p-6">
             <div className={`w-full my-4 ${alignLeft ? "text-left" : "text-right"}`}>
               <h2 className="text-2xl md:text-4xl whitespace-nowrap">
                 {location} {year}
