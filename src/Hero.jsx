@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const ScrambleText = ({ text, darkMode }) => {
@@ -31,9 +31,19 @@ const ScrambleText = ({ text, darkMode }) => {
     <span
       onMouseEnter={handleMouseEnter}
       onTouchStart={handleMouseEnter}
-      className={`select-none ${darkMode ? "text-neutral-100" : "text-neutral-900"}`}
+      className={`
+        inline-flex
+        ${darkMode ? "text-neutral-100" : "text-neutral-900"}
+      `}
     >
-      {displayText}
+      {displayText.split("").map((char, i) => (
+        <span
+          key={i}
+          className="inline-block w-[1.5ch] text-center"
+        >
+          {char}
+        </span>
+      ))}
     </span>
   );
 };
@@ -44,32 +54,49 @@ function Hero({ darkMode }) {
       <motion.img
         src="/photofolio/ireland/DSC04136.JPG"
         alt="Hero"
-        className="w-full h-[90vh] object-cover"
+        className="w-full h-screen object-cover"
       />
 
       <div
-        className={`absolute bottom-0 left-0 right-0 h-48 ${
-          darkMode ? "bg-gradient-to-t from-black" : "bg-gradient-to-t from-white"
-        }`}
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[45vh]
+        ${darkMode
+          ? "bg-gradient-to-t from-black/95 via-black/50"
+          : "bg-gradient-to-t from-neutral-100 via-neutral-100/40"}
+        `}
       />
 
-      <motion.div
-        className="absolute inset-0 flex flex-col items-center md:items-end text-center m-4"
-      >
-        <h1 className="text-6xl md:text-7xl text-neutral-700 tracking-wide leading-tight">
-          <span className="opacity-70">JM</span>
-          Photos
+      <motion.div className="absolute inset-0 flex flex-col justify-end items-center px-8 md:px-16 pb-20">
+        <h1
+          className={`
+            font-light
+            text-4xl md:text-6xl
+            tracking-tight
+            ${darkMode ? "text-neutral-100" : "text-neutral-900"}
+          `}
+        >
+          <span className="font-medium">JM</span>Photos
         </h1>
 
-        <div className="flex m-4 text-sm text-neutral-700 md:text-base">
-          <Link to="/photofolio/featured" className="w-6 mx-10">
-            <ScrambleText text="Featured" />
+        <div className="mt-6 flex gap-8 text-xs md:text-sm uppercase font-medium">
+          <Link
+            to="/photofolio/featured"
+            className="hover:opacity-70 transition"
+          >
+            <ScrambleText text="Featured" darkMode={darkMode} />
           </Link>
-          <a href="#gallery" className="w-6 mx-8">
-            <ScrambleText text="Gallery" />
+
+          <a
+            href="#gallery"
+            className="hover:opacity-70 transition"
+          >
+            <ScrambleText text="Gallery" darkMode={darkMode} />
           </a>
-          <Link to="/photofolio/about" className="w-6 mx-8">
-            <ScrambleText text="About" />
+
+          <Link
+            to="/photofolio/about"
+            className="hover:opacity-70 transition"
+          >
+            <ScrambleText text="About" darkMode={darkMode} />
           </Link>
         </div>
       </motion.div>

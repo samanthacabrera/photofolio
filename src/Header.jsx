@@ -23,7 +23,7 @@ export default function Header({ darkMode, setDarkMode }) {
 
     const handleScroll = () => {
       const isMobile = window.innerWidth < 768;
-      const scrollBreakpoint = isMobile ? 90 : 550;
+      const scrollBreakpoint = isMobile ? 90 : 750;
       setShowTitle(window.scrollY > scrollBreakpoint);
     };
 
@@ -31,7 +31,6 @@ export default function Header({ darkMode, setDarkMode }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHome]);
 
-  // Click outside for menu
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
