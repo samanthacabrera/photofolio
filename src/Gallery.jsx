@@ -91,9 +91,9 @@ function Gallery({ darkMode, setDarkMode }) {
         id="gallery"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
         className="flex flex-col items-center min-h-screen max-w-5xl mx-4 md:mx-auto">
-      <h1 className="text-4xl md:text-8xl tracking-wider m-12 px-4 py-4 md:py-8">Gallery</h1>
+      {/* <h1 className="text-4xl md:text-8xl tracking-wider m-12 px-4 py-4 md:py-8">Gallery</h1> */}
       {/* Filters */}
-      <div className="flex flex-col items-center gap-6 md:gap-8 my-6 text-sm md:text-base">
+      <div className="self-start m-4 flex flex-col gap-6 md:gap-8 text-sm md:text-base">
         <div className="flex items-center gap-3">
           <span className="uppercase tracking-widest">
             Location
@@ -133,7 +133,7 @@ function Gallery({ darkMode, setDarkMode }) {
         const isSingle = photos.length === 1;
 
         return (
-          <div key={`${location}-${year}`} className="pt-16 p-6">
+          <div key={`${location}-${year}`} className="pt-12 p-6">
             <div className={`w-full my-4 ${alignLeft ? "text-left" : "text-right"}`}>
               <h2 className="text-2xl md:text-4xl whitespace-nowrap">
                 {location} {year}

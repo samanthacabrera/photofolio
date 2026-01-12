@@ -1,11 +1,10 @@
 import { useState } from "react";
+import { motion, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
-const ScrambleText = ({ text }) => {
+const ScrambleText = ({ text, darkMode }) => {
   const [displayText, setDisplayText] = useState(text);
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
   let interval = null;
 
   const handleMouseEnter = () => {
@@ -15,11 +14,9 @@ const ScrambleText = ({ text }) => {
       setDisplayText(
         text
           .split("")
-          .map((char, index) => {
-            if (index < iteration) return text[index];
-            if (char === " ") return " ";
-            return letters[Math.floor(Math.random() * letters.length)];
-          })
+          .map((char, i) =>
+            i < iteration ? text[i] : letters[Math.floor(Math.random() * letters.length)]
+          )
           .join("")
       );
       iteration += 1 / 3;
@@ -30,69 +27,53 @@ const ScrambleText = ({ text }) => {
     }, 30);
   };
 
-  const handleMouseLeave = () => {
-    clearInterval(interval);
-    setDisplayText(text);
-  };
-
   return (
     <span
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       onTouchStart={handleMouseEnter}
-      onTouchEnd={handleMouseLeave}
-      className="select-none"
+      className={`select-none ${darkMode ? "text-neutral-100" : "text-neutral-900"}`}
     >
       {displayText}
     </span>
   );
 };
 
-function Hero() {
+function Hero({ darkMode }) {
   return (
-    <>
-      <motion.section
-        id="hero"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.25 }}
-        className="flex flex-col items-center justify-center relative w-screen h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/photofolio/ireland/DSC04136.JPG')" }}
-      >
+    <section className="relative w-full overflow-hidden">
+      <motion.img
+        src="/photofolio/ireland/DSC04136.JPG"
+        alt="Hero"
+        className="w-full h-[90vh] object-cover"
+      />
 
-        <h1 className="text-7xl md:text-9xl text-center text-neutral-900 tracking-wide font-bold">
-          <span className="text-neutral-300">JM</span>Photos
+      <div
+        className={`absolute bottom-0 left-0 right-0 h-48 ${
+          darkMode ? "bg-gradient-to-t from-black" : "bg-gradient-to-t from-white"
+        }`}
+      />
+
+      <motion.div
+        className="absolute inset-0 flex flex-col items-center md:items-end text-center m-4"
+      >
+        <h1 className="text-6xl md:text-7xl text-neutral-700 tracking-wide leading-tight">
+          <span className="opacity-50">JM</span>
+          Photos
         </h1>
-      
-        <div className="fixed top-1 flex justify-around w-full max-w-5xl text-neutral-900 font-semibold">
-          <motion.div whileTap={{ opacity: 0.6 }} className="w-[5vw]">
-            <Link
-              to="/photofolio/featured"
-              className="text-xs md:text-sm tracking-wide"
-            >
-              <ScrambleText text="Featured" />
-            </Link>
-          </motion.div>
-          <motion.div whileTap={{ opacity: 0.6 }} className="w-[5vw]">
-            <Link
-              to="/photofolio/gallery"
-              className="text-xs md:text-sm tracking-wide"
-            >
-              <ScrambleText text="Gallery" />
-            </Link>
-          </motion.div>
-          <motion.div whileTap={{ opacity: 0.6 }} className="w-[5vw]">
-            <Link
-              to="/photofolio/about"
-              className="text-xs md:text-sm tracking-wide"
-            >
-              <ScrambleText text="About" />
-            </Link>
-          </motion.div>
+
+        <div className="flex m-4 text-sm text-neutral-700 md:text-base">
+          <Link to="/photofolio/featured" className="w-6 mx-10">
+            <ScrambleText text="Featured" />
+          </Link>
+          <a href="#gallery" className="w-6 mx-8">
+            <ScrambleText text="Gallery" />
+          </a>
+          <Link to="/photofolio/about" className="w-6 mx-8">
+            <ScrambleText text="About" />
+          </Link>
         </div>
-    </motion.section>
-    </>
+      </motion.div>
+    </section>
   );
 }
 

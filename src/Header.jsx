@@ -9,7 +9,7 @@ export default function Header({ darkMode, setDarkMode }) {
 
     const pageTitles = {
         "/photofolio/featured": "Featured",
-        "/photofolio/gallery": "Gallery",
+        "/photofolio/": "Gallery",
         "/photofolio/about": "About",
     };
 

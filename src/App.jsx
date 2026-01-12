@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Hero from "./Hero";
+import Home from "./Home";
 import Featured from "./Featured";
 import Gallery from "./Gallery";
 import About from "./About";
@@ -12,7 +12,7 @@ function AnimatedRoutes({ darkMode, setDarkMode }) {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/photofolio/" element={<Hero />} />
+        <Route path="/photofolio/" element={<Home darkMode={darkMode} setDarkMode={setDarkMode} />} />
         <Route path="/photofolio/featured" element={<Featured darkMode={darkMode} setDarkMode={setDarkMode} />} />
         <Route path="/photofolio/gallery" element={<Gallery darkMode={darkMode} setDarkMode={setDarkMode} />} />
         <Route path="/photofolio/about" element={<About darkMode={darkMode} setDarkMode={setDarkMode} />} />
