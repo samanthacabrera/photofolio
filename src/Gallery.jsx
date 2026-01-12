@@ -90,47 +90,55 @@ function Gallery({ darkMode, setDarkMode }) {
     <motion.section 
         id="gallery"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
-        className="flex flex-col items-center min-h-screen max-w-7xl mx-4 md:mx-auto">
-      {/* Filters */}
-      <div className="self-start pt-12 m-4 flex flex-col gap-6 md:gap-8 text-sm md:text-base">
-        <div className="flex items-center gap-3">
-          <span className="uppercase tracking-widest">
-            Location
-          </span>
-          <select
-            value={filterLocation}
-            onChange={(e) => setFilterLocation(e.target.value)}
-            className="bg-transparent border-b pb-1 focus:outline-none tracking-wide cursor-pointer"
-          >
-            {locations.map((loc) => (
-              <option key={loc} value={loc}>
-                {loc}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="uppercase tracking-widest">
-            Year
-          </span>
-          <select
-            value={filterYear}
-            onChange={(e) => setFilterYear(e.target.value)}
-            className="bg-transparent border-b pb-1 focus:outline-none tracking-wide cursor-pointer"
-          >
+        className="flex flex-col items-center min-h-screen mx-4">
+        {/* Filters */}
+        <div className="self-start pt-12 px-2 flex flex-col gap-6 text-sm md:text-base">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="uppercase tracking-widest">Year</span>
             {years.map((year) => (
-              <option key={year} value={year}>
+              <button
+                key={year}
+                onClick={() =>
+                  setFilterYear((prev) => (prev === String(year) ? "All" : String(year)))
+                }
+                className={`px-3 py-1 rounded-full border transition-all duration-200 uppercase text-current text-xs md:text-sm hover:opacity-70 transition duration-200
+                  ${
+                    filterYear === String(year)
+                      ? "border-current"
+                      : "border-transparent "
+                  }`}
+              >
                 {year}
-              </option>
+              </button>
             ))}
-          </select>
-        </div>
-      </div>
+          </div>
 
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="uppercase tracking-widest">Location</span>
+            {locations.map((loc) => (
+              <button
+                key={loc}
+                onClick={() =>
+                  setFilterLocation((prev) => (prev === loc ? "All" : loc))
+                }
+                className={`px-3 py-1 rounded-full border transition-all duration-200 uppercase text-current text-xs md:text-sm hover:opacity-70 transition duration-200
+                  ${
+                    filterLocation === loc
+                      ? "border-current"
+                      : "border-transparent "
+                  }`}
+              >
+                {loc}
+              </button>
+            ))}
+          </div>
+        </div>
+
+      <div className="py-12">
       {sortedGroups.map(({ location, year, photos }, index) => {
         return (
-          <div key={`${location}-${year}`} className="py-2">
-            <div className="grid md:grid-cols-2 gap-4">
+          <div key={`${location}-${year}`} >
+            <div className="grid md:grid-cols-2 gap-4 py-2">
               {photos.map(({ id, src, desc }) => (
                 <div
                   key={id}
@@ -156,6 +164,7 @@ function Gallery({ darkMode, setDarkMode }) {
           </div>
         );
       })}
+      </div>
 
       {/* Lightbox */}
       {lightboxOpen && activePhoto && (
