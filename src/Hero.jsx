@@ -57,7 +57,7 @@ function Hero({ darkMode }) {
         className="absolute inset-0 flex flex-col items-center md:items-end text-center m-4"
       >
         <h1 className="text-6xl md:text-7xl text-neutral-700 tracking-wide leading-tight">
-          <span className="opacity-50">JM</span>
+          <span className="text-neutral-600 opacity-50">JM</span>
           Photos
         </h1>
 

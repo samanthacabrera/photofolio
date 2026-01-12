@@ -10,7 +10,6 @@ return (
     >
         <Header darkMode={darkMode} setDarkMode={setDarkMode} />
         <div id="about" className="flex flex-col items-center justify-center h-[90vh] max-w-xl mx-8 md:mx-auto">   
-            {/* <h1 className="text-4xl md:text-8xl tracking-wider m-12 py-6">About</h1> */}
             <div className="text-justify tracking-wide normal-case space-y-6">
                 <p>Based in Utrecht, Netherlands. </p>
                 <p>This is my personal archive of places I’ve visited that felt worth holding onto.</p>

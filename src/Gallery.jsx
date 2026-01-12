@@ -90,10 +90,9 @@ function Gallery({ darkMode, setDarkMode }) {
     <motion.section 
         id="gallery"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
-        className="flex flex-col items-center min-h-screen max-w-5xl mx-4 md:mx-auto">
-      {/* <h1 className="text-4xl md:text-8xl tracking-wider m-12 px-4 py-4 md:py-8">Gallery</h1> */}
+        className="flex flex-col items-center min-h-screen max-w-7xl mx-4 md:mx-auto">
       {/* Filters */}
-      <div className="self-start m-4 flex flex-col gap-6 md:gap-8 text-sm md:text-base">
+      <div className="self-start pt-12 m-4 flex flex-col gap-6 md:gap-8 text-sm md:text-base">
         <div className="flex items-center gap-3">
           <span className="uppercase tracking-widest">
             Location
@@ -129,43 +128,31 @@ function Gallery({ darkMode, setDarkMode }) {
       </div>
 
       {sortedGroups.map(({ location, year, photos }, index) => {
-        const alignLeft = index % 2 === 0;
-        const isSingle = photos.length === 1;
-
         return (
-          <div key={`${location}-${year}`} className="pt-12 p-6">
-            <div className={`w-full my-4 ${alignLeft ? "text-left" : "text-right"}`}>
-              <h2 className="text-2xl md:text-4xl whitespace-nowrap">
-                {location} {year}
-              </h2>
-            </div>
-
-            {isSingle ? (
-              <div className={`flex ${alignLeft ? "justify-start" : "justify-end"}`}>
-                <div className="w-fit">
+          <div key={`${location}-${year}`} className="py-2">
+            <div className="grid md:grid-cols-2 gap-4">
+              {photos.map(({ id, src, desc }) => (
+                <div
+                  key={id}
+                  className="relative group cursor-pointer overflow-hidden"
+                  onClick={() => handleClick(id)}
+                >
                   <img
-                    src={photos[0].src}
-                    alt={photos[0].desc}
-                    className="max-w-[47vw] max-h-[90vh] object-cover cursor-pointer"
-                    onClick={() => handleClick(photos[0].id)}
+                    src={src}
+                    alt={desc}
+                    className="w-full max-h-[90vh] object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                </div>
-              </div>
-            ) : (
-              <div className="grid md:grid-cols-2 gap-4">
-                {photos.map(({ id, src, desc }) => (
-                  <div key={id}>
-                    <img
-                      src={src}
-                      alt={desc}
-                      className="w-full max-h-[90vh] object-cover cursor-pointer hover:scale-[101%] hover:opacity-90 transition-all duration-300"
-                      onClick={() => handleClick(id)}
-                    />
+                  <div
+                    className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 
+                              flex items-center justify-center text-white text-sm md:text-base 
+                              font-semibold transition-opacity duration-300"
+                  >
+                    <span className="tracking-wide">{location} {year}</span>
                   </div>
-                ))}
-                {photos.length % 2 !== 0 && <div />}
-              </div>
-            )}
+                </div>
+              ))}
+              {photos.length % 2 !== 0 && <div />}
+            </div>
           </div>
         );
       })}
