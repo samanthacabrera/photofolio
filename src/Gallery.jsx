@@ -66,6 +66,10 @@ function Gallery({ darkMode, setDarkMode }) {
   };
 
   useEffect(() => {
+    setActivePhotoIndex(0);
+  }, [filterLocation, filterYear]);
+
+  useEffect(() => {
       window.addEventListener("keydown", handleKeyDown);
       return () => window.removeEventListener("keydown", handleKeyDown);
     }, [lightboxOpen, flatPhotos]);

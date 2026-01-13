@@ -15,28 +15,30 @@ function Featured({ darkMode, setDarkMode }) {
         animate={{ opacity: 1 }} 
         exit={{ opacity: 0 }} 
         transition={{ duration: 0.25 }}
-        className="flex flex-col items-center min-h-screen max-w-7xl mx-4 md:mx-auto py-24"
+        className="flex flex-col items-center min-h-screen max-w-7xl mx-4 md:mx-auto py-6 md:py-24"
       > 
-        <div className="flex flex-col gap-16">
+        <div className="flex flex-col gap-[10vh] md:gap-[50vh]">
           {featuredPhotos.map((photo, index) => (
-            <article key={photo.id} className="flex flex-col md:flex-row gap-6 md:gap-12 items-center">
+            <article key={photo.id} className={`flex flex-col md:flex-row gap-6 md:gap-12 items-center
+                ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}
+            >
               
-              <div className="md:w-3/4 relative overflow-hidden rounded-sm shadow-lg">
+              <div className="md:w-4/5 relative overflow-hidden rounded-sm shadow-lg">
                 <img 
                   src={photo.src} 
                   alt={photo.desc} 
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[101%]"
                 />
               </div>
-              <div className="self-start md:w-1/4 flex flex-col gap-4">
+              <div className="self-start md:w-1/5 flex flex-col gap-4">
                 <p className="text-sm md:text-base uppercase tracking-widest text-neutral-500">
                   {photo.location} {photo.year}
                 </p>
-                <h2 className="text-2xl md:text-3xl font-semibold tracking-wide">
+                <h2 className="text-2xl md:text-3xl font-semibold tracking-widest">
                   {photo.desc}
                 </h2>
                 {photo.featuredText && (
-                  <p className="normal-case text-justify tracking-wide text-neutral-700 dark:text-neutral-300">
+                  <p className="normal-case text-justify">
                       {photo.featuredText} 
                   </p>
                 )}

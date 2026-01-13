@@ -61,7 +61,7 @@ function Hero({ darkMode }) {
         className={`pointer-events-none absolute inset-x-0 bottom-0 h-[45vh]
         ${darkMode
           ? "bg-gradient-to-t from-black/95 via-black/50"
-          : "bg-gradient-to-t from-neutral-100 via-neutral-100/40"}
+          : "bg-gradient-to-t from-white via-white/20"}
         `}
       />
 
