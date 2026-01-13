@@ -42,21 +42,52 @@ export default function Header({ darkMode, setDarkMode }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleNavigate = () => {
+    setMenuOpen(false);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <header className="sticky top-0 z-50 w-screen h-[8vh] bg-white flex items-center justify-center text-neutral-800 text-[10px] md:text-sm tracking-[0.2em] relative">
-
       {(!isHome || showTitle) && (
-        <div ref={menuRef} className="absolute left-4">
-          <button
-            onClick={() => setMenuOpen((prev) => !prev)}
+        <div className="absolute left-4">
+          <Link
+            to="/photofolio/"
+            onClick={handleNavigate}
             className="text-xs md:text-sm hover:opacity-70 transition-opacity uppercase"
-            aria-label="Open menu"
           >
             <span className="font-medium">JM</span>Photos
+          </Link>
+        </div>
+      )}
+
+      {currentTitle && (
+        <div
+          ref={menuRef}
+          className={`absolute left-1/2 -translate-x-1/2
+            transition-all duration-300 ease-out
+            ${
+              currentTitle === "About"
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : showTitle
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-1 pointer-events-none"
+            }
+          `}
+        >
+          <button
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="text-sm md:text-base tracking-widest hover:opacity-70 transition-opacity uppercase"
+            aria-label="Open menu"
+          >
+            {currentTitle}
           </button>
 
           {menuOpen && (
-            <div className="absolute left-0 top-full mt-4 p-4 min-w-[10rem] border border-current bg-background backdrop-blur-sm text-[10px] md:text-xs tracking-[0.25em] z-[100]">
+            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 p-4 min-w-[10rem] border border-current bg-black/10 backdrop-blur-sm text-[10px] md:text-xs tracking-[0.25em] z-[100]">
               {[
                 { label: "Home", path: "/photofolio/" },
                 { label: "Featured", path: "/photofolio/featured" },
@@ -66,7 +97,7 @@ export default function Header({ darkMode, setDarkMode }) {
                 <Link
                   key={item.label}
                   to={item.path}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={handleNavigate}
                   className="block py-2 hover:opacity-70 transition-opacity"
                 >
                   {item.label}
@@ -75,23 +106,6 @@ export default function Header({ darkMode, setDarkMode }) {
             </div>
           )}
         </div>
-      )}
-
-      {currentTitle && (
-        <h2
-          className={`absolute left-1/2 -translate-x-1/2 text-sm md:text-base tracking-widest
-          transition-all duration-300 ease-out
-          ${
-            currentTitle === "About"
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : showTitle
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-1 pointer-events-none"
-          }
-        `}
-        >
-          {currentTitle}
-        </h2>
       )}
 
       {(!isHome || showTitle) && (
