@@ -70,7 +70,7 @@ function Hero({ darkMode }) {
           className={`
             font-light
             text-4xl md:text-6xl
-            tracking-tight
+            tracking-[0.25em]
             ${darkMode ? "text-neutral-100" : "text-neutral-900"}
           `}
         >

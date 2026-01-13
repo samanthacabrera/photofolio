@@ -1,50 +1,3 @@
-// import { motion } from "framer-motion";
-// import photos from "./photos"; 
-// import Header from "./Header";
-// import ScrollToTop from "./ScrollToTop";
-
-// function Featured({ darkMode, setDarkMode }) {
-//     const featuredPhotos = photos.filter((photo) => photo.featured);
-
-//     return (
-//     <>
-//     <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-//     <motion.section 
-//         id="featured" 
-//         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
-//         className="flex flex-col items-center min-h-screen max-w-5xl mx-4 md:mx-auto"
-//     > 
-//         <div className="grid grid-cols-1 gap-24 p-6">
-//             {featuredPhotos.map((photo) => (
-//             <div
-//                 key={photo.id}
-//                 className="w-full mx-auto relative group"
-//             >
-//                 <div className="flex flex-col space-y-4 my-4 text-sm text-center tracking-wider">
-//                     <p>{photo.location} {photo.year}</p>
-//                     <p className="text-lg">{photo.desc}</p>
-//                     {photo.featuredText && (
-//                     <p className="normal-case text-justify tracking-wide">
-//                         {photo.featuredText}
-//                     </p>
-//                     )}
-//                 </div>
-                
-//                 <div className="relative">
-//                     <img src={photo.src} alt={photo.desc} className="w-fit h-full md:w-full object-cover"/>
-//                 </div>
-//             </div>
-//             ))}
-//         </div>
-//     </motion.section>
-//     <ScrollToTop />
-//     </>
-//   );
-// }
-
-// export default Featured;
-
-
 import { motion } from "framer-motion";
 import photos from "./photos"; 
 import Header from "./Header";
@@ -68,14 +21,14 @@ function Featured({ darkMode, setDarkMode }) {
           {featuredPhotos.map((photo, index) => (
             <article key={photo.id} className="flex flex-col md:flex-row gap-6 md:gap-12 items-center">
               
-              <div className="md:w-2/3 relative overflow-hidden rounded-sm shadow-lg">
+              <div className="md:w-3/4 relative overflow-hidden rounded-sm shadow-lg">
                 <img 
                   src={photo.src} 
                   alt={photo.desc} 
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[101%]"
                 />
               </div>
-              <div className="self-start md:w-1/3 flex flex-col gap-4">
+              <div className="self-start md:w-1/4 flex flex-col gap-4">
                 <p className="text-sm md:text-base uppercase tracking-widest text-neutral-500">
                   {photo.location} {photo.year}
                 </p>
@@ -83,12 +36,9 @@ function Featured({ darkMode, setDarkMode }) {
                   {photo.desc}
                 </h2>
                 {photo.featuredText && (
-                    <>
-                    <p className="normal-case text-justify tracking-wide text-neutral-700 dark:text-neutral-300">
-                        {photo.featuredText} 
-                    </p>
-                    <p className="hover:opacity-70 normal-case tracking-wide text-neutral-700 dark:text-neutral-300">read more</p>
-                    </>
+                  <p className="normal-case text-justify tracking-wide text-neutral-700 dark:text-neutral-300">
+                      {photo.featuredText} 
+                  </p>
                 )}
               </div>
 

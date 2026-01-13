@@ -42,6 +42,18 @@ export default function Header({ darkMode, setDarkMode }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   const handleNavigate = () => {
     setMenuOpen(false);
     window.scrollTo({
@@ -57,7 +69,7 @@ export default function Header({ darkMode, setDarkMode }) {
           <Link
             to="/photofolio/"
             onClick={handleNavigate}
-            className="text-xs md:text-sm hover:opacity-70 transition-opacity uppercase"
+            className="text-xs md:text-sm tracking-widest hover:opacity-70 transition-opacity uppercase" 
           >
             <span className="font-medium">JM</span>Photos
           </Link>
@@ -78,6 +90,7 @@ export default function Header({ darkMode, setDarkMode }) {
             }
           `}
         >
+          {!menuOpen && (
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
             className="text-sm md:text-base tracking-widest hover:opacity-70 transition-opacity uppercase"
@@ -85,9 +98,14 @@ export default function Header({ darkMode, setDarkMode }) {
           >
             {currentTitle}
           </button>
+          )}
 
           {menuOpen && (
-            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 p-4 min-w-[10rem] border border-current bg-black/10 backdrop-blur-sm text-[10px] md:text-xs tracking-[0.25em] z-[100]">
+          <div
+            className={`absolute left-1/2 -translate-x-1/2 top-full mt-4 w-screen h-[95vh] p-8 flex flex-col items-center text-2xl md:text-3xl tracking-[0.15em] font-medium z-50 ${
+              darkMode ? 'bg-black text-white' : 'bg-white text-black'
+            }`}
+          >
               {[
                 { label: "Home", path: "/photofolio/" },
                 { label: "Featured", path: "/photofolio/featured" },
@@ -98,11 +116,18 @@ export default function Header({ darkMode, setDarkMode }) {
                   key={item.label}
                   to={item.path}
                   onClick={handleNavigate}
-                  className="block py-2 hover:opacity-70 transition-opacity"
+                  className="py-4 hover:opacity-50 hover:translate-x-4 transition-all duration-200"
                 >
                   {item.label}
                 </Link>
               ))}
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 text-5xl font-light hover:opacity-50 transition-opacity duration-200"
+              aria-label="Close menu"
+            >
+              ×
+            </button>
             </div>
           )}
         </div>
