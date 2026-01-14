@@ -1,41 +1,35 @@
-import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./Header";
 import Home from "./Home";
 import Featured from "./Featured";
 import Gallery from "./Gallery";
 import About from "./About";
 
-function AnimatedRoutes({ darkMode, setDarkMode }) {
-  const location = useLocation();
-
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/photofolio/" element={<Home darkMode={darkMode} setDarkMode={setDarkMode} />} />
-        <Route path="/photofolio/featured" element={<Featured darkMode={darkMode} setDarkMode={setDarkMode} />} />
-        <Route path="/photofolio/gallery" element={<Gallery darkMode={darkMode} setDarkMode={setDarkMode} />} />
-        <Route path="/photofolio/about" element={<About darkMode={darkMode} setDarkMode={setDarkMode} />} />
-      </Routes>
-    </AnimatePresence>
-  );
-}
-
 export default function App() {
-  const [darkMode, setDarkMode] = useState(true); 
+  const [layoutValue, setLayoutValue] = useState(2);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
-  
   return (
     <BrowserRouter>
-      <AnimatedRoutes darkMode={darkMode} setDarkMode={setDarkMode}/>
+      <Header layoutValue={layoutValue} setLayoutValue={setLayoutValue} />
+      <Routes>
+        <Route
+          path="/photofolio/"
+          element={<Home layoutValue={layoutValue} />}
+        />
+        <Route
+          path="/photofolio/featured"
+          element={<Featured layoutValue={layoutValue} />}
+        />
+        <Route
+          path="/photofolio/gallery"
+          element={<Gallery layoutValue={layoutValue} />}
+        />
+        <Route
+          path="/photofolio/about"
+          element={<About layoutValue={layoutValue}/>}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
-

@@ -1,12 +1,12 @@
 import Gallery from "./Gallery";
 import Hero from "./Hero";
 
-function Home ({ darkMode, setDarkMode }) {
+function Home ({ layoutValue }) {
 
 return (
     <div className="flex flex-col space-y-6">
-        <Hero darkMode={darkMode} setDarkMode={setDarkMode} />
-        <Gallery darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Hero layoutValue={layoutValue} />
+      <Gallery layoutValue={layoutValue} />
     </div>
   );
 }

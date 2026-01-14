@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const ScrambleText = ({ text, darkMode }) => {
+const ScrambleText = ({ text }) => {
   const [displayText, setDisplayText] = useState(text);
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let interval = null;
@@ -31,10 +30,7 @@ const ScrambleText = ({ text, darkMode }) => {
     <span
       onMouseEnter={handleMouseEnter}
       onTouchStart={handleMouseEnter}
-      className={`
-        inline-flex
-        ${darkMode ? "text-neutral-100" : "text-neutral-900"}
-      `}
+      className="inline-flex"
     >
       {displayText.split("").map((char, i) => (
         <span
@@ -48,32 +44,19 @@ const ScrambleText = ({ text, darkMode }) => {
   );
 };
 
-function Hero({ darkMode }) {
+function Hero() {
   return (
     <section className="relative w-full overflow-hidden">
-      <motion.img
+      <img
         src="/photofolio/ireland/DSC04136.JPG"
         alt="Hero"
         className="w-full h-screen object-cover"
       />
 
-      <div
-        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[45vh]
-        ${darkMode
-          ? "bg-gradient-to-t from-black/95 via-black/50"
-          : "bg-gradient-to-t from-white via-white/20"}
-        `}
-      />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45vh] bg-gradient-to-t from-black/95 via-black/50" />
 
-      <motion.div className="absolute inset-0 flex flex-col justify-end items-center px-8 md:px-16 pb-20">
-        <h1
-          className={`
-            font-light
-            text-4xl md:text-6xl
-            tracking-[0.25em]
-            ${darkMode ? "text-neutral-100" : "text-neutral-900"}
-          `}
-        >
+      <div className="absolute inset-0 flex flex-col justify-start md:justify-end items-center px-8 md:px-16 pt-12 pb-20 text-neutral-800 md:text-inherit">
+        <h1 className="font-light text-4xl tracking-[0.25em]">
           <span className="font-medium">JM</span>Photos
         </h1>
 
@@ -82,24 +65,24 @@ function Hero({ darkMode }) {
             to="/photofolio/featured"
             className="hover:opacity-70 transition"
           >
-            <ScrambleText text="Featured" darkMode={darkMode} />
+            <ScrambleText text="Featured" />
           </Link>
 
           <a
             href="#gallery"
             className="hover:opacity-70 transition"
           >
-            <ScrambleText text="Gallery" darkMode={darkMode} />
+            <ScrambleText text="Gallery" />
           </a>
 
           <Link
             to="/photofolio/about"
             className="hover:opacity-70 transition"
           >
-            <ScrambleText text="About" darkMode={darkMode} />
+            <ScrambleText text="About" />
           </Link>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

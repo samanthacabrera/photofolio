@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import photos from "./photos";
-import Header from "./Header";
 import ScrollToTop from "./ScrollToTop";
 
 const groupPhotosByLocationAndYear = (items) =>
@@ -12,7 +10,7 @@ const groupPhotosByLocationAndYear = (items) =>
     return acc;
   }, {});
 
-function Gallery({ darkMode, setDarkMode }) {
+function Gallery({ layoutValue }) {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [filterLocation, setFilterLocation] = useState("All");
@@ -88,12 +86,16 @@ function Gallery({ darkMode, setDarkMode }) {
     };
   }, [lightboxOpen]);
 
+  const galleryGridMap = {
+    1: "md:grid-cols-1",
+    2: "md:grid-cols-2",
+    3: "md:grid-cols-3",
+    4: "md:grid-cols-4",
+  };
   return (
     <>
-    <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-    <motion.section 
+    <section 
         id="gallery"
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
         className="flex flex-col items-center min-h-screen mx-4">
         {/* Filters */}
         <div className="self-start pt-12 px-2 flex flex-col gap-6 text-sm md:text-base">
@@ -139,41 +141,34 @@ function Gallery({ darkMode, setDarkMode }) {
         </div>
 
       <div className="py-12">
-      {sortedGroups.map(({ location, year, photos }, index) => {
-        return (
-          <div key={`${location}-${year}`} >
-            <div className="grid md:grid-cols-2 gap-4 py-2">
-              {photos.map(({ id, src, desc }) => (
-                <div
-                  key={id}
-                  className="relative group cursor-pointer overflow-hidden"
-                  onClick={() => handleClick(id)}
-                >
-                  <img
-                    src={src}
-                    alt={desc}
-                    className="w-full max-h-[90vh] object-cover transition-transform duration-300 group-hover:scale-[101%]"
-                  />
-                  <div
-                    className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 
-                              flex items-center justify-center text-white text-sm md:text-base 
-                              font-semibold transition-opacity duration-300"
-                  >
-                    <span className="tracking-wide">{location} {year}</span>
-                  </div>
-                </div>
-              ))}
-              {photos.length % 2 !== 0 && <div />}
+        <div className={`grid gap-4 py-2 ${galleryGridMap[layoutValue]}`} >
+          {flatPhotos.map(({ id, src, desc, location, year }) => (
+            <div
+              key={id}
+              className="relative group cursor-pointer overflow-hidden"
+              onClick={() => handleClick(id)}
+            >
+              <img
+                src={src}
+                alt={desc}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[101%]"
+              />
+              <div
+                className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 
+                          flex items-center justify-center text-white text-sm md:text-base 
+                          font-semibold transition-opacity duration-300"
+              >
+                <span className="tracking-wide">{location} {year}</span>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          ))}
+          {photos.length % 2 !== 0 && <div />}
+        </div>
       </div>
 
       {/* Lightbox */}
       {lightboxOpen && activePhoto && (
-        <motion.div 
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+        <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
         >
           <img
@@ -196,9 +191,9 @@ function Gallery({ darkMode, setDarkMode }) {
           >
             x
           </button>
-        </motion.div>
+        </div>
       )}
-    </motion.section>
+    </section>
     <ScrollToTop />
     </>
   );

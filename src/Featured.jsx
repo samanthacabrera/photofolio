@@ -1,53 +1,71 @@
-import { motion } from "framer-motion";
-import photos from "./photos"; 
-import Header from "./Header";
+import photos from "./photos";
 import ScrollToTop from "./ScrollToTop";
 
-function Featured({ darkMode, setDarkMode }) {
+function Featured({ layoutValue }) {
   const featuredPhotos = photos.filter((photo) => photo.featured);
+
+  const articleLayoutMap = {
+    1: "md:flex flex-col",
+    2: "md:grid md:grid-cols-2",
+    3: "md:grid md:grid-cols-[3fr_2fr]",
+    4: "md:grid md:grid-cols-[4fr_1fr]",
+  };
 
   return (
     <>
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-      <motion.section 
-        id="featured" 
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        exit={{ opacity: 0 }} 
-        transition={{ duration: 0.25 }}
+      <section
+        id="featured"
         className="flex flex-col items-center min-h-screen max-w-7xl mx-4 md:mx-auto py-6 md:py-24"
-      > 
-        <div className="flex flex-col gap-[10vh] md:gap-[50vh]">
+      >
+        <div
+          className={`
+            ${
+              layoutValue <= 1
+                ? "flex flex-col md:flex-row gap-[10vh]"
+                : "flex flex-col gap-[20vh]"
+            }
+          `}
+        >
           {featuredPhotos.map((photo, index) => (
-            <article key={photo.id} className={`flex flex-col md:flex-row gap-6 md:gap-12 items-center
-                ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}
+            <article
+              key={photo.id}
+              className={`gap-6
+                ${articleLayoutMap[layoutValue]}
+                ${
+                  index % 2 === 1 && layoutValue === 4
+                    ? "md:[direction:rtl]"
+                    : ""
+                }
+              `}
             >
-              
-              <div className="md:w-4/5 relative overflow-hidden rounded-sm shadow-lg">
-                <img 
-                  src={photo.src} 
-                  alt={photo.desc} 
+              <div className="relative overflow-hidden rounded-sm shadow-lg">
+                <img
+                  src={photo.src}
+                  alt={photo.desc}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[101%]"
                 />
               </div>
-              <div className="self-start md:w-1/5 flex flex-col gap-4">
+
+              <div className="self-start flex flex-col gap-4">
                 <p className="text-sm md:text-base uppercase tracking-widest text-neutral-500">
                   {photo.location} {photo.year}
                 </p>
+
                 <h2 className="text-2xl md:text-3xl font-semibold tracking-widest">
                   {photo.desc}
                 </h2>
+
                 {photo.featuredText && (
                   <p className="normal-case text-justify">
-                      {photo.featuredText} 
+                    {photo.featuredText}
                   </p>
                 )}
               </div>
-
             </article>
           ))}
         </div>
-      </motion.section>
+      </section>
+
       <ScrollToTop />
     </>
   );

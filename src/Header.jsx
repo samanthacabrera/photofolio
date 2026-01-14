@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Header({ darkMode, setDarkMode }) {
+export default function Header({ layoutValue, setLayoutValue }) {
   const location = useLocation();
   const [showTitle, setShowTitle] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,6 +17,16 @@ export default function Header({ darkMode, setDarkMode }) {
   const currentTitle = pageTitles[location.pathname] || "";
 
   const isHome = location.pathname === "/photofolio/";
+
+  useEffect(() => {
+    if (!isHome) {
+      setShowTitle(true);
+    } else {
+      setShowTitle(false);
+    }
+    setMenuOpen(false); 
+  }, [location.pathname, isHome]);
+
 
   useEffect(() => {
     if (!isHome) return setShowTitle(true);
@@ -63,8 +73,9 @@ export default function Header({ darkMode, setDarkMode }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-screen h-[8vh] bg-white flex items-center justify-center text-neutral-800 text-[10px] md:text-sm tracking-[0.2em] relative">
-      {(!isHome || showTitle) && (
+  <>
+    {(!isHome || showTitle) && (
+    <header className="sticky top-0 z-50 w-screen h-[5vh] bg-black flex items-center justify-center text-[10px] md:text-sm tracking-[0.2em] relative">
         <div className="absolute left-4">
           <Link
             to="/photofolio/"
@@ -74,7 +85,7 @@ export default function Header({ darkMode, setDarkMode }) {
             <span className="font-medium">JM</span>Photos
           </Link>
         </div>
-      )}
+
 
       {currentTitle && (
         <div
@@ -101,11 +112,7 @@ export default function Header({ darkMode, setDarkMode }) {
           )}
 
           {menuOpen && (
-          <div
-            className={`absolute left-1/2 -translate-x-1/2 top-full mt-4 w-screen h-[95vh] p-8 flex flex-col items-center text-2xl md:text-3xl tracking-[0.15em] font-medium z-50 ${
-              darkMode ? 'bg-black text-white' : 'bg-white text-black'
-            }`}
-          >
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-screen h-[95vh] bg-black p-8 flex flex-col items-center text-2xl md:text-3xl tracking-[0.15em] font-medium z-50" >
               {[
                 { label: "Home", path: "/photofolio/" },
                 { label: "Featured", path: "/photofolio/featured" },
@@ -116,7 +123,7 @@ export default function Header({ darkMode, setDarkMode }) {
                   key={item.label}
                   to={item.path}
                   onClick={handleNavigate}
-                  className="py-4 hover:opacity-50 hover:translate-x-4 transition-all duration-200"
+                  className="py-4 hover:opacity-50 hover:-translate-y-2 transition-all duration-200"
                 >
                   {item.label}
                 </Link>
@@ -134,36 +141,25 @@ export default function Header({ darkMode, setDarkMode }) {
       )}
 
       {(!isHome || showTitle) && (
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="absolute right-4 flex items-center space-x-1 hover:opacity-70 transition-opacity uppercase"
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? (
-            <>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <circle cx="12" cy="12" r="5" strokeWidth="1" />
-                <line x1="12" y1="2" x2="12" y2="5" strokeWidth="1" strokeLinecap="round"/>
-                <line x1="12" y1="19" x2="12" y2="22" strokeWidth="1" strokeLinecap="round"/>
-                <line x1="2" y1="12" x2="5" y2="12" strokeWidth="1" strokeLinecap="round"/>
-                <line x1="19" y1="12" x2="22" y2="12" strokeWidth="1" strokeLinecap="round"/>
-                <line x1="5" y1="5" x2="7" y2="7" strokeWidth="1" strokeLinecap="round"/>
-                <line x1="17" y1="17" x2="19" y2="19" strokeWidth="1" strokeLinecap="round"/>
-                <line x1="5" y1="19" x2="7" y2="17" strokeWidth="1" strokeLinecap="round"/>
-                <line x1="17" y1="7" x2="19" y2="5" strokeWidth="1" strokeLinecap="round"/>
-              </svg>
-              <span className="tracking-[0.2em]">Light</span>
-            </>
-          ) : (
-            <>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M21.752 15.002A9 9 0 1112 3a9.003 9.003 0 009.752 12.002z" />
-              </svg>
-              <span className="tracking-[0.2em]">Dark</span>
-            </>
-          )}
-        </button>
+      <div className="absolute right-4 hidden md:flex items-center space-x-2">
+          <input
+            type="range"
+            min={1}
+            max={4}
+            step={1}
+            value={layoutValue}
+            onChange={(e) => setLayoutValue(Number(e.target.value))}
+            className="w-28 h-1 rounded-full bg-white/50 accent-white cursor-pointer transition-all duration-300 ease-in-out
+                      hover:bg-white/80 focus:outline-none"
+            style={{
+              WebkitAppearance: "none",
+              appearance: "none",
+            }}
+          />
+        </div>
       )}
     </header>
+    )}
+    </>
   );
 }

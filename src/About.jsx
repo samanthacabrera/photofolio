@@ -1,17 +1,18 @@
-import { motion } from "framer-motion";
-import Header from "./Header";
-
-function About({ darkMode, setDarkMode }) {
+function About({ layoutValue }) {
     const email = "justinamiller1023@gmail.com"
 
+    const textSizeMap = {
+        1: "md:text-base",
+        2: "md:text-lg",
+        3: "md:text-xl",
+        4: "md:text-2xl",
+    };
+
+
 return (
-    <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
-        className="h-screen overflow-hidden"
-    >
-        <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+    <div className="h-screen overflow-hidden">
         <div id="about" className="flex flex-col items-center justify-center h-[90vh] max-w-xl mx-8 md:mx-auto">   
-            <div className="text-left tracking-wide normal-case space-y-4">
+            <div className={`${textSizeMap[layoutValue]} text-left tracking-wide normal-case space-y-4`}>
                 <p>Based in Utrecht, Netherlands. </p>
                 <p>This is my personal archive of places I’ve visited that felt worth holding onto.</p>
                 <p>I am self-taught and began photographing in 2020. All photos are captured with a Sony Alpha a6000 under natural light.</p>
@@ -21,8 +22,11 @@ return (
                 <a href="https://samoontha.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition pl-1">Sam Cabrera</a>
             </p>
         </div>
-    </motion.div>
+    </div>
   );
 }
 
 export default About;
+
+
+    
