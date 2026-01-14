@@ -100,7 +100,8 @@ function Gallery({ layoutValue }) {
         id="gallery"
         className="flex flex-col items-center min-h-screen mx-4">
         {/* Filters */}
-        <div className="self-start pt-12 px-2 flex flex-col gap-6 text-sm md:text-base">
+        <div className="self-start pt-20
+         px-2 flex flex-col gap-6 text-sm md:text-base">
           <div className="flex flex-wrap items-center gap-3">
             <span className="uppercase tracking-widest">Year</span>
             {years.map((year) => (
@@ -141,7 +142,8 @@ function Gallery({ layoutValue }) {
             ))}
           </div>
         </div>
-
+      
+      {/* Gallery */}
       <div className="py-12">
         <div className={`grid gap-4 py-2 ${galleryGridMap[layoutValue]}`} >
           {flatPhotos.map(({ id, src, desc, location, year }) => (

@@ -6,7 +6,7 @@ function Home ({ layoutValue }) {
 
   return (
     <Transition>
-      <div className="flex flex-col space-y-6">
+      <div className="flex flex-col space-y-24">
         <Hero layoutValue={layoutValue} />
         <Gallery layoutValue={layoutValue} />
       </div>
