@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import photos from "./photos";
+import Transition from "./Transition";
 import ScrollToTop from "./ScrollToTop";
 
 const groupPhotosByLocationAndYear = (items) =>
@@ -94,6 +95,7 @@ function Gallery({ layoutValue }) {
   };
   return (
     <>
+    <Transition>
     <section 
         id="gallery"
         className="flex flex-col items-center min-h-screen mx-4">
@@ -194,6 +196,7 @@ function Gallery({ layoutValue }) {
         </div>
       )}
     </section>
+    </Transition>
     <ScrollToTop />
     </>
   );

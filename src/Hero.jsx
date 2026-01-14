@@ -63,20 +63,23 @@ function Hero() {
         <div className="mt-6 flex gap-8 text-xs md:text-sm uppercase font-medium">
           <Link
             to="/photofolio/featured"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="hover:opacity-70 transition"
           >
             <ScrambleText text="Featured" />
           </Link>
 
-          <a
-            href="#gallery"
+          <Link
+            to="/photofolio/gallery"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="hover:opacity-70 transition"
           >
             <ScrambleText text="Gallery" />
-          </a>
+          </Link>
 
           <Link
             to="/photofolio/about"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="hover:opacity-70 transition"
           >
             <ScrambleText text="About" />

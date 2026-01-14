@@ -1,4 +1,5 @@
 import photos from "./photos";
+import Transition from "./Transition";
 import ScrollToTop from "./ScrollToTop";
 
 function Featured({ layoutValue }) {
@@ -13,6 +14,7 @@ function Featured({ layoutValue }) {
 
   return (
     <>
+      <Transition>
       <section
         id="featured"
         className="flex flex-col items-center min-h-screen max-w-7xl mx-4 md:mx-auto py-6 md:py-24"
@@ -65,7 +67,7 @@ function Featured({ layoutValue }) {
           ))}
         </div>
       </section>
-
+      </Transition>
       <ScrollToTop />
     </>
   );

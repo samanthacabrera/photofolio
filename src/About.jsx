@@ -1,3 +1,5 @@
+import Transition from "./Transition";
+
 function About({ layoutValue }) {
     const email = "justinamiller1023@gmail.com"
 
@@ -10,6 +12,7 @@ function About({ layoutValue }) {
 
 
 return (
+    <Transition>
     <div className="h-screen overflow-hidden">
         <div id="about" className="flex flex-col items-center justify-center h-[90vh] max-w-xl mx-8 md:mx-auto">   
             <div className={`${textSizeMap[layoutValue]} text-left tracking-wide normal-case space-y-4`}>
@@ -23,6 +26,7 @@ return (
             </p>
         </div>
     </div>
+    </Transition>
   );
 }
 
