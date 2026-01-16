@@ -7,7 +7,7 @@ import Gallery from "./Gallery";
 import About from "./About";
 
 export default function App() {
-  const [layoutValue, setLayoutValue] = useState(2);
+  const [layoutValue, setLayoutValue] = useState(1);
 
   return (
     <BrowserRouter>

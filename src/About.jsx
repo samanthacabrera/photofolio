@@ -6,15 +6,13 @@ function About({ layoutValue }) {
     const textSizeMap = {
         1: "md:text-base",
         2: "md:text-lg",
-        3: "md:text-xl",
-        4: "md:text-2xl",
+        3: "md:text-2xl",
     };
 
 
 return (
     <Transition>
-    <div className="h-screen overflow-hidden">
-        <div id="about" className="flex flex-col items-center justify-center h-[90vh] max-w-xl mx-8 md:mx-auto">   
+        <div id="about" className="flex flex-col items-center justify-center h-[85vh] max-w-xl mx-4 md:mx-auto">   
             <div className={`${textSizeMap[layoutValue]} text-left tracking-wide normal-case space-y-4`}>
                 <p>Based in Utrecht, Netherlands. </p>
                 <p>This is my personal archive of places I’ve visited that felt worth holding onto.</p>
@@ -25,7 +23,6 @@ return (
                 <a href="https://samoontha.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition pl-1">Sam Cabrera</a>
             </p>
         </div>
-    </div>
     </Transition>
   );
 }

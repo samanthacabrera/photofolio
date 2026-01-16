@@ -3,7 +3,7 @@ const photos = [
     { id: 2, src: "/photofolio/ireland/DSC03798.JPG", location: "Ireland", year: 2025, desc: "Howth Cliff", featured: false },
     { id: 3, src: "/photofolio/ireland/DSC04133.JPG", location: "Ireland", year: 2025, desc: "Cliffs of Moher", featured: false },
     { id: 4, src: "/photofolio/ireland/DSC04158.JPG", location: "Ireland", year: 2025, desc: "Cliffs of Moher", featured: false },
-    { id: 5, src: "/photofolio/portugal/DSC02534.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys", featured: true, featuredText: "Walking the Seven Hanging Valleys trail was surreal. Along the way, I photographed limestone cliffs and hidden sea caves carved out by the Atlantic. I finished my hike with a quick dip at the iconic Praia da Marinha." },
+    { id: 5, src: "/photofolio/portugal/DSC02534.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys", featured: true, featuredText: "Walking the Seven Hanging Valleys trail was surreal. Along the way, I photographed limestone cliffs and hidden sea caves carved out by the Atlantic. I finished my hike with a quick dip at the iconic Praia da Marinha" },
     { id: 6, src: "/photofolio/portugal/DSC02283.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys", featured: false },
     { id: 7, src: "/photofolio/portugal/DSC02552.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys", featured: false },
     { id: 8, src: "/photofolio/portugal/DSC02615.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys", featured: false },

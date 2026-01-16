@@ -94,6 +94,7 @@ export default function Header({ layoutValue, setLayoutValue }) {
 
   return (
     <header className="sticky top-0 z-50 w-screen h-[15vh] bg-black flex items-center justify-center text-[10px] md:text-sm tracking-[0.2em] relative">
+      {!menuOpen && (
       <div className="hidden md:flex absolute left-6">
         <Link
           to="/photofolio/"
@@ -103,6 +104,7 @@ export default function Header({ layoutValue, setLayoutValue }) {
           <span className="font-medium">JM</span>Photos
         </Link>
       </div>
+      )}
 
       {/* Page Title / Dropdown Menu */}
       {currentTitle && (
@@ -133,11 +135,12 @@ export default function Header({ layoutValue, setLayoutValue }) {
       )}
 
       {/* Slider */}
+      {!menuOpen && (
       <div className="absolute right-6 hidden md:flex items-center space-x-2">
         <input
           type="range"
           min={1}
-          max={4}
+          max={3}
           step={1}
           value={layoutValue}
           onChange={(e) => setLayoutValue(Number(e.target.value))}
@@ -145,6 +148,7 @@ export default function Header({ layoutValue, setLayoutValue }) {
           style={{ WebkitAppearance: "none", appearance: "none" }}
         />
       </div>
+      )}
     </header>
   );
 }

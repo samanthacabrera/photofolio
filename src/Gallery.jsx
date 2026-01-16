@@ -88,10 +88,9 @@ function Gallery({ layoutValue }) {
   }, [lightboxOpen]);
 
   const galleryGridMap = {
-    1: "md:grid-cols-1",
-    2: "md:grid-cols-2",
-    3: "md:grid-cols-3",
-    4: "md:grid-cols-4",
+    1: "md:grid-cols-2",
+    2: "md:grid-cols-3",
+    3: "md:grid-cols-4",
   };
   return (
     <>
