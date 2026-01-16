@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 
 const PAGE_TITLES = {
-  "/photofolio/": "Gallery",
+  "/photofolio/": "Home",
   "/photofolio/featured": "Featured",
   "/photofolio/gallery": "Gallery",
   "/photofolio/about": "About",
@@ -29,7 +29,7 @@ function DropdownMenu({ open, onClose, onNavigate }) {
 
   return (
     <div
-      className="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-screen h-[95vh] bg-black p-8 flex flex-col items-center text-2xl md:text-3xl tracking-[0.15em] font-medium z-50"
+      className="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-4 w-screen h-[95vh] bg-black p-8 flex flex-col items-center text-2xl md:text-3xl tracking-[0.15em] font-medium z-50"
     >
       {MENU_ITEMS.map((item) => (
         <Link
@@ -54,15 +54,17 @@ function DropdownMenu({ open, onClose, onNavigate }) {
 }
 
 
-export default function Header({ layoutValue, setLayoutValue }) {
+export default function Header() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
-
+  const [isLight, setIsLight] = useState(
+    localStorage.getItem("theme") === "light"
+  );  
   const pathname = location.pathname;
   const isHome = pathname === "/photofolio/";
   const currentTitle = PAGE_TITLES[pathname] || "";
-  const shouldShowHeader = !isHome || showTitle;
+  const shouldShowHeader = !isHome && showTitle;
 
   useEffect(() => {
     setMenuOpen(false);
@@ -73,17 +75,20 @@ export default function Header({ layoutValue, setLayoutValue }) {
       setShowTitle(true);
       return;
     }
-
-    const handleScroll = () => {
-      const isMobile = window.innerWidth < 768;
-      const breakpoint = isMobile ? 90 : 750;
-      setShowTitle(window.scrollY > breakpoint);
-    };
-
-    handleScroll(); 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, [isHome]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (isLight) {
+      root.classList.add("light-mode");
+      localStorage.setItem("theme", "light");
+    } else {
+      root.classList.remove("light-mode");
+      localStorage.setItem("theme", "dark");
+    }
+  }, [isLight]);
+
 
   const handleNavigate = () => {
     setMenuOpen(false);
@@ -93,7 +98,7 @@ export default function Header({ layoutValue, setLayoutValue }) {
   if (!shouldShowHeader) return null;
 
   return (
-    <header className="sticky top-0 z-50 w-screen h-[15vh] bg-black flex items-center justify-center text-[10px] md:text-sm tracking-[0.2em] relative">
+    <header className="header sticky top-0 z-50 w-screen h-[10vh] bg-black flex items-center justify-center text-[10px] md:text-sm tracking-[0.2em] relative">
       {!menuOpen && (
       <div className="hidden md:flex absolute left-6">
         <Link
@@ -134,21 +139,20 @@ export default function Header({ layoutValue, setLayoutValue }) {
         </div>
       )}
 
-      {/* Slider */}
+
+      {/* Light/Dark Toggle  */}
       {!menuOpen && (
-      <div className="absolute right-6 hidden md:flex items-center space-x-2">
-        <input
-          type="range"
-          min={1}
-          max={3}
-          step={1}
-          value={layoutValue}
-          onChange={(e) => setLayoutValue(Number(e.target.value))}
-          className="w-28 h-1 rounded-full bg-white/50 accent-white cursor-pointer transition-all duration-300 ease-in-out hover:bg-white/80 focus:outline-none"
-          style={{ WebkitAppearance: "none", appearance: "none" }}
-        />
-      </div>
+        <div className="absolute right-6">
+          <button
+            className="text-xs md:text-sm tracking-widest hover:opacity-70 transition-opacity uppercase"
+            onClick={() => setIsLight(!isLight)}
+            aria-label="Toggle light mode"
+          >
+            {isLight ? "Dark" : "Light"}
+          </button>
+        </div>
       )}
-    </header>
+    </header>   
   );
 }
+

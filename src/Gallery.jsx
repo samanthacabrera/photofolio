@@ -11,11 +11,12 @@ const groupPhotosByLocationAndYear = (items) =>
     return acc;
   }, {});
 
-function Gallery({ layoutValue }) {
+function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [filterLocation, setFilterLocation] = useState("All");
   const [filterYear, setFilterYear] = useState("All");
+  const [layoutValue, setLayoutValue] = useState(1);
 
   const locations = useMemo(
     () => ["All", ...new Set(photos.map((p) => p.location))],
@@ -95,12 +96,10 @@ function Gallery({ layoutValue }) {
   return (
     <>
     <Transition>
-    <section 
-        id="gallery"
-        className="flex flex-col items-center min-h-screen mx-4">
+    <section id="gallery" className="flex flex-col items-center min-h-screen mx-4">
+      <div className="flex flex-col md:flex-row justify-between items-center pt-20 px-4 w-full gap-6">
         {/* Filters */}
-        <div className="self-start pt-20
-         px-2 flex flex-col gap-6 text-sm md:text-base">
+        <div className="flex flex-col flex-wrap gap-4 md:gap-6">
           <div className="flex flex-wrap items-center gap-3">
             <span className="uppercase tracking-widest">Year</span>
             {years.map((year) => (
@@ -109,18 +108,14 @@ function Gallery({ layoutValue }) {
                 onClick={() =>
                   setFilterYear((prev) => (prev === String(year) ? "All" : String(year)))
                 }
-                className={`px-3 py-1 rounded-full border transition-all duration-200 uppercase text-current text-xs md:text-sm hover:opacity-70 transition duration-200
-                  ${
-                    filterYear === String(year)
-                      ? "border-current"
-                      : "border-transparent "
-                  }`}
+                className={`px-3 py-1 rounded-full border transition-all duration-200 uppercase text-current text-xs md:text-sm hover:opacity-70
+                  ${filterYear === String(year) ? "border-current" : "border-transparent"}
+                `}
               >
                 {year}
               </button>
             ))}
           </div>
-
           <div className="flex flex-wrap items-center gap-3">
             <span className="uppercase tracking-widest">Location</span>
             {locations.map((loc) => (
@@ -129,19 +124,31 @@ function Gallery({ layoutValue }) {
                 onClick={() =>
                   setFilterLocation((prev) => (prev === loc ? "All" : loc))
                 }
-                className={`px-3 py-1 rounded-full border transition-all duration-200 uppercase text-current text-xs md:text-sm hover:opacity-70 transition duration-200
-                  ${
-                    filterLocation === loc
-                      ? "border-current"
-                      : "border-transparent "
-                  }`}
+                className={`px-3 py-1 rounded-full border transition-all duration-200 uppercase text-current text-xs md:text-sm hover:opacity-70
+                  ${filterLocation === loc ? "border-current" : "border-transparent"}
+                `}
               >
                 {loc}
               </button>
             ))}
           </div>
         </div>
-      
+
+        {/* Slider */}
+        <div className="flex-shrink-0 mt-4 md:mt-0">
+          <input
+            type="range"
+            min={1}
+            max={3}
+            step={1}
+            value={layoutValue}
+            onChange={(e) => setLayoutValue(Number(e.target.value))}
+            className="w-28 h-1 rounded-full bg-white/50 accent-white cursor-pointer transition-all duration-300 ease-in-out hover:bg-white/80 focus:outline-none"
+            style={{ WebkitAppearance: "none", appearance: "none" }}
+          />
+        </div>
+      </div>
+
       {/* Gallery */}
       <div className="py-12">
         <div className={`grid gap-4 py-2 ${galleryGridMap[layoutValue]}`} >

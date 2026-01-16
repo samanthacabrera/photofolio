@@ -1,92 +1,93 @@
-import { useState } from "react";
+// import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import Transition from "./Transition";
 
-const ScrambleText = ({ text }) => {
-  const [displayText, setDisplayText] = useState(text);
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let interval = null;
+// const ScrambleText = ({ text, boldPrefix = "" }) => {
+//   const [displayText, setDisplayText] = useState(text);
+//   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//   const intervalRef = useRef(null);
 
-  const handleMouseEnter = () => {
-    let iteration = 0;
-    clearInterval(interval);
-    interval = setInterval(() => {
-      setDisplayText(
-        text
-          .split("")
-          .map((char, i) =>
-            i < iteration ? text[i] : letters[Math.floor(Math.random() * letters.length)]
-          )
-          .join("")
-      );
-      iteration += 1 / 3;
-      if (iteration >= text.length) {
-        clearInterval(interval);
-        setDisplayText(text);
-      }
-    }, 30);
-  };
+//   const handleMouseEnter = () => {
+//     let iteration = 0;
+//     const totalLength = text.length;
 
-  return (
-    <span
-      onMouseEnter={handleMouseEnter}
-      onTouchStart={handleMouseEnter}
-      className="inline-flex"
-    >
-      {displayText.split("").map((char, i) => (
-        <span
-          key={i}
-          className="inline-block w-[1.5ch] text-center"
-        >
-          {char}
-        </span>
-      ))}
-    </span>
-  );
-};
+//     clearInterval(intervalRef.current);
+
+//     intervalRef.current = setInterval(() => {
+//       setDisplayText(
+//         text
+//           .split("")
+//           .map((char, i) =>
+//             i < iteration
+//               ? char
+//               : letters[Math.floor(Math.random() * letters.length)]
+//           )
+//           .join("")
+//       );
+
+//       iteration += 0.25;
+
+//       if (iteration >= totalLength) {
+//         clearInterval(intervalRef.current);
+//         setDisplayText(text);
+//       }
+//     }, 20);
+//   };
+
+//   return (
+//     <span
+//       onMouseEnter={handleMouseEnter}
+//       onTouchStart={handleMouseEnter}
+//       className="group inline-flex"
+//     >
+//       {displayText.split("").map((char, i) => (
+//         <span
+//           key={i}
+//           className={`inline-block w-[1.5ch] text-center text-5xl md:text-4xl group-hover:scale-125 transition duration-500 ${
+//             i < boldPrefix.length ? "font-semibold" : ""
+//           } uppercase tracking-tight`}
+//         >
+//           {char}
+//         </span>
+//       ))}
+//     </span>
+//   );
+// };
 
 function Hero() {
   return (
-    <section className="relative w-full overflow-hidden">
+    <Transition>
+    <section className="relative w-full h-screen overflow-hidden bg-black">
       <img
         src="/photofolio/ireland/DSC04136.JPG"
         alt="Hero"
-        className="w-full h-screen object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45vh] bg-gradient-to-t from-black/95 via-black/50" />
+      <div className="absolute inset-0 bg-black/20"></div>
 
-      <div className="absolute inset-0 flex flex-col justify-start md:justify-end items-center px-8 md:px-16 pt-12 pb-20 text-neutral-800 md:text-inherit">
-        <h1 className="font-light text-4xl tracking-[0.25em]">
-          <span className="font-medium">JM</span>Photos
-        </h1>
+      <div className="relative z-10 flex flex-col items-center h-full pt-8 space-y-20 text-white">
+        {/* <ScrambleText text="JMPHOTOS" boldPrefix="JM"/> */}
+        <h1 className="text-4xl font-light"><span className="font-normal">JM</span>Photos</h1>
 
-        <div className="mt-6 flex gap-8 text-xs md:text-sm uppercase font-medium">
-          <Link
-            to="/photofolio/featured"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="hover:opacity-70 transition"
-          >
-            <ScrambleText text="Featured" />
+       <div className="flex flex-col space-y-6 tracking-wide text-center text-4xl md:text-8xl w-full">
+          <Link to="/photofolio/featured" className="group flex justify-center opacity-80 hover:opacity-100 transition-all duration-500 p-4">
+            Featured
+            <span className="absolute right-[20vw] ml-2 opacity-0 transform translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">☞</span>
           </Link>
-
-          <Link
-            to="/photofolio/gallery"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="hover:opacity-70 transition"
-          >
-            <ScrambleText text="Gallery" />
+          <Link to="/photofolio/gallery" className="group flex justify-center opacity-80 hover:opacity-100 transition-all duration-500 p-4">
+            Gallery
+            <span className="absolute left-[20vw] ml-2 opacity-0 transform translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">☜</span>
           </Link>
-
-          <Link
-            to="/photofolio/about"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="hover:opacity-70 transition"
-          >
-            <ScrambleText text="About" />
+          <Link to="/photofolio/about" className="group flex justify-center opacity-80 hover:opacity-100 transition-all duration-500 p-4">
+            About
+            <span className="absolute bottom-0 ml-2 opacity-0 transform translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">☟</span>
           </Link>
         </div>
+
       </div>
     </section>
+    </Transition>
   );
 }
 
