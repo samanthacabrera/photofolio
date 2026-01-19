@@ -33,7 +33,7 @@ function Featured() {
                       className={`overflow-hidden transition-all duration-500 ease-in-out
                         ${
                           isOpen
-                            ? "w-3/4 h-[70vh]"
+                            ? "w-4/5 h-[70vh]"
                             : "w-64 h-44 shrink-0"
                         }
                       `}
@@ -48,7 +48,7 @@ function Featured() {
                       className={`flex flex-col transition-all duration-500 ease-in-out
                         ${
                           isOpen
-                            ? "w-1/4"
+                            ? "w-1/5"
                             : ""
                         }
                       `}
