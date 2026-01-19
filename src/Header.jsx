@@ -142,7 +142,7 @@ export default function Header() {
 
       {/* Light/Dark Toggle  */}
       {!menuOpen && (
-        <div className="absolute right-6">
+        <div className="hidden md:flex absolute right-6">
           <button
             className="text-xs md:text-sm tracking-widest hover:opacity-70 transition-opacity uppercase"
             onClick={() => setIsLight(!isLight)}

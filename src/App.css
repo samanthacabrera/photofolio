@@ -11,6 +11,14 @@ html {
   text-transform: uppercase;
   background-color: black;
   color: whitesmoke;
+  cursor: crosshair;
+}
+
+a,
+a:hover,
+button,
+button:hover {
+  cursor: crosshair;
 }
 
 /* Dark / Light Mode */
