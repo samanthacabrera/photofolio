@@ -34,7 +34,7 @@ function Featured() {
                         ${
                           isOpen
                             ? "w-4/5 h-[70vh]"
-                            : "w-64 h-44 shrink-0"
+                            : "w-64 h-48 shrink-0"
                         }
                       `}
                     >
@@ -68,7 +68,7 @@ function Featured() {
                           onClick={() => toggle(photo.id)}
                           className="self-start text-xs uppercase tracking-widest opacity-60 hover:opacity-100 transition"
                         >
-                          {isOpen ? "" : "Read more"}
+                          {isOpen ? "Close" : "Read more"}
                         </button>
                       )}
                     </div>
@@ -80,14 +80,8 @@ function Featured() {
                     `}
                   >
                     <div className="overflow-hidden">
-                      <p className="normal-case tracking-wide leading-loose">
+                      <p className="normal-case text-sm md:text-base tracking-wide leading-loose">
                         {photo.featuredText}
-                      <button
-                        onClick={() => toggle(photo.id)}
-                        className="pl-2 text-sm uppercase tracking-widest opacity-60 hover:opacity-100 transition"
-                      >
-                        {isOpen ? "Close" : ""}
-                      </button>
                       </p>
                     </div>
                   </div>
