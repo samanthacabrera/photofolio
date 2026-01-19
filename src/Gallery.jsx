@@ -135,7 +135,7 @@ function Gallery() {
         </div>
 
         {/* Slider */}
-        <div className="flex-shrink-0 mt-4 md:mt-0">
+        <div className="hidden md:flex flex-shrink-0 mt-4 md:mt-0">
           <input
             type="range"
             min={1}

@@ -1,56 +1,100 @@
+import { useState } from "react";
 import photos from "./photos";
 import Transition from "./Transition";
 import ScrollToTop from "./ScrollToTop";
 
 function Featured() {
   const featuredPhotos = photos.filter((photo) => photo.featured);
+  const [openId, setOpenId] = useState(null);
+
+  const toggle = (id) => {
+    setOpenId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <>
       <Transition>
         <section
           id="featured"
-          className="flex flex-col items-center min-h-screen max-w-screen mx-8 py-6 md:py-24"
+          className="flex flex-col items-center min-h-screen max-w-7xl mx-6 md:mx-auto py-12"
         >
-          <div
-            className="flex flex-col gap-[25vh] md:gap-[50vh]"
-          >
-            {featuredPhotos.map((photo, index) => (
-              <article
-                key={photo.id}
-                className={`md:grid md:grid-cols-[4fr_1fr] gap-8
-                  ${
-                    index % 2 === 1
-                      ? "md:[direction:rtl]"
-                      : ""
-                  }
-                `}
-              >
-                <div className="relative overflow-hidden rounded-sm shadow-lg md:h-[75vh]">
-                  <img
-                    src={photo.src}
-                    alt={photo.desc}
-                    className="w-full h-full object-cover transition-transform duration-300"/>
-                </div>
+          <ul className="w-full flex flex-col gap-12">
+            {featuredPhotos.map((photo) => {
+              const isOpen = openId === photo.id;
 
-                <div className="flex flex-col self-start gap-4">
-                  <p className="uppercase tracking-widest text-neutral-500">
-                    {photo.location} {photo.year}
-                  </p>
+              return (
+                <li key={photo.id} className="pb-12">
+                  <div
+                    className={`transition-all duration-500 ease-in-out
+                      ${isOpen ? "flex gap-8" : "flex gap-6"}
+                    `}
+                  >
+                    <div
+                      className={`overflow-hidden transition-all duration-500 ease-in-out
+                        ${
+                          isOpen
+                            ? "w-3/4 h-[70vh]"
+                            : "w-64 h-44 shrink-0"
+                        }
+                      `}
+                    >
+                      <img
+                        src={photo.src}
+                        alt={photo.desc}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div
+                      className={`flex flex-col transition-all duration-500 ease-in-out
+                        ${
+                          isOpen
+                            ? "w-1/4"
+                            : ""
+                        }
+                      `}
+                    >
+                      <p className={`uppercase tracking-widest opacity-60 mb-2
+                       ${isOpen ? "text-2xl" : "text-xs"}
+                      `}>
+                        {photo.location} {photo.year}
+                      </p>
 
-                  <h2 className="font-semibold tracking-widest text-xl">
-                    {photo.desc}
-                  </h2>
+                      <h3 className="tracking-widest font-medium mb-4">
+                        {photo.desc}
+                      </h3>
 
-                  {photo.featuredText && (
-                    <p className="normal-case text-md text-justify tracking-tight w-full leading-relaxed">
-                      {photo.featuredText}
-                    </p>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
+                      {photo.featuredText && (
+                        <button
+                          onClick={() => toggle(photo.id)}
+                          className="self-start text-xs uppercase tracking-widest opacity-60 hover:opacity-100 transition"
+                        >
+                          {isOpen ? "" : "Read more"}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  <div
+                    className={`grid transition-all duration-500 ease-in-out
+                      ${isOpen ? "grid-rows-[1fr] mt-8" : "grid-rows-[0fr]"}
+                    `}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="normal-case tracking-wide leading-loose">
+                        {photo.featuredText}
+                      <button
+                        onClick={() => toggle(photo.id)}
+                        className="pl-2 text-sm uppercase tracking-widest opacity-60 hover:opacity-100 transition"
+                      >
+                        {isOpen ? "Close" : ""}
+                      </button>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </section>
       </Transition>
 
@@ -60,4 +104,3 @@ function Featured() {
 }
 
 export default Featured;
-
