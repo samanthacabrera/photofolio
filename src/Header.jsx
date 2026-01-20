@@ -139,16 +139,49 @@ export default function Header() {
         </div>
       )}
 
-
       {/* Light/Dark Toggle  */}
       {!menuOpen && (
         <div className="hidden md:flex absolute right-6">
           <button
-            className="text-xs md:text-sm tracking-widest hover:opacity-70 transition-opacity uppercase"
             onClick={() => setIsLight(!isLight)}
-            aria-label="Toggle light mode"
+            aria-label="Toggle light/dark mode"
+            className="flex items-center justify-center w-8 h-8 hover:opacity-70 transition-opacity"
           >
-            {isLight ? "Dark" : "Light"}
+            {isLight ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-5 h-5"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <line x1="12" y1="1" x2="12" y2="5" />
+                <line x1="12" y1="19" x2="12" y2="23" />
+                <line x1="1" y1="12" x2="5" y2="12" />
+                <line x1="19" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="4.22" x2="7.07" y2="7.07" />
+                <line x1="16.93" y1="16.93" x2="19.78" y2="19.78" />
+                <line x1="4.22" y1="19.78" x2="7.07" y2="16.93" />
+                <line x1="16.93" y1="7.07" x2="19.78" y2="4.22" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-5 h-5"
+              >
+                <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+              </svg>
+            )}
           </button>
         </div>
       )}
