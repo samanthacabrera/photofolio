@@ -69,18 +69,27 @@ function Hero() {
           </h2>
         </div>
 
-        <nav className="absolute bottom-4 z-30 flex justify-between w-screen px-4 font-bold tracking-wide text-2xl md:text-6xl">
+        <nav className="absolute bottom-4 z-30 flex justify-between w-screen px-4 font-bold tracking-wide text-2xl md:text-4xl">
           <Link
             to="/photofolio/featured"
             onClick={(e) => {
               e.preventDefault();
-              handleClick("/photofolio/featured", { x: 1, y: 0 });
+              handleClick("/photofolio/featured", { x: 0, y: -1 });
             }}
             className="opacity-60 hover:opacity-90 transition"
           >
             Featured
           </Link>
-
+          <Link
+            to="/photofolio/gallery"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("/photofolio/gallery", { x: 0, y: -1 });
+            }}
+            className="opacity-60 hover:opacity-90 transition md:pr-16"
+          >
+            Gallery
+          </Link>
           <Link
             to="/photofolio/about"
             onClick={(e) => {
@@ -90,17 +99,6 @@ function Hero() {
             className="opacity-60 hover:opacity-90 transition"
           >
             About
-          </Link>
-
-          <Link
-            to="/photofolio/gallery"
-            onClick={(e) => {
-              e.preventDefault();
-              handleClick("/photofolio/gallery", { x: -1, y: 0 });
-            }}
-            className="opacity-60 hover:opacity-90 transition"
-          >
-            Gallery
           </Link>
         </nav>
       </motion.section>
