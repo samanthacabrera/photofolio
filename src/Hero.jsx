@@ -9,73 +9,100 @@ function Hero() {
 
   const handleClick = (path, dir) => {
     setSwipe({ ...dir, active: true });
-    setTimeout(() => navigate(path), 500); 
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      navigate(path);
+    }, 650);
   };
 
   return (
     <Transition>
       <motion.section
-        className="relative w-screen h-screen overflow-hidden"
+        className="relative w-screen overflow-hidden bg-black"
+        style={{ height: "160vh" }}
         animate={
           swipe.active
-            ? { x: swipe.x * -1000, y: swipe.y * 1000, opacity: 0 }
-            : { x: 0, y: 0, opacity: 1 }
+            ? {
+                x: swipe.x * -400,
+                y: swipe.y * 400,
+                opacity: 0,
+                scale: 0.96,
+                filter: "blur(6px)",
+              }
+            : {
+                x: 0,
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                filter: "blur(0px)",
+              }
         }
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        transition={{
+          type: "spring",
+          stiffness: 140,
+          damping: 22,
+          mass: 0.6,
+        }}
       >
-        <img
+        <motion.img
           src="/photofolio/ireland/DSC04136.JPG"
           alt="Hero"
           className="absolute inset-0 w-full h-full object-cover"
+          initial={{ scale: 1.15 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.6, ease: "easeOut" }}
         />
 
-        <div className="relative z-10 flex flex-col items-center justify-center h-full">
-          <h1 className="fixed top-12 text-3xl md:text-4xl font-light">
-            <span className="font-normal">JM</span>Photos
-          </h1>
+        <div className="absolute inset-0 bg-black/25 z-10" />
+        <div className="absolute left-1/2 top-0 h-full w-px bg-white/25 z-20" />
 
-          <nav className="flex flex-col space-y-6 md:space-y-10 text-center tracking-wide text-3xl sm:text-4xl md:text-6xl w-full pb-16">
-            <Link
-              onClick={(e) => {
-                e.preventDefault();
-                handleClick("/photofolio/featured", { x: -1, y: 0 });
-              }}
-              to="/photofolio/featured"
-              className="group relative flex justify-center opacity-80 hover:opacity-100 transition duration-500 cursor-pointer"
-            >
-              Featured
-              <span className="hidden md:block absolute right-[20vw] opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition duration-300">
-                ☞
-              </span>
-            </Link>
-            <Link
-              onClick={(e) => {
-                e.preventDefault();
-                handleClick("/photofolio/gallery", { x: 1, y: 0 });
-              }}
-              to="/photofolio/gallery"
-              className="group relative flex justify-center opacity-80 hover:opacity-100 transition duration-500 cursor-pointer"
-            >
-              Gallery
-              <span className="hidden md:block absolute left-[20vw] opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition duration-300">
-                ☜
-              </span>
-            </Link>
-            <Link
-              onClick={(e) => {
-                e.preventDefault();
-                handleClick("/photofolio/about", { x: 0, y: 1 });
-              }}
-              to="/photofolio/about"
-              className="group relative flex justify-center opacity-80 hover:opacity-100 transition duration-500 cursor-pointer"
-            >
-              About
-              <span className="hidden md:block absolute top-full mt-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
-                ☟
-              </span>
-            </Link>
-          </nav>
+        <div className="absolute inset-0 z-20 pointer-events-none">
+          <h1 className="absolute top-[20vh] left-1/2 -translate-x-1/2 opacity-30 font-extrabold tracking-tight leading-none text-[28vw]">
+            JM
+          </h1>
         </div>
+
+        <div className="relative z-30 flex items-center justify-center h-screen">
+          <h2 className="font-bold tracking-[0.5em] pl-6 text-4xl md:text-5xl">
+            Photography
+          </h2>
+        </div>
+
+        <nav className="absolute bottom-4 z-30 flex justify-between w-screen px-4 font-bold tracking-wide text-2xl md:text-6xl">
+          <Link
+            to="/photofolio/featured"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("/photofolio/featured", { x: 1, y: 0 });
+            }}
+            className="opacity-60 hover:opacity-90 transition"
+          >
+            Featured
+          </Link>
+
+          <Link
+            to="/photofolio/about"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("/photofolio/about", { x: 0, y: -1 });
+            }}
+            className="opacity-60 hover:opacity-90 transition"
+          >
+            About
+          </Link>
+
+          <Link
+            to="/photofolio/gallery"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("/photofolio/gallery", { x: -1, y: 0 });
+            }}
+            className="opacity-60 hover:opacity-90 transition"
+          >
+            Gallery
+          </Link>
+        </nav>
       </motion.section>
     </Transition>
   );
