@@ -38,9 +38,6 @@ function About() {
         ref={ref}
         className="relative flex flex-col items-center justify-center h-[80vh] max-w-lg mx-8 md:mx-auto"
       >
-        {/* Editorial vertical rule */}
-        <div className="absolute left-1/2 top-0 h-full w-px bg-black/10 hidden md:block" />
-
         <motion.div
           style={{ y }}
           variants={container}
