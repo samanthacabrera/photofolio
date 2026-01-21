@@ -44,7 +44,7 @@ function Featured() {
           <ul className={`w-full gap-6 ${
               isCompact
                 ? "grid grid-cols-1 gap-6" 
-                : "flex flex-col gap-32" 
+                : "flex flex-col gap-48 py-12" 
             }`}>
             {featuredPhotos.map((photo, index) => {
               const isOpen = openId === photo.id;
@@ -72,7 +72,11 @@ function Featured() {
                       <img
                         src={photo.src}
                         alt={photo.desc}
-                        className="w-full h-full object-cover"
+                        className={`h-full object-cover
+                          ${(isCompact && isOpen)
+                              ? "w-full md:w-2/3 mx-auto" 
+                              : "w-full" 
+                          }`}
                       />
                     </div>
                     {!(isCompact && isOpen) && (
@@ -115,7 +119,7 @@ function Featured() {
 
                   {/* Compact mode */}
                   {photo.featuredText && isCompact && isOpen && (
-                    <div className="flex flex-col items-center mt-4 transition-all duration-500 ease-in-out">
+                    <div className="flex flex-col items-center md:w-2/3 mx-auto mt-4 transition-all duration-500 ease-in-out">
                       <p className="uppercase tracking-widest opacity-60 mb-2 text-center">
                         {photo.location} {photo.year}
                       </p>
