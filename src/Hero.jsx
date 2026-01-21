@@ -55,7 +55,7 @@ function Hero() {
         />
 
         <div className="absolute inset-0 bg-black/25 z-10" />
-        {/* <div className="absolute left-1/2 top-0 h-full w-px bg-white/25 z-20" /> */}
+        <div className="absolute left-1/2 top-0 h-full w-px bg-white/25 z-20" />
 
         <div className="absolute inset-0 z-20 pointer-events-none">
           <h1 className="absolute top-[20vh] left-1/2 -translate-x-1/2 opacity-30 font-extrabold tracking-tight leading-none text-[28vw]">
@@ -69,7 +69,8 @@ function Hero() {
           </h2>
         </div>
 
-        <nav className="absolute bottom-4 z-30 flex justify-between w-screen px-4 font-bold tracking-wide text-2xl md:text-4xl">
+        <nav className="relative pt-20 z-30 w-screen font-bold tracking-wide
+            flex flex-col items-center gap-12 text-2xl md:text-4xl">
           <Link
             to="/photofolio/featured"
             onClick={(e) => {
@@ -86,7 +87,7 @@ function Hero() {
               e.preventDefault();
               handleClick("/photofolio/gallery", { x: 0, y: -1 });
             }}
-            className="opacity-60 hover:opacity-90 transition md:pr-16"
+            className="opacity-60 hover:opacity-90 transition"
           >
             Gallery
           </Link>

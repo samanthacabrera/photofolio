@@ -7,13 +7,12 @@ function Featured() {
   const featuredPhotos = photos.filter((photo) => photo.featured);
 
   const [openId, setOpenId] = useState(null);
-  const [layout, setLayout] = useState("expanded"); 
+  const [layoutValue, setLayoutValue] = useState(1);
+  const isCompact = layoutValue === 2;
 
   const toggle = (id) => {
     setOpenId((prev) => (prev === id ? null : id));
   };
-
-  const isCompact = layout === "compact";
 
   return (
     <>
@@ -22,23 +21,25 @@ function Featured() {
           id="featured"
           className="flex flex-col min-h-screen max-w-7xl mx-6 md:mx-auto py-12">
           {/* Layout Toggle */}
-          <div className="group hidden md:flex items-center w-fit mb-12">
-            <p className="text-xs font-medium opacity-70 mx-2">Expanded</p>
-            <div className="relative w-20 h-3">
-              <div className="absolute top-1/2 w-full h-[2px] bg-current opacity-30 group-hover:opacity-60 rounded-full -translate-y-1/2"></div>
-              <div
-                className={`absolute top-1/2 w-3 h-3 bg-current rounded-full shadow-sm -translate-y-1/2 transition-all duration-200 ${
-                  isCompact ? "left-full -translate-x-full" : "left-0"
-                }`}
-                onClick={() => setLayout(isCompact ? "expanded" : "compact")}
-                style={{ cursor: "pointer" }}
-              ></div>
-              <div
-                className="absolute inset-0"
-                onClick={() => setLayout(isCompact ? "expanded" : "compact")}
-              ></div>
-            </div>
-            <p className="text-xs font-medium opacity-70 mx-2">Compact</p>
+          <div className="hidden md:flex items-center w-fit gap-4 mb-12">
+            <span className="text-xs uppercase tracking-widest opacity-60">
+              Expanded
+            </span>
+
+            <input
+              type="range"
+              min={1}
+              max={2}
+              step={1}
+              value={layoutValue}
+              onChange={(e) => setLayoutValue(Number(e.target.value))}
+              className="w-24 h-1 rounded-full bg-white/50 accent-white cursor-pointer transition-all duration-300 ease-in-out hover:bg-white/80 focus:outline-none"
+              style={{ WebkitAppearance: "none", appearance: "none" }}
+            />
+
+            <span className="text-xs uppercase tracking-widest opacity-60">
+              Compact
+            </span>
           </div>
           {/* Grid */}
           <ul className={`w-full gap-6 ${
