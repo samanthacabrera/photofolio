@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import photos from "./photos";
+import Lightbox from "./Lightbox";
 import Transition from "./Transition";
 import ScrollToTop from "./ScrollToTop";
 
@@ -17,6 +18,7 @@ function Gallery() {
   const [filterLocation, setFilterLocation] = useState("All");
   const [filterYear, setFilterYear] = useState("All");
   const [layoutValue, setLayoutValue] = useState(1);
+
 
   const locations = useMemo(
     () => ["All", ...new Set(photos.map((p) => p.location))],
@@ -54,40 +56,6 @@ function Gallery() {
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (!lightboxOpen) return;
-    if (e.key === "ArrowRight")
-      setActivePhotoIndex((prev) => (prev + 1) % flatPhotos.length);
-    else if (e.key === "ArrowLeft")
-      setActivePhotoIndex(
-        (prev) => (prev - 1 + flatPhotos.length) % flatPhotos.length
-      );
-    else if (e.key === "Escape") setLightboxOpen(false);
-  };
-
-  useEffect(() => {
-    setActivePhotoIndex(0);
-  }, [filterLocation, filterYear]);
-
-  useEffect(() => {
-      window.addEventListener("keydown", handleKeyDown);
-      return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [lightboxOpen, flatPhotos]);
-
-    const activePhoto = flatPhotos[activePhotoIndex];
-
-    useEffect(() => {
-    if (lightboxOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [lightboxOpen]);
-
   const galleryGridMap = {
     1: "md:grid-cols-2",
     2: "md:grid-cols-3",
@@ -97,7 +65,7 @@ function Gallery() {
     <>
     <Transition>
     <section id="gallery" className="flex flex-col items-center min-h-screen mx-4">
-      <div className="flex flex-col md:flex-row justify-between items-center pt-20 px-4 w-full gap-6">
+      <div className="flex flex-col md:flex-row justify-between items-center pt-20 w-full gap-6">
         {/* Filters */}
         <div className="flex flex-col flex-wrap gap-4 md:gap-6">
           <div className="flex flex-wrap items-center gap-3">
@@ -177,31 +145,13 @@ function Gallery() {
       </div>
 
       {/* Lightbox */}
-      {lightboxOpen && activePhoto && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
-        >
-          <img
-            src={activePhoto.src}
-            alt={activePhoto.desc}
-            className="max-w-full max-h-full object-contain md:w-screen md:h-screen md:object-cover"
-          />
-
-          <div className="absolute top-4 left-2 text-xs tracking-[0.3em] text-neutral-300 md:text-neutral-800 bg-white/20 py-1 px-1.5 rounded">
-            {activePhotoIndex + 1} / {flatPhotos.length}
-          </div>
-
-          <div className="absolute top-4 text-xs tracking-wide text-neutral-300 md:text-neutral-800  tracking-[0.3em] bg-white/20 py-1 px-1.5 rounded">
-              {activePhoto.location} {activePhoto.year}
-          </div>
-          
-          <button
-            className="absolute top-4 right-2 text-xs text-neutral-300 md:text-neutral-800 bg-white/20 py-1 px-1.5 rounded hover:scale-110 transition duration-200"
-            onClick={() => setLightboxOpen(false)}
-          >
-            x
-          </button>
-        </div>
+      {lightboxOpen && (
+        <Lightbox
+          photos={flatPhotos}
+          activeIndex={activePhotoIndex}
+          setActiveIndex={setActivePhotoIndex}
+          onClose={() => setLightboxOpen(false)}
+        />
       )}
     </section>
     </Transition>
