@@ -55,7 +55,7 @@ function Hero() {
         />
 
         <div className="absolute inset-0 bg-black/25 z-10" />
-        <div className="absolute left-1/2 top-0 h-full w-px bg-white/25 z-20" />
+        {/* <div className="absolute left-1/2 top-0 h-full w-px bg-white/25 z-20" /> */}
 
         <div className="absolute inset-0 z-20 pointer-events-none">
           <h1 className="absolute top-[20vh] left-1/2 -translate-x-1/2 opacity-30 font-extrabold tracking-tight leading-none text-[28vw]">
