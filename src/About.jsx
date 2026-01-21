@@ -46,7 +46,7 @@ function About() {
           variants={container}
           initial="hidden"
           animate="visible"
-          className="text-justify leading-relaxed tracking-wide normal-case space-y-4"
+          className="text-left leading-relaxed tracking-wide normal-case space-y-4"
         >
           <motion.p variants={item}>
             Based in Utrecht, Netherlands.

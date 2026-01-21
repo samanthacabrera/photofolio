@@ -20,7 +20,7 @@ function Hero() {
     <Transition>
       <motion.section
         className="relative w-screen overflow-hidden bg-black"
-        style={{ height: "160vh" }}
+        style={{ height: "200vh" }}
         animate={
           swipe.active
             ? {
@@ -64,13 +64,13 @@ function Hero() {
         </div>
 
         <div className="relative z-30 flex items-center justify-center h-screen">
-          <h2 className="font-bold tracking-[0.5em] pl-6 text-4xl md:text-5xl">
+          <h2 className="font-bold tracking-[0.25em] md:tracking-[0.5em] pl-6 text-2xl md:text-5xl">
             Photography
           </h2>
         </div>
 
-        <nav className="relative pt-20 z-30 w-screen font-bold tracking-wide
-            flex flex-col items-center gap-12 text-2xl md:text-4xl">
+        <nav className="relative pt-48 md:pt-24 z-30 w-screen font-bold tracking-wide
+            flex flex-col items-center gap-16 md:gap-32 text-2xl md:text-7xl">
           <Link
             to="/photofolio/featured"
             onClick={(e) => {
