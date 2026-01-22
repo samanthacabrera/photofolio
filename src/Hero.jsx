@@ -19,7 +19,7 @@ function Hero() {
   return (
     <Transition>
       <motion.section
-        className="relative w-screen h-[160vh] md:h-[200vh] overflow-hidden bg-black"
+        className="relative w-screen h-[100dvh] md:h-[200vh] overflow-hidden bg-black"
         animate={
           swipe.active
             ? {
@@ -54,7 +54,6 @@ function Hero() {
         />
 
         <div className="absolute inset-0 bg-black/25 z-10" />
-        <div className="absolute left-1/2 top-0 h-full w-px bg-white/25 z-20" />
 
         <div className="absolute inset-0 z-20 pointer-events-none">
           <h1 className="absolute top-[20vh] left-1/2 -translate-x-1/2 opacity-30 font-extrabold tracking-tight leading-none text-[28vw]">
@@ -68,15 +67,14 @@ function Hero() {
           </h2>
         </div>
 
-        <nav className="relative pt-0 md:pt-24 z-30 w-screen font-bold tracking-wide
-            flex flex-col items-center gap-16 md:gap-32 text-2xl md:text-7xl">
+        <nav className="absolute bottom-20 left-1/2 -translate-x-1/2 md:relative md:pt-20 z-30 w-screen font-bold tracking-wide flex flex-col items-center gap-10 md:gap-0 text-2xl md:text-7xl">
           <Link
             to="/photofolio/featured"
             onClick={(e) => {
               e.preventDefault();
               handleClick("/photofolio/featured", { x: 0, y: -1 });
             }}
-            className="opacity-60 hover:opacity-90 transition"
+            className="w-full h-full md:h-[33vh] flex items-center justify-center text-center opacity-60 hover:opacity-90 md:hover:bg-black transition-all duration-200"
           >
             Featured
           </Link>
@@ -86,7 +84,7 @@ function Hero() {
               e.preventDefault();
               handleClick("/photofolio/gallery", { x: 0, y: -1 });
             }}
-            className="opacity-60 hover:opacity-90 transition"
+            className="w-full h-full md:h-[33vh] flex items-center justify-center text-center opacity-60 hover:opacity-90 md:hover:bg-black transition-all duration-200"
           >
             Gallery
           </Link>
@@ -96,7 +94,7 @@ function Hero() {
               e.preventDefault();
               handleClick("/photofolio/about", { x: 0, y: -1 });
             }}
-            className="opacity-60 hover:opacity-90 transition"
+            className="w-full h-full md:h-[33vh] flex items-center justify-center text-center opacity-60 hover:opacity-90 md:hover:bg-black transition-all duration-200"
           >
             About
           </Link>
