@@ -19,7 +19,7 @@ function Hero() {
   return (
     <Transition>
       <motion.section
-        className="relative w-screen h-[100dvh] md:h-[200vh] overflow-hidden bg-black"
+        className="relative w-screen h-[100dvh] md:h-[200vh] bg-black"
         animate={
           swipe.active
             ? {
@@ -67,37 +67,25 @@ function Hero() {
           </h2>
         </div>
 
-        <nav className="absolute bottom-20 left-1/2 -translate-x-1/2 md:relative md:pt-20 z-30 w-screen font-bold tracking-wide flex flex-col items-center gap-10 md:gap-0 text-2xl md:text-7xl">
-          <Link
-            to="/photofolio/featured"
-            onClick={(e) => {
-              e.preventDefault();
-              handleClick("/photofolio/featured", { x: 0, y: -1 });
-            }}
-            className="w-full h-full md:h-[33vh] flex items-center justify-center text-center opacity-60 hover:opacity-90 md:hover:bg-black transition-all duration-200"
-          >
-            Featured
-          </Link>
-          <Link
-            to="/photofolio/gallery"
-            onClick={(e) => {
-              e.preventDefault();
-              handleClick("/photofolio/gallery", { x: 0, y: -1 });
-            }}
-            className="w-full h-full md:h-[33vh] flex items-center justify-center text-center opacity-60 hover:opacity-90 md:hover:bg-black transition-all duration-200"
-          >
-            Gallery
-          </Link>
-          <Link
-            to="/photofolio/about"
-            onClick={(e) => {
-              e.preventDefault();
-              handleClick("/photofolio/about", { x: 0, y: -1 });
-            }}
-            className="w-full h-full md:h-[33vh] flex items-center justify-center text-center opacity-60 hover:opacity-90 md:hover:bg-black transition-all duration-200"
-          >
-            About
-          </Link>
+        <nav className="relative z-30 flex flex-col items-center justify-around h-screen py-12 text-lg md:text-4xl tracking-[0.35em] font-medium">
+          {[
+            { label: "Featured", path: "/photofolio/featured" },
+            { label: "Gallery", path: "/photofolio/gallery" },
+            { label: "About", path: "/photofolio/about" },
+          ].map((item, i) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={(e) => {
+                e.preventDefault();
+                handleClick(item.path, { x: 0, y: -1 });
+              }}
+              className="relative opacity-50 hover:opacity-90 transition-all duration-300 ease-out hover:-translate-y-[1px] 
+                after:content-[''] after:absolute after:left-1/2 after:-bottom-2 after:h-px after:w-full after:-translate-x-1/2 after:bg-white/60 after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
       </motion.section>
     </Transition>
