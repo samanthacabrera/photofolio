@@ -19,7 +19,7 @@ function Hero() {
   return (
     <Transition>
       <motion.section
-        className="relative w-screen h-[100dvh] md:h-[200vh] bg-black"
+        className="relative w-screen h-[100dvh] bg-black"
         animate={
           swipe.active
             ? {
@@ -53,26 +53,21 @@ function Hero() {
           transition={{ duration: 1.6, ease: "easeOut" }}
         />
 
-        <div className="absolute inset-0 bg-black/25 z-10" />
+        <div className="absolute inset-0 bg-black/30 z-10" />
 
-        <div className="absolute inset-0 z-20 pointer-events-none">
-          <h1 className="absolute top-[20vh] left-1/2 -translate-x-1/2 opacity-30 font-extrabold tracking-tight leading-none text-[28vw]">
-            JM
-          </h1>
-        </div>
-
-        <div className="relative z-30 flex items-center justify-center h-screen">
-          <h2 className="font-bold tracking-[0.25em] md:tracking-[0.5em] pl-6 text-2xl md:text-5xl">
-            Photography
+        <div className="relative z-30 flex pt-12 justify-center h-screen">
+          <h2 className="font-bold text-2xl tracking-[0.35em]">
+            <span className="opacity-90 mr-2">JM</span>
+            <span className="opacity-70">Photography</span>
           </h2>
         </div>
 
-        <nav className="relative z-30 flex flex-col items-center justify-around h-screen py-12 text-lg md:text-4xl tracking-[0.35em] font-medium">
+        <nav className="relative z-30 flex flex-col items-center space-y-4 -mt-64 py-12 text-lg tracking-[0.35em] font-medium">
           {[
             { label: "Featured", path: "/photofolio/featured" },
             { label: "Gallery", path: "/photofolio/gallery" },
             { label: "About", path: "/photofolio/about" },
-          ].map((item, i) => (
+          ].map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -80,8 +75,7 @@ function Hero() {
                 e.preventDefault();
                 handleClick(item.path, { x: 0, y: -1 });
               }}
-              className="relative opacity-50 hover:opacity-90 transition-all duration-300 ease-out hover:-translate-y-[1px] 
-                after:content-[''] after:absolute after:left-1/2 after:-bottom-2 after:h-px after:w-full after:-translate-x-1/2 after:bg-white/60 after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100"
+              className="relative opacity-50 hover:opacity-90 transition-all duration-300 ease-out"
             >
               {item.label}
             </Link>
