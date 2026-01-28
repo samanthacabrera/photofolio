@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import photos from "./photos";
 import Lightbox from "./Lightbox";
 import Transition from "./Transition";
-import ScrollToTop from "./ScrollToTop";
 
 const groupPhotosByLocationAndYear = (items) =>
   items.reduce((acc, { location, year, ...rest }) => {
@@ -155,7 +154,6 @@ function Gallery() {
       )}
     </section>
     </Transition>
-    <ScrollToTop />
     </>
   );
 }

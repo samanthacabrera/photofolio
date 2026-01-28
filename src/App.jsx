@@ -4,6 +4,7 @@ import Hero from "./Hero";
 import Featured from "./Featured";
 import Gallery from "./Gallery";
 import About from "./About";
+import Footer from "./Footer";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           element={<About />}
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

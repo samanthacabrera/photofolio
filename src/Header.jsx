@@ -29,14 +29,14 @@ function DropdownMenu({ open, onClose, onNavigate }) {
 
   return (
     <div
-      className="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-4 w-screen h-[95vh] bg-black p-8 flex flex-col items-center text-2xl md:text-3xl tracking-[0.15em] font-medium z-50"
+      className="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-4 w-screen h-[95vh] bg-black p-8 flex flex-col items-center text-2xl tracking-[0.15em] font-medium z-50"
     >
       {MENU_ITEMS.map((item) => (
         <Link
           key={item.label}
           to={item.path}
           onClick={onNavigate}
-          className="py-4 hover:opacity-50 hover:-translate-y-2 transition-all duration-200"
+          className="py-4 opacity-50 hover:opacity-90 hover:-translate-y-1 transition-all duration-200"
         >
           {item.label}
         </Link>
@@ -44,7 +44,7 @@ function DropdownMenu({ open, onClose, onNavigate }) {
 
       <button
         onClick={onClose}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-5xl font-light hover:opacity-50 transition-opacity duration-200"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-5xl font-light opacity-50 hover:opacity-90 transition-opacity duration-200"
         aria-label="Close menu"
       >
         ×
@@ -99,7 +99,7 @@ export default function Header() {
 
   return (
     <header className="header sticky top-0 z-50 w-screen h-[10vh] bg-black flex items-center justify-center text-[10px] md:text-sm tracking-[0.2em] relative">
-      {!menuOpen && (
+      {/* {!menuOpen && (
       <div className="hidden md:flex absolute left-6">
         <Link
           to="/photofolio/"
@@ -109,7 +109,7 @@ export default function Header() {
           <span className="font-medium">JM</span>Photos
         </Link>
       </div>
-      )}
+      )} */}
 
       {/* Page Title / Dropdown Menu */}
       {currentTitle && (
@@ -140,7 +140,7 @@ export default function Header() {
       )}
 
       {/* Light/Dark Toggle  */}
-      {!menuOpen && (
+      {/* {!menuOpen && (
         <div className="hidden md:flex absolute right-6">
           <button
             onClick={() => setIsLight(!isLight)}
@@ -184,7 +184,7 @@ export default function Header() {
             )}
           </button>
         </div>
-      )}
+      )} */}
     </header>   
   );
 }

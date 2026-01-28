@@ -3,7 +3,6 @@ import Transition from "./Transition";
 import { useRef } from "react";
 
 function About() {
-  const email = "justinamiller1023@gmail.com";
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -46,7 +45,7 @@ function About() {
           className="text-left leading-relaxed tracking-wide normal-case space-y-4"
         >
           <motion.p variants={item}>
-            Based in Utrecht, Netherlands.
+            I am a photographer based in Utrecht, Netherlands.
           </motion.p>
 
           <motion.p variants={item}>
@@ -57,20 +56,6 @@ function About() {
           <motion.p variants={item}>
             I am self-taught and began photographing in 2020. All photos are
             captured with a Sony Alpha a6000 under natural light.
-          </motion.p>
-
-          <motion.p variants={item}>
-            You can reach me at
-            <motion.a
-              href={`mailto:${email}`}
-              whileHover={{
-                opacity: 0.8,
-              }}
-              className="italic inline-block pl-2"
-            >
-              {email}
-            </motion.a>
-            .
           </motion.p>
         </motion.div>
 
