@@ -6,57 +6,63 @@ function Featured() {
   const featuredPhotos = photos.filter((photo) => photo.featured);
 
   return (
-    <>
-      <Transition>
-        <section className="flex flex-col min-h-screen max-w-7xl mx-6 md:mx-auto py-12">
-          <ul className="w-full flex flex-col gap-12 md:gap-60 py-6">
-            {featuredPhotos.map((photo, index) => {
-              const reverse = index % 2 === 1;
+    <Transition>
+      <section className="min-h-screen max-w-7xl mx-6 md:mx-auto py-24 flex flex-col gap-48">
+        <p className="pt-20 text-center text-4xl max-w-2xl mx-auto leading-relaxed italic">
+          A curated selection of my favorite shots
+        </p>
 
-              return (
-                <li key={photo.id} className="pb-12">
-                  <div
-                    className={`flex flex-col md:flex-row gap-6 md:gap-10 ${
-                      reverse ? "md:flex-row-reverse" : ""
-                    }`}
+        <ul className="flex flex-col gap-48">
+          {featuredPhotos.map((photo) => (
+            <li key={photo.id} className="relative flex flex-col items-center gap-12">
+              <div className="text-center">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                 
+                </h2>
+              </div>
+
+            <div className="hidden md:flex flex-row max-w-7xl mx-auto -translate-x-[5vw]">
+              <div className="flex items-center">
+                <p className="inline-block transform -rotate-90 whitespace-nowrap opacity-70 tracking-widest text-xl">
+                  {photo.desc}
+                </p>
+              </div>
+              <div className="relative md:w-[70vw] md:h-[80vh] flex-shrink-0 overflow-hidden">
+                <img
+                  src={photo.src}
+                  alt={photo.desc}
+                  className="h-fit w-fit object-cover"
+                />
+              </div>
+            </div>
+
+            {photo.featuredText && (
+              <div className="text-center mt-6 md:max-w-3xl">
+                <p className="text-base md:text-lg leading-loose tracking-wider my-4">
+                  {photo.featuredText}
+                </p>
+              </div>
+            )}
+
+              <div className="md:hidden flex flex-col w-full mt-4 text-center">
+                <p className="uppercase tracking-wide opacity-60 mb-2 text-sm">{photo.location} • {photo.year}</p>
+                {photo.featuredText && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-sm tracking-wide leading-relaxed max-w-md mx-auto"
                   >
-                    {/* Image */}
-                    <div className="overflow-hidden w-full md:h-[75vh]">
-                      <img src={photo.src} alt={photo.desc} className="h-full w-full object-cover" />
-                    </div>
+                    {photo.featuredText}
+                  </motion.p>
+                )}
+              </div>
 
-                    {/* Info */}
-                    <div className="flex flex-col w-full md:w-1/4">
-                      <p className="uppercase tracking-widest opacity-60 mb-2 text-sm md:text-xs">
-                        {photo.location} {photo.year}
-                      </p>
-                      <h3 className="tracking-widest font-medium mb-4">{photo.desc}</h3>
-
-                      {photo.featuredText && (
-                        <p className="hidden md:block normal-case text-sm md:text-base tracking-wide leading-loose">
-                          {photo.featuredText}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {photo.featuredText && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                      className="md:hidden"
-                    >
-                      <p className="normal-case text-sm tracking-wide leading-loose">{photo.featuredText}</p>
-                    </motion.div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      </Transition>
-    </>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </Transition>
   );
 }
 
