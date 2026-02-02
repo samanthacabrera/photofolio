@@ -45,7 +45,7 @@ function Gallery() {
     <Transition>
       <section
         id="gallery"
-        className="min-h-screen max-w-7xl mx-6 md:mx-auto py-24 flex flex-col gap-32"
+        className="min-h-screen mx-6 py-24 flex flex-col gap-32"
       >
         <p className="pt-20 text-center text-4xl max-w-2xl mx-auto leading-loose italic">
           A complete archive <br/> of my work
@@ -68,7 +68,7 @@ function Gallery() {
 
           {/* Gallery */}
           <div
-            className={`grid gap-6 w-full max-w-6xl ${galleryGridMap[layoutValue]}`}
+            className={`grid gap-2 w-full max-w-7xl ${galleryGridMap[layoutValue]}`}
           >
             {flatPhotos.map(({ id, src, desc, location, year }) => (
               <div
