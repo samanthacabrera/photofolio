@@ -47,7 +47,7 @@ function Gallery() {
         id="gallery"
         className="min-h-screen mx-6 py-24 flex flex-col gap-32"
       >
-        <p className="pt-20 text-center text-4xl max-w-2xl mx-auto leading-loose italic">
+        <p className="pt-20 text-center text-4xl max-w-2xl mx-auto leading-loose tracking-widest italic">
           A complete archive <br/> of my work
         </p>
 
