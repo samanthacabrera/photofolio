@@ -11,8 +11,6 @@ const photos = [
     { id: 10, src: "/photofolio/norway/DSC00474.JPG", location: "Norway", year: 2026, desc: "Ersfjordbotn", featured: false },
     { id: 11, src: "/photofolio/norway/DSC00532.JPG", location: "Norway", year: 2026, desc: "Ersfjordbotn", featured: false },
     { id: 12, src: "/photofolio/norway/DSC00466.JPG", location: "Norway", year: 2026, desc: "Ersfjordbotn", featured: false },
-    { id: 13, src: "/photofolio/norway/IMG_5002.HEIC", location: "Norway", year: 2026, desc: "Sommarøy", featured: false },
-    { id: 14, src: "/photofolio/norway/DSC00631.JPG", location: "Norway", year: 2026, desc: "Sommarøy", featured: false },
 ];
 
 export default photos;
