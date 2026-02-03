@@ -13,14 +13,14 @@ const slideVariants = {
     opacity: 1,
     filter: "blur(0px)",
     transition: {
-      duration: 1,
+      duration: 0.7,
       ease: [0.40, 1, 0.36, 1],
     },
   },
   exit: {
     opacity: 0,
     filter: "blur(4px)",
-    transition: { duration: 0.8 },
+    transition: { duration: 0.5 },
   },
 };
 
@@ -62,7 +62,7 @@ function Featured() {
           A selection of my <br /> favorite shots
         </p>
 
-        <div className="relative pt-20">
+        <div className="relative pt-40">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={photo.id}
@@ -90,18 +90,13 @@ function Featured() {
                     {photo.featuredText}
                   </p>
                 )}
-                <div className="flex items-center gap-6 mt-8 text-sm tracking-widest uppercase">
-                  <span className="opacity-50">
-                    {index + 1} / {featuredPhotos.length}
-                  </span>
-                  <button
-                    onClick={() => setIsPlaying((p) => !p)}
-                    className="opacity-60 hover:opacity-100 transition text-xl "
-                    aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-                  >
-                    {isPlaying ? "⏸" : "▶"}
-                  </button>
-                </div>
+                <button
+                  onClick={() => setIsPlaying((p) => !p)}
+                  className="opacity-60 hover:opacity-100 transition text-xl py-4"
+                  aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+                >
+                  {isPlaying ? "⏸" : "▶"}
+                </button>
               </div>
               {/* Photo */}
               <div className="relative w-full md:w-5/6 h-[80vh] overflow-hidden">

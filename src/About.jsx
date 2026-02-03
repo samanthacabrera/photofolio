@@ -9,20 +9,18 @@ function About() {
         className="relative flex flex-col items-center justify-center min-h-[90vh] max-w-lg mx-8 md:mx-auto"
       >
         <div
-          className="text-left leading-relaxed tracking-wide normal-case space-y-4"
+          className="text-center tracking-widest space-y-8"
         >
           <p>
-            I am a photographer based in Utrecht, Netherlands.
+            I am a photographer based in The Netherlands.
           </p>
-
-          <p>
-            This is my personal collection of places I’ve visited that felt worth
-            holding onto.
-          </p>
-
           <p>
             I am self-taught and began photographing in 2020. All photos are
             captured with a Sony Alpha a6000 under natural light.
+          </p>
+          <p>
+            This is my personal collection of places I’ve visited that felt worth
+            holding onto.
           </p>
         </div>
 

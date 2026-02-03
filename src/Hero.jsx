@@ -1,56 +1,21 @@
-import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Transition from "./Transition";
 
 function Hero() {
   const navigate = useNavigate();
-  const [swipe, setSwipe] = useState({ x: 0, y: 0, active: false });
 
-  const handleClick = (path, dir) => {
-    setSwipe({ ...dir, active: true });
-
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      navigate(path);
-    }, 650);
+  const handleClick = (path) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate(path);
   };
 
   return (
     <Transition>
-      <motion.section
-        className="relative w-screen h-[100dvh] bg-black"
-        animate={
-          swipe.active
-            ? {
-                x: swipe.x * -400,
-                y: swipe.y * 400,
-                opacity: 0,
-                scale: 0.96,
-                filter: "blur(6px)",
-              }
-            : {
-                x: 0,
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                filter: "blur(0px)",
-              }
-        }
-        transition={{
-          type: "spring",
-          stiffness: 140,
-          damping: 22,
-          mass: 0.6,
-        }}
-      >
-        <motion.img
+      <section className="relative w-screen h-[100dvh] bg-black">
+        <img
           src="/photofolio/ireland/DSC04136.JPG"
           alt="Hero"
           className="absolute inset-0 w-full h-full object-cover"
-          initial={{ scale: 1.15 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.6, ease: "easeOut" }}
         />
 
         <div className="absolute inset-0 bg-black/30 z-10" />
@@ -62,6 +27,7 @@ function Hero() {
           </h2>
         </div>
 
+        {/* Nav */}
         <nav className="relative z-30 flex flex-col items-center space-y-4 -mt-64 py-12 text-lg tracking-[0.35em] font-medium">
           {[
             { label: "Featured", path: "/photofolio/featured" },
@@ -73,15 +39,15 @@ function Hero() {
               to={item.path}
               onClick={(e) => {
                 e.preventDefault();
-                handleClick(item.path, { x: 0, y: -1 });
+                handleClick(item.path);
               }}
-              className="relative opacity-50 hover:opacity-90 transition-all duration-300 ease-out"
+              className="relative opacity-70 hover:opacity-100"
             >
               {item.label}
             </Link>
           ))}
         </nav>
-      </motion.section>
+      </section>
     </Transition>
   );
 }

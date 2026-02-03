@@ -21,33 +21,6 @@ button:hover {
   cursor: crosshair;
 }
 
-/* Dark / Light Mode */
-:root {
-  --bg-color: #000;
-  --text-color: #fff;
-}
-
-.light-mode {
-  --bg-color: #fff;
-  --text-color: #000;
-}
-
-html,
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-.header {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-.dropdown-menu {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
 /* Slider  */
 input[type="range"] {
   -webkit-appearance: none;
@@ -60,7 +33,6 @@ input[type="range"] {
   transition: background 0.3s ease;
 }
 
-/* WebKit thumb */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -73,7 +45,6 @@ input[type="range"]::-webkit-slider-thumb {
   transition: transform 0.3s ease;
 }
 
-/* Firefox thumb */
 input[type="range"]::-moz-range-thumb {
   width: 10px;
   height: 10px;
@@ -84,11 +55,6 @@ input[type="range"]::-moz-range-thumb {
   transition: transform 0.3s ease;
 }
 
-input[type="range"]:hover {
-  background: color-mix(in srgb, currentColor 75%, var(--bg-color));
-}
-
-/* Hover interaction */
 input[type="range"]:hover::-webkit-slider-thumb {
   transform: scale(1.1);
 }
