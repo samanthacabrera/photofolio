@@ -1,4 +1,5 @@
 import Transition from "./Transition";
+import ScrollToTop from "./ScrollToTop";
 
 function About() {
   
@@ -7,10 +8,18 @@ function About() {
       <section
         id="about"
         data-title="About"
-        className="relative flex flex-col items-center justify-center min-h-screen max-w-lg mx-8 md:mx-auto"
+        className="relative flex flex-col items-center justify-center min-h-screen max-w-6xl mx-6 md:mx-auto py-12"
       >
+        <div className="relative h-[40vh] w-full flex flex-col items-end justify-end pb-36 text-right">
+          <div className="flex items-center gap-4 mb-4">
+            <span className="h-px w-[65vw] bg-white/40" />
+            <p className="text-5xl tracking-[0.3em] font-bold text-white/80">
+              About
+            </p>
+          </div>
+        </div>
         <div
-          className="text-center tracking-widest space-y-8"
+          className="text-center text-sm tracking-widest max-w-lg mx-auto space-y-8"
         >
           <p>
             I am a photographer based in The Netherlands.
@@ -25,7 +34,7 @@ function About() {
           </p>
         </div>
 
-        <p className="fixed bottom-2 text-[10px] md:text-xs tracking-wide">
+        <p className="translate-y-[20vh] pb-2 text-[10px] md:text-xs tracking-wide">
           This site was made by
           <a
             href="https://samoontha.com/"
@@ -37,6 +46,7 @@ function About() {
           </a>
         </p>
       </section>
+    <ScrollToTop/>
     </Transition>
   );
 }

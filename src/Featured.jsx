@@ -47,13 +47,16 @@ function Featured() {
         data-title="Featured"
         className="min-h-screen max-w-6xl mx-6 md:mx-auto py-12 overflow-hidden"
       >
-        <div className="relative h-[70vh] flex flex-col items-center justify-center pb-12 text-center bg-black">
-            <h1 className="text-5xl md:text-7xl font-medium tracking-wide mb-6 text-white/70">
-              Featured Work
-            </h1>
-            <p className="text-sm md:text-base italic tracking-widest text-white/90">
-              A deeper look at my favorite shots
+        <div className="relative h-[70vh] w-full flex flex-col items-start justify-end pb-24 text-left">
+          <div className="flex items-center gap-4 mb-4">
+            <p className="text-5xl tracking-[0.3em] font-bold text-white/80">
+              Featured
             </p>
+            <span className="h-px w-[55vw] bg-white/40" />
+          </div>
+          <p className="text-sm md:text-base italic tracking-widest self-start text-white/70">
+            A deeper look into my favorite shots
+          </p>
         </div>
 
         <div className="relative">
