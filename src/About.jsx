@@ -4,9 +4,10 @@ function About() {
   
   return (
     <Transition>
-      <div
+      <section
         id="about"
-        className="relative flex flex-col items-center justify-center min-h-[90vh] max-w-lg mx-8 md:mx-auto"
+        data-title="About"
+        className="relative flex flex-col items-center justify-center min-h-screen max-w-lg mx-8 md:mx-auto"
       >
         <div
           className="text-center tracking-widest space-y-8"
@@ -35,7 +36,7 @@ function About() {
             Sam Cabrera
           </a>
         </p>
-      </div>
+      </section>
     </Transition>
   );
 }

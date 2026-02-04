@@ -1,115 +1,108 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-
-
-const PAGE_TITLES = {
-  "/photofolio/": "Home",
-  "/photofolio/featured": "Featured",
-  "/photofolio/gallery": "Gallery",
-  "/photofolio/about": "About",
-};
+import { useEffect, useState } from "react";
 
 const MENU_ITEMS = [
-  { label: "Home", path: "/photofolio/" },
-  { label: "Featured", path: "/photofolio/featured" },
-  { label: "Gallery", path: "/photofolio/gallery" },
-  { label: "About", path: "/photofolio/about" },
+  { label: "Home", hash: "#home" },
+  { label: "Featured", hash: "#featured" },
+  { label: "Gallery", hash: "#gallery" },
+  { label: "About", hash: "#about" },
 ];
 
-function DropdownMenu({ open, onClose, onNavigate }) {
-  useEffect(() => {
-    if (!open) return;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
-  if (!open) return null;
-
-  return (
-    <div
-      className="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full mt-4 w-screen h-[95vh] bg-black p-8 flex flex-col items-center text-2xl tracking-[0.15em] font-medium z-50"
-    >
-      {MENU_ITEMS.map((item) => (
-        <Link
-          key={item.label}
-          to={item.path}
-          onClick={onNavigate}
-          className="py-4 opacity-50 hover:opacity-90 hover:-translate-y-1 transition-all duration-200"
-        >
-          {item.label}
-        </Link>
-      ))}
-
-      <button
-        onClick={onClose}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-5xl font-light opacity-50 hover:opacity-90 transition-opacity duration-200"
-        aria-label="Close menu"
-      >
-        ×
-      </button>
-    </div>
-  );
-}
-
-
 export default function Header() {
-  const location = useLocation();
+  const [visible, setVisible] = useState(false);
+  const [currentTitle, setCurrentTitle] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showTitle, setShowTitle] = useState(false);
-  const pathname = location.pathname;
-  const isHome = pathname === "/photofolio/";
-  const currentTitle = PAGE_TITLES[pathname] || "";
-  const shouldShowHeader = !isHome && showTitle;
 
   useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+    const hero = document.getElementById("home");
+    if (!hero) return;
+
+    const onScroll = () => {
+      setVisible(window.scrollY > hero.offsetHeight - 10);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
-    if (!isHome) {
-      setShowTitle(true);
-      return;
-    }
-  }, [isHome]);
+    const sections = Array.from(
+      document.querySelectorAll("section[id][data-title]")
+    ).filter((s) => s.id !== "home");
 
-  const handleNavigate = () => {
+    if (!sections.length) return;
+
+    const onScroll = () => {
+      const middle = window.innerHeight / 2;
+      let closestSection = null;
+      let minDistance = Infinity;
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const sectionMiddle = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionMiddle - middle);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestSection = section;
+        }
+      });
+
+      if (closestSection) {
+        const { id, dataset } = closestSection;
+        setCurrentTitle(dataset.title);
+        history.replaceState(null, "", `#${id}`);
+      }
+    };
+
+    onScroll(); 
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const handleNavClick = (hash) => {
+    const el = document.getElementById(hash.replace("#", ""));
+    if (!el) return;
+
+    el.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (!shouldShowHeader) return null;
-
   return (
-    <header className="header sticky top-0 z-50 w-screen h-[10vh] bg-black flex items-center justify-center text-[10px] md:text-sm tracking-[0.2em] relative">
-      {currentTitle && (
-        <div
-          className={`absolute left-1/2 -translate-x-1/2 transition-all duration-300 ease-out
-            ${
-              currentTitle === "About" || showTitle
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-1 pointer-events-none"
-            }`}
+    <header
+      className={`fixed top-0 left-0 z-50 w-screen h-[6vh] bg-black flex items-center justify-center
+        transition-all duration-300 ease-out
+        ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"}`}
+    >
+      {!menuOpen && currentTitle && (
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="uppercase tracking-[0.35em] text-sm"
         >
-          {!menuOpen && (
-            <button
-              onClick={() => setMenuOpen(true)}
-              className="text-sm md:text-base tracking-widest hover:opacity-70 transition-opacity uppercase"
-              aria-label="Open menu"
-            >
-              {currentTitle}
-            </button>
-          )}
+          {currentTitle}
+        </button>
+      )}
 
-          <DropdownMenu
-            open={menuOpen}
-            onClose={() => setMenuOpen(false)}
-            onNavigate={handleNavigate}
-          />
+      {/* Dropdown */}
+      {menuOpen && (
+        <div className="absolute top-full left-0 w-screen h-[95vh] bg-black flex flex-col items-center space-y-6 text-2xl tracking-[0.25em]">
+          {MENU_ITEMS.map((item) => (
+            <button
+              key={item.hash}
+              onClick={() => handleNavClick(item.hash)}
+              className="opacity-60 hover:opacity-100 transition uppercase"
+            >
+              {item.label}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="absolute bottom-10 text-5xl"
+          >
+            ×
+          </button>
         </div>
       )}
-    </header>   
+    </header>
   );
 }
-

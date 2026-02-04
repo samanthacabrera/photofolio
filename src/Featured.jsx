@@ -57,7 +57,7 @@ function Featured() {
 
   return (
     <Transition>
-      <section className="min-h-screen max-w-7xl mx-6 md:mx-auto py-12 overflow-hidden">
+      <section id="featured" data-title="Featured" className="min-h-screen max-w-7xl mx-6 md:mx-auto py-12 overflow-hidden">
         <p className="py-20 text-center text-4xl max-w-2xl mx-auto leading-loose tracking-widest italic">
           A selection of my <br /> favorite shots
         </p>
