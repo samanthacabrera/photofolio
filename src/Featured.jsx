@@ -45,13 +45,18 @@ function Featured() {
       <section
         id="featured"
         data-title="Featured"
-        className="min-h-screen max-w-7xl mx-6 md:mx-auto py-12 overflow-hidden"
+        className="min-h-screen max-w-6xl mx-6 md:mx-auto py-12 overflow-hidden"
       >
-        <p className="flex justify-center items-center h-[40vh] md:h-[75vh] text-center text-2xl md:text-4xl max-w-2xl mx-auto leading-loose tracking-widest italic">
-          A selection of my <br /> favorite shots
-        </p>
+        <div className="relative h-[70vh] flex flex-col items-center justify-center pb-12 text-center bg-black">
+            <h1 className="text-5xl md:text-7xl font-medium tracking-wide mb-6 text-white/70">
+              Featured Work
+            </h1>
+            <p className="text-sm md:text-base italic tracking-widest text-white/90">
+              A deeper look at my favorite shots
+            </p>
+        </div>
 
-        <div className="relative pt-12 md:pt-40">
+        <div className="relative">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={photo.id}
@@ -87,7 +92,7 @@ function Featured() {
               </div>
 
               {/* Photo */}
-              <div className="relative w-full md:w-5/6 h-[60vh] md:h-[80vh] overflow-hidden rounded-md">
+              <div className="relative w-full md:w-5/6 h-[60vh] md:h-[80vh] overflow-hidden">
                 <img
                   src={photo.src}
                   alt={photo.desc}
