@@ -4,24 +4,14 @@ import photos from "./photos";
 import Transition from "./Transition";
 
 const slideVariants = {
-  enter: {
-    opacity: 0,
-    filter: "blur(4px)",
-  },
+  enter: { opacity: 0, filter: "blur(4px)" },
   center: {
     x: 0,
     opacity: 1,
     filter: "blur(0px)",
-    transition: {
-      duration: 0.7,
-      ease: [0.40, 1, 0.36, 1],
-    },
+    transition: { duration: 0.7, ease: [0.4, 1, 0.36, 1] },
   },
-  exit: {
-    opacity: 0,
-    filter: "blur(4px)",
-    transition: { duration: 0.5 },
-  },
+  exit: { opacity: 0, filter: "blur(4px)", transition: { duration: 0.5 } },
 };
 
 function Featured() {
@@ -37,10 +27,8 @@ function Featured() {
   const paginate = (newDirection) => {
     setIndex(([prev]) => {
       const next = prev + newDirection;
-
       if (next < 0) return [featuredPhotos.length - 1, newDirection];
       if (next >= featuredPhotos.length) return [0, newDirection];
-
       return [next, newDirection];
     });
   };
@@ -48,21 +36,22 @@ function Featured() {
   useEffect(() => {
     if (!isPlaying) return;
 
-    const interval = setInterval(() => {
-      paginate(1);
-    }, 5000);
-
+    const interval = setInterval(() => paginate(1), 5000);
     return () => clearInterval(interval);
   }, [isPlaying]);
 
   return (
     <Transition>
-      <section id="featured" data-title="Featured" className="min-h-screen max-w-7xl mx-6 md:mx-auto py-12 overflow-hidden">
-        <p className="py-20 text-center text-4xl max-w-2xl mx-auto leading-loose tracking-widest italic">
+      <section
+        id="featured"
+        data-title="Featured"
+        className="min-h-screen max-w-7xl mx-6 md:mx-auto py-12 overflow-hidden"
+      >
+        <p className="flex justify-center items-center h-[40vh] md:h-[75vh] text-center text-2xl md:text-4xl max-w-2xl mx-auto leading-loose tracking-widest italic">
           A selection of my <br /> favorite shots
         </p>
 
-        <div className="relative pt-40">
+        <div className="relative pt-12 md:pt-40">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={photo.id}
@@ -71,35 +60,34 @@ function Featured() {
               initial="enter"
               animate="center"
               exit="exit"
-              className={`flex flex-col md:flex-row gap-12 items-start ${
-                isReversed ? "md:flex-row-reverse" : ""
-              }`}
+              className={`flex flex-col gap-8 md:gap-12 items-start
+                ${isReversed ? "md:flex-row-reverse" : "md:flex-row"}`}
             >
               {/* Info */}
-              <div className="w-full md:w-1/6">
-                <h1 className="text-2xl font-light mb-4">
-                  {photo.desc}
-                </h1>
+              <div className="w-full md:w-1/6 flex flex-col md:items-start items-center text-center md:text-left">
+                <h1 className="text-2xl font-light mb-4">{photo.desc}</h1>
 
                 <p className="italic tracking-widest opacity-70 mb-4">
                   {photo.location} {photo.year}
                 </p>
 
                 {photo.featuredText && (
-                  <p className="leading-loose normal-case tracking-wider">
+                  <p className="leading-loose normal-case tracking-wider mb-4">
                     {photo.featuredText}
                   </p>
                 )}
+
                 <button
                   onClick={() => setIsPlaying((p) => !p)}
-                  className="opacity-60 hover:opacity-100 transition text-xl py-4"
+                  className="opacity-60 hover:opacity-100 transition text-xl py-2 md:py-4"
                   aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
                 >
                   {isPlaying ? "⏸" : "▶"}
                 </button>
               </div>
+
               {/* Photo */}
-              <div className="relative w-full md:w-5/6 h-[80vh] overflow-hidden">
+              <div className="relative w-full md:w-5/6 h-[60vh] md:h-[80vh] overflow-hidden rounded-md">
                 <img
                   src={photo.src}
                   alt={photo.desc}
