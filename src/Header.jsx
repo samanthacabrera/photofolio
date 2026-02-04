@@ -13,15 +13,26 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const hero = document.getElementById("home");
-    if (!hero) return;
+    let lastScrollY = window.scrollY;
+    const threshold = 10;
 
     const onScroll = () => {
-      setVisible(window.scrollY > hero.offsetHeight - 10);
+      const hero = document.getElementById("home");
+      if (!hero) return;
+
+      const heroBottom = hero.offsetHeight;
+
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < heroBottom) {
+        setVisible(false);
+      } else if (Math.abs(currentScrollY - lastScrollY) > threshold) {
+        setVisible(currentScrollY < lastScrollY);
+      }
+
+      lastScrollY = currentScrollY;
     };
 
-    onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -33,32 +44,30 @@ export default function Header() {
     if (!sections.length) return;
 
     const onScroll = () => {
-      const middle = window.innerHeight / 2;
-      let closestSection = null;
-      let minDistance = Infinity;
+      let current = null;
 
-      sections.forEach((section) => {
+      for (const section of sections) {
         const rect = section.getBoundingClientRect();
-        const sectionMiddle = rect.top + rect.height / 2;
-        const distance = Math.abs(sectionMiddle - middle);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestSection = section;
+        if (rect.bottom > 0 && rect.top <= window.innerHeight * 0.25) {
+          current = section;
         }
-      });
+      }
 
-      if (closestSection) {
-        const { id, dataset } = closestSection;
+      if (current) {
+        const { id, dataset } = current;
         setCurrentTitle(dataset.title);
         history.replaceState(null, "", `#${id}`);
+      } else {
+        setCurrentTitle(""); 
+        history.replaceState(null, "", "#home");
       }
     };
 
-    onScroll(); 
-    window.addEventListener("scroll", onScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
+  
   const handleNavClick = (hash) => {
     const el = document.getElementById(hash.replace("#", ""));
     if (!el) return;

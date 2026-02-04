@@ -46,18 +46,18 @@ function Gallery() {
       <section
         id="gallery"
         data-title="Gallery"
-        className="min-h-screen max-w-6xl mx-6 md:mx-auto py-12"
+        className="min-h-screen max-w-6xl mx-6 md:mx-auto"
       >
-        <div className="relative h-[70vh] w-full flex flex-col items-center justify-end text-right pb-24 bg-black">
+        <div className="relative h-fit w-full flex flex-col items-center justify-end text-right pb-24 bg-black">
           <div className="flex items-center gap-4 mb-4">
             <span className="h-px w-[60vw] bg-white/40" />
-            <p className="text-5xl tracking-[0.3em] font-bold text-white/80">
+            <p className="text-xl md:text-5xl tracking-[0.3em] font-bold text-white/80">
               Gallery
             </p>
           </div>
-          <p className="text-sm md:text-base italic tracking-widest self-end text-white/70">
+          {/* <p className="text-sm md:text-base italic tracking-widest self-end text-white/70">
             A complete archive of my work
-          </p>
+          </p> */}
         </div>
 
         {/* Slider */}
