@@ -54,12 +54,9 @@ function Featured() {
             </p>
             <span className="h-px w-[55vw] bg-white/40" />
           </div>
-          {/* <p className="text-sm md:text-base italic tracking-widest self-start text-white/70">
-            A deeper look into my favorite shots
-          </p> */}
         </div>
 
-        <div className="relative">
+        <div className="hidden md:block relative">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={photo.id}
@@ -104,6 +101,30 @@ function Featured() {
               </div>
             </motion.div>
           </AnimatePresence>
+        </div>
+
+        {/* Mobile layout */}
+        <div className="flex flex-col gap-16 md:hidden">
+          {featuredPhotos.map((p) => (
+            <div key={p.id} className="flex flex-col gap-4">
+              <img
+                src={p.src}
+                alt={p.desc}
+                className="w-full h-[50vh] object-cover"
+              />
+              <div className="flex flex-col gap-2 px-2">
+                <h2 className="text-xl font-semibold">{p.desc}</h2>
+                <p className="italic tracking-widest opacity-70">
+                  {p.location} {p.year}
+                </p>
+                {p.featuredText && (
+                  <p className="leading-loose normal-case tracking-wider">
+                    {p.featuredText}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </Transition>

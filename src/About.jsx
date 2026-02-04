@@ -8,7 +8,7 @@ function About() {
       <section
         id="about"
         data-title="About"
-        className="relative flex flex-col items-center justify-center min-h-screen max-w-6xl mx-6 md:mx-auto"
+        className="relative flex flex-col items-center justify-center  max-w-6xl mx-6 md:mx-auto"
       >
         <div className="relative h-fit w-full flex flex-col items-end justify-end pb-36 text-right">
           <div className="flex items-center gap-4 mb-4">

@@ -13,7 +13,7 @@ export default function App() {
         <Route
           path="/photofolio/"
           element={
-            <div className="flex flex-col space-y-64">
+            <div className="flex flex-col space-y-24 md:space-y-64">
               <Hero />
               <Gallery />
               <Featured />
