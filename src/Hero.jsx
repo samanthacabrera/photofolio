@@ -17,9 +17,9 @@ function Hero() {
         
         <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#111211] to-transparent z-20 pointer-events-none" />
 
-        <div className="relative z-30 flex justify-center items-center h-screen">
-          <h2 className="font-bold text-2xl md:text-4xl tracking-[0.35em]">
-            <span className="opacity-70">JM</span>
+        <div className="relative z-30 flex items-center justify-center h-screen">
+          <h2 className="text-2xl md:text-4xl tracking-[0.35em]">
+            <span className="opacity-80">JM</span>
             <span className="opacity-60">Photography</span>
           </h2>
         </div>

@@ -51,7 +51,7 @@ function Gallery() {
       >
         <div className="relative h-fit w-full flex flex-col items-center justify-end pb-20">
           <div className="flex flex-col items-center gap-4">
-            <p className="font-bold text-2xl md:text-4xl tracking-[0.35em] opacity-70">
+            <p className="text-2xl md:text-4xl tracking-[0.30em] opacity-70">
               Gallery
             </p>
           <nav className="hidden md:flex justify-center gap-6 mt-6">
