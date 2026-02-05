@@ -10,16 +10,22 @@ function About() {
         data-title="About"
         className="relative flex flex-col items-center justify-center  max-w-6xl mx-6 md:mx-auto"
       >
-        <div className="relative h-fit w-full flex flex-col items-end justify-end pb-36 text-right">
+        {/* <div className="relative h-fit w-full flex flex-col items-end justify-end pb-36 text-right">
           <div className="flex items-center gap-4 mb-4">
             <span className="h-px w-[67vw] bg-white/40" />
             <p className="text-xl md:text-4xl tracking-[0.3em] font-bold text-white/80">
               About
             </p>
           </div>
-        </div>
+        </div> */}
+
+        <header className="pb-20 max-w-6xl mx-auto text-center">
+          <h1 className="font-bold text-2xl md:text-4xl tracking-[0.35em] opacity-70">
+            About
+          </h1>
+        </header>
         <div
-          className="text-center text-sm tracking-widest max-w-lg mx-auto space-y-8"
+          className="text-center text-sm tracking-widest max-w-xs mx-auto space-y-8"
         >
           <p>
             I am a photographer based in The Netherlands.

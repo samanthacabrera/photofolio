@@ -14,7 +14,7 @@ const groupPhotosByLocationAndYear = (items) =>
 function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [layoutValue, setLayoutValue] = useState(1);
+  const [layoutValue, setLayoutValue] = useState(2);
 
   const sortedGroups = useMemo(() => {
     return Object.values(groupPhotosByLocationAndYear(photos)).sort(
@@ -36,9 +36,10 @@ function Gallery() {
   };
 
   const galleryGridMap = {
-    1: "md:grid-cols-2",
-    2: "md:grid-cols-3",
-    3: "md:grid-cols-4",
+    1: "md:grid-cols-1 md:gap-4 md:max-w-xl md:mx-auto",
+    2: "md:grid-cols-2 md:gap-2 md:max-w-3xl md:mx-auto",
+    3: "md:grid-cols-3 md:gap-2 md:max-w-4xl md:mx-auto",
+    4: "md:grid-cols-4 md:gap-2 md:max-w-6xl md:mx-auto",
   };
 
   return (
@@ -46,59 +47,62 @@ function Gallery() {
       <section
         id="gallery"
         data-title="Gallery"
-        className="min-h-screen max-w-6xl mx-6 md:mx-auto"
+        className="min-h-screen"
       >
-        <div className="relative h-fit w-full flex flex-col items-center justify-end text-right pb-8 bg-black">
-          <div className="flex items-center gap-4">
-            <p className="text-xl md:text-4xl tracking-[0.3em] font-bold text-white/80">
+        <div className="relative h-fit w-full flex flex-col items-center justify-end pb-20">
+          <div className="flex flex-col items-center gap-4">
+            <p className="font-bold text-2xl md:text-4xl tracking-[0.35em] opacity-70">
               Gallery
             </p>
-            <span className="h-px w-[60vw] bg-white/40" />
+          <nav className="hidden md:flex justify-center gap-6 mt-6">
+            {[1, 2, 3, 4].map((val) => (
+              <button
+                key={val}
+                onClick={() => setLayoutValue(val)}
+                aria-label={`Set gallery density ${val}`}
+                className="relative w-2 h-2 rounded-full transition-all"
+              >
+                <span
+                  className={`
+                    block w-full h-full rounded-full
+                    ${layoutValue === val
+                      ? "bg-white scale-125"
+                      : "bg-white/30 hover:bg-white/60"}
+                    transition-all duration-300
+                  `}
+                />
+              </button>
+            ))}
+          </nav>
           </div>
         </div>
 
-        {/* Slider */}
-        <div className="flex flex-col items-start gap-24">
-          <div className="hidden md:flex flex-col items-center gap-1 text-center">
-            <input
-              type="range"
-              min={1}
-              max={3}
-              step={1}
-              value={layoutValue}
-              onChange={(e) => setLayoutValue(Number(e.target.value))}
-              className="mt-2 w-40 h-1 rounded-full bg-white/50 accent-white cursor-pointer transition-all duration-300 ease-in-out hover:bg-white/80 focus:outline-none"
-              style={{ WebkitAppearance: "none", appearance: "none" }}
-            />
-          </div>
-
-          {/* Gallery */}
-          <div
-            className={`grid gap-2 w-full max-w-7xl ${galleryGridMap[layoutValue]}`}
-          >
-            {flatPhotos.map(({ id, src, desc, location, year }) => (
+        {/* Gallery */}
+        <div
+          className={`grid w-full gap-4 p-4 md:p-0 ${galleryGridMap[layoutValue]}`}
+        >
+          {flatPhotos.map(({ id, src, desc, location, year }) => (
+            <div
+              key={id}
+              className="relative group cursor-pointer overflow-hidden"
+              onClick={() => handleClick(id)}
+            >
+              <img
+                src={src}
+                alt={desc}
+                className="w-full h-full object-cover transition-transform duration-300"
+              />
               <div
-                key={id}
-                className="relative group cursor-pointer overflow-hidden"
-                onClick={() => handleClick(id)}
+                className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 
+                          flex items-end p-2 justify-start text-white/80 text-sm md:text-base 
+                          font-semibold transition-opacity duration-300"
               >
-                <img
-                  src={src}
-                  alt={desc}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[101%]"
-                />
-                <div
-                  className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 
-                            flex items-center justify-center text-white text-sm md:text-base 
-                            font-semibold transition-opacity duration-300"
-                >
-                  <span className="tracking-wide">
-                    {location} {year}
-                  </span>
-                </div>
+                <span className="tracking-wide">
+                  {location} {year}
+                </span>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
         {/* Lightbox */}
@@ -117,3 +121,4 @@ function Gallery() {
 }
 
 export default Gallery;
+

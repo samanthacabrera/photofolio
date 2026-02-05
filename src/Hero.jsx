@@ -13,9 +13,9 @@ function Hero() {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        <div className="absolute inset-0 bg-black/40 z-10" />
+        <div className="absolute inset-0 bg-black/20 z-10" />
         
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#111211] to-transparent z-20 pointer-events-none" />
 
         <div className="relative z-30 flex justify-center items-center h-screen">
           <h2 className="font-bold text-2xl md:text-4xl tracking-[0.35em]">

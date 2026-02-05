@@ -94,10 +94,6 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
       >
         ×
       </button>
-
-      <div className="absolute bottom-6 text-xs tracking-widest opacity-50 md:hidden">
-        Swipe to navigate
-      </div>
     </div>
   );
 }
