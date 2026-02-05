@@ -13,28 +13,19 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-    const threshold = 10;
-
     const onScroll = () => {
       const hero = document.getElementById("home");
       if (!hero) return;
 
       const heroBottom = hero.offsetHeight;
-
-      const currentScrollY = window.scrollY;
-      if (currentScrollY < heroBottom) {
-        setVisible(false);
-      } else if (Math.abs(currentScrollY - lastScrollY) > threshold) {
-        setVisible(currentScrollY < lastScrollY);
-      }
-
-      lastScrollY = currentScrollY;
+      setVisible(window.scrollY >= heroBottom);
     };
 
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
 
   useEffect(() => {
     const sections = Array.from(

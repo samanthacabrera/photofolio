@@ -12,8 +12,8 @@ function About() {
       >
         <div className="relative h-fit w-full flex flex-col items-end justify-end pb-36 text-right">
           <div className="flex items-center gap-4 mb-4">
-            <span className="h-px w-[65vw] bg-white/40" />
-            <p className="text-xl md:text-5xl tracking-[0.3em] font-bold text-white/80">
+            <span className="h-px w-[67vw] bg-white/40" />
+            <p className="text-xl md:text-4xl tracking-[0.3em] font-bold text-white/80">
               About
             </p>
           </div>

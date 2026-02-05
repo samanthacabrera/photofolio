@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import Hero from "./Hero";
-import Featured from "./Featured";
+// import Featured from "./Featured";
 import Gallery from "./Gallery";
 import About from "./About";
 
@@ -16,7 +16,7 @@ export default function App() {
             <div className="flex flex-col space-y-24 md:space-y-64">
               <Hero />
               <Gallery />
-              <Featured />
+              {/* <Featured /> */}
               <About />
             </div>
           }

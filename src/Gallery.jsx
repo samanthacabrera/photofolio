@@ -48,20 +48,17 @@ function Gallery() {
         data-title="Gallery"
         className="min-h-screen max-w-6xl mx-6 md:mx-auto"
       >
-        <div className="relative h-fit w-full flex flex-col items-center justify-end text-right pb-24 bg-black">
-          <div className="flex items-center gap-4 mb-4">
-            <span className="h-px w-[60vw] bg-white/40" />
-            <p className="text-xl md:text-5xl tracking-[0.3em] font-bold text-white/80">
+        <div className="relative h-fit w-full flex flex-col items-center justify-end text-right pb-8 bg-black">
+          <div className="flex items-center gap-4">
+            <p className="text-xl md:text-4xl tracking-[0.3em] font-bold text-white/80">
               Gallery
             </p>
+            <span className="h-px w-[60vw] bg-white/40" />
           </div>
-          {/* <p className="text-sm md:text-base italic tracking-widest self-end text-white/70">
-            A complete archive of my work
-          </p> */}
         </div>
 
         {/* Slider */}
-        <div className="flex flex-col items-center gap-24">
+        <div className="flex flex-col items-start gap-24">
           <div className="hidden md:flex flex-col items-center gap-1 text-center">
             <input
               type="range"
