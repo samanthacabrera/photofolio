@@ -37,6 +37,7 @@ function Hero() {
       >
         <img
           ref={imageRef}
+          id="hero-image" 
           src="/photofolio/ireland/DSC04136.JPG"
           alt="Hero"
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-[6000ms] ease-in-out
@@ -65,7 +66,7 @@ function Hero() {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
           }
-          img {
+          #hero-image {
             animation: zoomSlow 10s ease-in-out infinite;
           }
         `}</style>
@@ -74,3 +75,4 @@ function Hero() {
 }
 
 export default Hero;
+
