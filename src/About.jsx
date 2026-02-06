@@ -1,5 +1,4 @@
 import Transition from "./Transition";
-import ScrollToTop from "./ScrollToTop";
 
 function About() {
   
@@ -26,7 +25,6 @@ function About() {
           </p>
         </div>
       </section>
-    <ScrollToTop/>
     </Transition>
   );
 }

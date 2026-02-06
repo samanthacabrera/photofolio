@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const MENU_ITEMS = [
   { label: "Home", hash: "#home" },
-  { label: "Featured", hash: "#featured" },
   { label: "Gallery", hash: "#gallery" },
   { label: "About", hash: "#about" },
 ];
@@ -69,7 +68,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-screen h-[6vh] bg-black flex items-center justify-center
+      className={`fixed top-0 left-0 z-50 w-screen h-[6vh] bg-[#111211] flex items-center justify-center
         transition-all duration-300 ease-out
         ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"}`}
     >
@@ -84,7 +83,7 @@ export default function Header() {
 
       {/* Dropdown */}
       {menuOpen && (
-        <div className="absolute top-full left-0 w-screen h-[95vh] bg-black flex flex-col items-center space-y-6 text-2xl tracking-[0.25em]">
+        <div className="absolute top-full left-0 w-screen h-[95vh] bg-[#111211] flex flex-col items-center justify-center space-y-8 text-2xl tracking-[0.25em]">
           {MENU_ITEMS.map((item) => (
             <button
               key={item.hash}
@@ -97,7 +96,7 @@ export default function Header() {
 
           <button
             onClick={() => setMenuOpen(false)}
-            className="absolute bottom-10 text-5xl"
+            className="text-5xl opacity-60 hover:opacity-100 transition "
           >
             ×
           </button>
