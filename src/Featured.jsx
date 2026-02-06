@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import photos from "./photos";
-import Transition from "./Transition";
 
 const slideVariants = {
   enter: { opacity: 0, filter: "blur(4px)" },
@@ -41,7 +40,6 @@ function Featured() {
   }, [isPlaying]);
 
   return (
-    <Transition>
       <section
         id="featured"
         data-title="Featured"
@@ -127,7 +125,6 @@ function Featured() {
           ))}
         </div>
       </section>
-    </Transition>
   );
 }
 

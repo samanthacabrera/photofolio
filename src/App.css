@@ -10,7 +10,7 @@ html {
   font-family: "Red Hat Display", sans-serif;
   text-transform: uppercase;
   background-color: #111211;
-  color: whitesmoke;
+  color: rgba(245, 245, 245, 0.9);
   cursor: crosshair;
 }
 

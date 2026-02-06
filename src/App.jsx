@@ -3,7 +3,6 @@ import Header from "./Header";
 import Hero from "./Hero";
 import About from "./About";
 import Gallery from "./Gallery";
-import ScrollToTop from "./ScrollToTop";
 
 export default function App() {
   return (
@@ -17,7 +16,6 @@ export default function App() {
               <Hero />
               <About />
               <Gallery />
-              <ScrollToTop />
             </div>
           }
         />
