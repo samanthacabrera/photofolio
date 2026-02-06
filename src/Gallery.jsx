@@ -1,7 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import photos from "./photos";
 import Lightbox from "./Lightbox";
-import Transition from "./Transition";
 
 const groupPhotosByLocationAndYear = (items) =>
   items.reduce((acc, { location, year, ...rest }) => {
@@ -11,10 +10,56 @@ const groupPhotosByLocationAndYear = (items) =>
     return acc;
   }, {});
 
+function useScrollFade(ref) {
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const el = ref.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        el.style.opacity = entry.intersectionRatio;
+      },
+      {
+        threshold: Array.from({ length: 20 }, (_, i) => i / 20),
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref]);
+}
+
+function GalleryItem({ photo, onClick }) {
+  const ref = useRef(null);
+  useScrollFade(ref);
+
+  return (
+    <div
+      ref={ref}
+      onClick={() => onClick(photo.id)}
+      className="relative group cursor-pointer overflow-hidden bg-neutral-100 aspect-[3/2] opacity-0 transition-opacity duration-300 ease-out">
+      <img
+        src={photo.src}
+        alt={photo.desc}
+        className="w-full h-full object-cover"
+      />
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3">
+        <span className="block text-white/90 text-[12px] tracking-widest">
+          {photo.location}
+        </span>
+        <span className="block text-white/60 text-[11px] tracking-widest">
+          {photo.year}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [layoutValue, setLayoutValue] = useState(2);
 
   const sortedGroups = useMemo(() => {
     return Object.values(groupPhotosByLocationAndYear(photos)).sort(
@@ -35,90 +80,29 @@ function Gallery() {
     }
   };
 
-  const galleryGridMap = {
-    1: "md:grid-cols-1 md:gap-4 md:max-w-xl md:mx-auto",
-    2: "md:grid-cols-2 md:gap-2 md:max-w-3xl md:mx-auto",
-    3: "md:grid-cols-3 md:gap-2 md:max-w-4xl md:mx-auto",
-    4: "md:grid-cols-4 md:gap-2 md:max-w-6xl md:mx-auto",
-  };
-
   return (
-    <Transition>
-      <section
-        id="gallery"
-        data-title="Gallery"
-        className="min-h-screen"
-      >
-        <div className="relative h-fit w-full flex flex-col items-center justify-end pb-20">
-          <div className="flex flex-col items-center gap-4">
-            {/* <p className="text-2xl md:text-4xl tracking-[0.30em] opacity-70">
-              Gallery
-            </p> */}
-          <nav className="hidden md:flex justify-center gap-6 mt-6">
-            {[1, 2, 3, 4].map((val) => (
-              <button
-                key={val}
-                onClick={() => setLayoutValue(val)}
-                aria-label={`Set gallery density ${val}`}
-                className="relative w-2 h-2 rounded-full transition-all"
-              >
-                <span
-                  className={`
-                    block w-full h-full rounded-full
-                    ${layoutValue === val
-                      ? "bg-white scale-125"
-                      : "bg-white/30 hover:bg-white/60"}
-                    transition-all duration-300
-                  `}
-                />
-              </button>
-            ))}
-          </nav>
-          </div>
-        </div>
-
-        {/* Gallery */}
-        <div
-          className={`grid w-full gap-4 p-4 md:p-0 ${galleryGridMap[layoutValue]}`}
-        >
-          {flatPhotos.map(({ id, src, desc, location, year }) => (
-            <div
-              key={id}
-              className="relative group cursor-pointer overflow-hidden"
-              onClick={() => handleClick(id)}
-            >
-              <img
-                src={src}
-                alt={desc}
-                className="w-full h-full object-cover transition-transform duration-300"
-              />
-              <div
-                className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 
-                          flex items-end p-2 justify-start text-white/80 text-sm md:text-base 
-                          font-semibold transition-opacity duration-300"
-              >
-                <span className="tracking-wide">
-                  {location} {year}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Lightbox */}
-        {lightboxOpen && (
-          <Lightbox
-            photos={flatPhotos}
-            activeIndex={activePhotoIndex}
-            setActiveIndex={setActivePhotoIndex}
-            onClose={() => setLightboxOpen(false)}
+    <section id="gallery" data-title="Gallery" className="min-h-screen">
+      <div
+        className="grid w-full grid-cols-1 gap-4 p-4 md:grid-cols-4 md:max-w-[92rem] md:mx-auto">
+        {flatPhotos.map((photo) => (
+          <GalleryItem
+            key={photo.id}
+            photo={photo}
+            onClick={handleClick}
           />
-        )}
-      </section>
-    </Transition>
+        ))}
+      </div>
 
+      {lightboxOpen && (
+        <Lightbox
+          photos={flatPhotos}
+          activeIndex={activePhotoIndex}
+          setActiveIndex={setActivePhotoIndex}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
+    </section>
   );
 }
 
 export default Gallery;
-
