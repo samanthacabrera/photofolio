@@ -69,7 +69,7 @@ function Hero() {
         );
       })}
 
-      <div className="absolute inset-0 bg-black/30 z-10" />
+      <div className="absolute inset-0 bg-black/20 z-10" />
 
       <div className="absolute bottom-0 left-0 w-full h-screen bg-gradient-to-t from-[#111211] to-transparent z-20 pointer-events-none" />
 

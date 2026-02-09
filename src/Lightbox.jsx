@@ -89,7 +89,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
 
       <button
         onClick={onClose}
-        className="absolute top-3 top-4 right-2 text-xl text-neutral-300 md:text-neutral-800 md:bg-white/20 px-1 rounded hover:scale-110 transition duration-200"
+        className="absolute top-2 right-2 text-xl text-neutral-300 md:text-neutral-800 md:bg-white/20 py-0 px-1 rounded hover:scale-110 transition duration-200"
         aria-label="Close"
       >
         ×
