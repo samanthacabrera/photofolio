@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 const MENU_ITEMS = [
   { label: "Home", hash: "#home" },
-  { label: "Gallery", hash: "#gallery" },
   { label: "About", hash: "#about" },
+  { label: "Gallery", hash: "#gallery" },
 ];
 
 export default function Header() {
