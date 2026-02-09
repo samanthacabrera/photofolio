@@ -45,11 +45,11 @@ function GalleryItem({ photo, onClick }) {
         className="w-full h-full object-cover"
       />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3">
-        <span className="block text-white/90 text-[12px] tracking-widest">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-full flex items-end space-x-1 z-10 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3">
+        <span className="text-white/90 text-[10px] tracking-widest">
           {photo.location}
         </span>
-        <span className="block text-white/60 text-[11px] tracking-widest">
+        <span className="text-white/70 text-[10px] tracking-widest">
           {photo.year}
         </span>
       </div>

@@ -79,17 +79,17 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
         "
       />
 
-      <div className="absolute top-4 left-2 text-xs tracking-[0.3em] text-neutral-300 md:text-neutral-800 bg-white/20 py-1 px-1.5 rounded">
+      <div className="absolute top-4 left-2 text-xs tracking-[0.3em] text-neutral-300 md:text-neutral-800 md:bg-white/20 py-1 px-1.5 rounded">
         {activeIndex + 1} / {photos.length}
       </div>
 
-      <div className="absolute top-4 text-xs tracking-[0.3em] text-neutral-300 md:text-neutral-800 bg-white/20 py-1 px-1.5 rounded">
+      <div className="absolute top-4 text-xs tracking-[0.3em] text-neutral-300 md:text-neutral-800 md:bg-white/20 py-1 px-1.5 rounded">
         {activePhoto.location} {activePhoto.year}
       </div>
 
       <button
         onClick={onClose}
-        className="absolute top-4 right-2 text-xs text-neutral-300 md:text-neutral-800 bg-white/20 py-2 px-3 rounded hover:scale-110 transition duration-200"
+        className="absolute top-3 top-4 right-2 text-xl text-neutral-300 md:text-neutral-800 md:bg-white/20 px-1 rounded hover:scale-110 transition duration-200"
         aria-label="Close"
       >
         ×
