@@ -73,7 +73,7 @@ function Hero() {
 
       <div className="absolute bottom-0 left-0 w-full h-screen bg-gradient-to-t from-[#111211] to-transparent z-20 pointer-events-none" />
 
-      <div className="relative z-30 flex items-center md:items-end justify-center h-screen pb-12">
+      <div className="relative z-30 flex items-center justify-center h-screen pb-12">
         <h2
           ref={titleRef}
           className={`text-2xl md:text-4xl tracking-[0.35em] text-white transition-all duration-[1000ms] ease-out

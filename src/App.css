@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Slackside+One&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +7,7 @@ body,
 html {
   padding: 0;
   margin: 0;
-  font-family: "Red Hat Display", sans-serif;
+  font-family: "Slackside One", cursive;
   text-transform: uppercase;
   background-color: #111211;
   color: rgba(245, 245, 245, 0.9);
