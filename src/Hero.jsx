@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import photos from "./photos"; 
 
 function useFadeIn(delay = 0) {
   const ref = useRef(null);
@@ -29,50 +30,90 @@ function Hero() {
   const [imageRef, imageVisible] = useFadeIn(0);
   const [titleRef, titleVisible] = useFadeIn(500);
 
+  const heroImages = photos.filter(p => p.featured);
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent(prev => (prev + 1) % heroImages.length);
+    }, 7000); 
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   return (
-      <section
-        id="home"
-        data-title="Home"
-        className="relative w-screen h-[100dvh] bg-[#111211] overflow-hidden"
-      >
-        <img
-          ref={imageRef}
-          id="hero-image" 
-          src="/photofolio/ireland/DSC04136.JPG"
-          alt="Hero"
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-[6000ms] ease-in-out
-            ${imageVisible ? "opacity-100 scale-105" : "opacity-0 scale-100"}
-          `}
-        />
+    <section
+      id="home"
+      data-title="Home"
+      className="relative w-screen h-[100dvh] bg-[#111211] overflow-hidden"
+    >
+      {/* Carousel images */}
+      {heroImages.map((photo, index) => {
+        const isActive = index === current && imageVisible;
+        const motionClass =
+          index % 2 === 0 ? "hero-pan-left" : "hero-pan-right";
 
-        <div className="absolute inset-0 bg-black/30 z-10" />
-
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#111211] to-transparent z-20 pointer-events-none" />
-
-        <div className="relative z-30 flex items-center justify-center h-screen">
-          <h2
-            ref={titleRef}
-            className={`text-2xl md:text-4xl tracking-[0.35em] text-white transition-all duration-[1000ms] ease-out
-              ${titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
+        return (
+          <img
+            key={photo.id}
+            ref={index === 0 ? imageRef : null}
+            src={photo.src}
+            alt={photo.desc}
+            className={`
+              absolute inset-0 w-full h-full object-cover
+              transition-opacity duration-[2000ms] ease-in-out
+              ${isActive ? "opacity-100" : "opacity-0"}
+              ${isActive ? motionClass : ""}
             `}
-          >
-            <span className="opacity-80">JM</span>
-            <span className="opacity-70">Photography</span>
-          </h2>
-        </div>
+          />
+        );
+      })}
 
-        <style jsx>{`
-          @keyframes zoomSlow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+      <div className="absolute inset-0 bg-black/30 z-10" />
+
+      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#111211] to-transparent z-20 pointer-events-none" />
+
+      <div className="relative z-30 flex items-center justify-center h-screen">
+        <h2
+          ref={titleRef}
+          className={`text-2xl md:text-4xl tracking-[0.35em] text-white transition-all duration-[1000ms] ease-out
+            ${titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
+          `}
+        >
+          <span className="opacity-80">JM</span>
+          <span className="opacity-70">Photography</span>
+        </h2>
+      </div>
+
+      <style jsx>{`
+        .hero-pan-left {
+          animation: heroPanLeft 12s ease-in-out forwards;
+        }
+
+        .hero-pan-right {
+          animation: heroPanRight 12s ease-in-out forwards;
+        }
+
+        @keyframes heroPanLeft {
+          0% {
+            transform: scale(1) translate(0, 0);
           }
-          #hero-image {
-            animation: zoomSlow 10s ease-in-out infinite;
+          100% {
+            transform: scale(1.15) translate(-4%, -2%);
           }
-        `}</style>
-      </section>
+        }
+
+        @keyframes heroPanRight {
+          0% {
+            transform: scale(1) translate(0, 0);
+          }
+          100% {
+            transform: scale(1.15) translate(4%, -2%);
+          }
+        }
+      `}</style>
+    </section>
   );
 }
 
 export default Hero;
-
