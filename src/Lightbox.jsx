@@ -5,15 +5,12 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
   const [touchStartX, setTouchStartX] = useState(null);
   const [touchEndX, setTouchEndX] = useState(null);
 
-
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowRight") {
         setActiveIndex((prev) => (prev + 1) % photos.length);
       } else if (e.key === "ArrowLeft") {
-        setActiveIndex(
-          (prev) => (prev - 1 + photos.length) % photos.length
-        );
+        setActiveIndex((prev) => (prev - 1 + photos.length) % photos.length);
       } else if (e.key === "Escape") {
         onClose();
       }
@@ -47,9 +44,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
     if (distance > threshold) {
       setActiveIndex((prev) => (prev + 1) % photos.length);
     } else if (distance < -threshold) {
-      setActiveIndex(
-        (prev) => (prev - 1 + photos.length) % photos.length
-      );
+      setActiveIndex((prev) => (prev - 1 + photos.length) % photos.length);
     }
 
     setTouchStartX(null);
@@ -60,7 +55,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
+      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md"
       onClick={onClose}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -72,24 +67,24 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
         src={activePhoto.src}
         alt={activePhoto.desc}
         onClick={(e) => e.stopPropagation()}
-        className="
-          w-full h-full object-contain
-          select-none touch-pan-y
-          md:w-screen md:h-screen md:object-cover
-        "
+        className="w-full h-full object-contain select-none touch-pan-y md:w-screen md:h-screen md:object-cover md:px-6"
       />
 
-      <div className="absolute top-4 left-2 text-xs tracking-[0.3em] text-neutral-300 md:text-neutral-800 md:bg-white/20 py-1 px-1.5 rounded">
-        {activeIndex + 1} / {photos.length}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-8 md:bg-[#111211]" />
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 md:bg-[#111211]" />
+
+      <div className="absolute top-1 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90">
+        {activePhoto.location} {activePhoto.year}
       </div>
 
-      <div className="absolute top-4 text-xs tracking-[0.3em] text-neutral-300 md:text-neutral-800 md:bg-white/20 py-1 px-1.5 rounded">
-        {activePhoto.location} {activePhoto.year}
+      <div className="absolute bottom-2 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90">
+        {activeIndex + 1} / {photos.length}
       </div>
 
       <button
         onClick={onClose}
-        className="absolute top-2 right-2 text-xl text-neutral-300 md:text-neutral-800 md:bg-white/20 py-0 px-1 rounded hover:scale-110 transition duration-200"
+        className="absolute -top-2 right-2 md:right-2 text-3xl text-white/90 hover:opacity-70 transition"
         aria-label="Close"
       >
         ×

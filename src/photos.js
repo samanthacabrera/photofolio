@@ -1,6 +1,6 @@
 const photos = [
     { id: 1, src: "/photofolio/usa/IMG_5073 2.jpg", location: "Colorado", year: 2025, desc: "Red Rocks Park", featured: false },
-    { id: 2, src: "/photofolio/usa/IMG_5074.jpg", location: "California", year: 2025, desc: "Newport Beach", featured: false },
+    { id: 2, src: "/photofolio/usa/IMG_5075.jpg", location: "California", year: 2025, desc: "Newport Beach", featured: false },
     { id: 3, src: "/photofolio/portugal/DSC02283.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys", featured: false },
     { id: 4, src: "/photofolio/portugal/DSC02552.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys", featured: true },
     { id: 5, src: "/photofolio/portugal/DSC02615.JPG", location: "Portugal", year: 2025, desc: "Seven Hanging Valleys", featured: false },
