@@ -1,45 +1,36 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import photos from "./photos"; 
 
-function useFadeIn(delay = 0) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setVisible(true), delay);
-        } else {
-          setVisible(false);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [delay]);
-
-  return [ref, visible];
-}
-
 function Hero() {
-  const [imageRef, imageVisible] = useFadeIn(0);
-  const [titleRef, titleVisible] = useFadeIn(500);
-
   const heroImages = photos.filter(p => p.featured);
   const [current, setCurrent] = useState(0);
+  const [prev, setPrev] = useState(null);
+  const [activeTransform, setActiveTransform] = useState({ scale: 1.15, x: 0, y: 0 });
+  const [fadeKey, setFadeKey] = useState(0);
+  const [titleVisible, setTitleVisible] = useState(false); 
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setTitleVisible(true), 300); 
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent(prev => (prev + 1) % heroImages.length);
-    }, 7000); 
+      setPrev(current);
+      setCurrent((current + 1) % heroImages.length);
+      setActiveTransform({ scale: 1.15, x: 0, y: 0 });
+      setFadeKey(prevKey => prevKey + 1); 
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [heroImages.length]);
+  }, [current, heroImages.length]);
+
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      setActiveTransform({ scale: 1.15, x: current % 2 === 0 ? -1 : 2, y: -1 });
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [current]);
 
   return (
     <section
@@ -47,37 +38,33 @@ function Hero() {
       data-title="Home"
       className="relative w-screen h-[100dvh] bg-[#111211] overflow-hidden"
     >
-      {/* Carousel images */}
-      {heroImages.map((photo, index) => {
-        const isActive = index === current && imageVisible;
-        const motionClass =
-          index % 2 === 0 ? "hero-pan-left" : "hero-pan-right";
+      {prev !== null && (
+        <img
+          src={heroImages[prev].src}
+          alt={heroImages[prev].desc}
+          className="absolute inset-0 w-full h-full object-cover animate-fade-out z-10"
+        />
+      )}
 
-        return (
-          <img
-            key={photo.id}
-            ref={index === 0 ? imageRef : null}
-            src={photo.src}
-            alt={photo.desc}
-            className={`
-              absolute inset-0 w-full h-full object-cover
-              transition-opacity duration-[2000ms] ease-in-out
-              ${isActive ? "opacity-100" : "opacity-0"}
-              ${isActive ? motionClass : ""}
-            `}
-          />
-        );
-      })}
+      <img
+        key={fadeKey} 
+        src={heroImages[current].src}
+        alt={heroImages[current].desc}
+        className="absolute inset-0 w-full h-full object-cover animate-fade-in z-20"
+        style={{
+          transform: `scale(${activeTransform.scale}) translate(${activeTransform.x}%, ${activeTransform.y}%)`,
+          transition: "transform 7s ease-in-out",
+        }}
+      />
 
-      <div className="absolute inset-0 bg-black/20 z-10" />
+      <div className="absolute inset-0 bg-black/20 z-30" />
+      <div className="absolute bottom-0 left-0 w-full h-screen bg-gradient-to-t from-[#111211] to-transparent z-40 pointer-events-none" />
 
-      <div className="absolute bottom-0 left-0 w-full h-screen bg-gradient-to-t from-[#111211] to-transparent z-20 pointer-events-none" />
-
-      <div className="relative z-30 flex items-center justify-center h-screen pb-12">
+      <div className="relative z-50 flex items-center justify-center h-screen pb-12">
         <h2
-          ref={titleRef}
-          className={`text-2xl md:text-4xl tracking-[0.35em] text-white transition-all duration-[1000ms] ease-out
-            ${titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
+          className={`
+            text-2xl md:text-4xl tracking-[0.35em] text-white transition-all duration-[1200ms] ease-out
+            ${titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
           `}
         >
           <span className="opacity-80">JM</span>
@@ -85,37 +72,14 @@ function Hero() {
         </h2>
       </div>
 
-      <style jsx>{`
-        .hero-pan-left {
-          animation: heroPanLeft 12s ease-in-out forwards;
-        }
-
-        .hero-pan-right {
-          animation: heroPanRight 12s ease-in-out forwards;
-        }
-
-        @keyframes heroPanLeft {
-          0% {
-            transform: scale(1) translate(0, 0);
-          }
-          100% {
-            transform: scale(1.15) translate(-4%, -2%);
-          }
-        }
-
-        @keyframes heroPanRight {
-          0% {
-            transform: scale(1) translate(0, 0);
-          }
-          100% {
-            transform: scale(1.15) translate(4%, -2%);
-          }
-        }
+      <style>{`
+        @keyframes fadeIn { 0% {opacity:0;} 100%{opacity:1;} }
+        @keyframes fadeOut { 0% {opacity:1;} 100%{opacity:0;} }
+        .animate-fade-in { animation: fadeIn 1.5s ease forwards; }
+        .animate-fade-out { animation: fadeOut 1.5s ease forwards; }
       `}</style>
     </section>
   );
 }
 
 export default Hero;
-
-
