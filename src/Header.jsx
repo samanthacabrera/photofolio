@@ -39,7 +39,7 @@ export default function Header() {
 
       for (const section of sections) {
         const rect = section.getBoundingClientRect();
-        if (rect.bottom > 0 && rect.top <= window.innerHeight * 0.25) {
+        if (rect.bottom > 0 && rect.top <= window.innerHeight * 0.1) {
           current = section;
         }
       }

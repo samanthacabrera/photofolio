@@ -20,3 +20,13 @@ button,
 button:hover {
   cursor: crosshair;
 }
+
+::selection {
+  background-color: #80e1f7;
+  color: #000000;
+}
+
+::-moz-selection {
+  background-color: #80e1f7;
+  color: #000000;
+}

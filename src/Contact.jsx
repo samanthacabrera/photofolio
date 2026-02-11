@@ -31,8 +31,6 @@ function useScrollFade(delay = 0) {
 
 function Contact() {
   const textRef = useScrollFade(0);
-  const labelRef = useScrollFade(150); 
-  const emailRef = useScrollFade(300);
   const footerRef = useScrollFade(450);
 
   return (
@@ -41,30 +39,21 @@ function Contact() {
       data-title="Contact"
       className="relative w-screen min-h-screen flex flex-col justify-center px-8 md:px-20 bg-[#111211] text-white"
     >
-      <div className="flex-1 flex flex-col items-center justify-center space-y-12 max-w-3xl mx-auto text-center">
+      <div className="flex-1 flex flex-col items-center justify-center space-y-12 text-center">
         <p
           ref={textRef}
-          className="opacity-0 transform translate-y-6 transition-all duration-500 ease-out text-sm lg:text-2xl leading-loose max-w-md"
+          className="opacity-0 transform translate-y-6 transition-all duration-500 ease-out text-white/80 text-sm lg:text-xl leading-loose max-w-md"
         >
-            For project inquiries or collaborations, <br/> you can best reach me by email.
+          For project inquiries or collaborations, <br/> you can best reach me by email at{" "}
+          <a
+            href="mailto:justinamiller1023@gmail.com"
+            className="relative group font-light tracking-[0.05em] underline-animation hover:text-white transition-all duration-500"
+          >
+            justinamiller1023@gmail.com
+            <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-white transition-all duration-500 group-hover:w-full"></span>
+          </a>
+          .
         </p>
-        <div>
-        <p
-          ref={labelRef}
-          className="opacity-0 transform translate-y-6 transition-all duration-500 ease-out text-sm md:text-base text-white/60 tracking-widest mb-2"
-        >
-          Email
-        </p>
-
-        <a
-          ref={emailRef}
-          href="mailto:justinamiller1023@gmail.com"
-          className="inline-block relative group opacity-0 transform translate-y-6 transition-all duration-500 ease-out text-sm lg:text-base font-light tracking-[0.05em]"
-        >
-          justinamiller1023@gmail.com
-          <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-white transition-all duration-500 group-hover:w-full"></span>
-        </a>
-        </div>
       </div>
 
       {/* Footer */}
