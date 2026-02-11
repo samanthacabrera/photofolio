@@ -44,7 +44,7 @@ function Contact() {
           ref={textRef}
           className="opacity-0 transform translate-y-6 transition-all duration-500 ease-out text-white/80 text-sm lg:text-xl leading-loose max-w-md"
         >
-          For project inquiries or collaborations, <br/> you can best reach me by email at{" "}
+          For project inquiries or collaborations, <br/> you can best reach me at{" "}
           <a
             href="mailto:justinamiller1023@gmail.com"
             className="relative group font-light tracking-[0.05em] underline-animation hover:text-white transition-all duration-500"
