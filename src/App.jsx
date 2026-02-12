@@ -3,7 +3,7 @@ import Header from "./Header";
 import Hero from "./Hero";
 import About from "./About";
 import Gallery from "./Gallery";
-import Contact from "./Contact";
+import Footer from "./Footer";
 
 export default function App() {
   return (
@@ -13,15 +13,15 @@ export default function App() {
         <Route
           path="/photofolio/"
           element={
-            <div className="flex flex-col space-y-24">
+            <div className="flex flex-col space-y-24 pb-24 md:pb-48">
               <Hero />
               <About />
               <Gallery />
-              <Contact />
             </div>
           }
         />
       </Routes>
+      <Footer /> 
     </BrowserRouter>
   );
 }
