@@ -99,7 +99,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 md:bg-[#111211]" />
 
       {/* Location */}
-      <div
+      <p
         className={` absolute top-1 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90
           transition-[opacity,transform] duration-500 delay-300
           ${phase === "content"
@@ -108,10 +108,10 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
         `}
       >
         {activePhoto.location} {activePhoto.year}
-      </div>
+      </p>
 
       {/* Count */}
-      <div
+      <p
         className={`absolute bottom-2 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90
           transition-[opacity,transform] duration-500 delay-400
           ${phase === "content"
@@ -120,7 +120,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
         `}
       >
         {activeIndex + 1} / {photos.length}
-      </div>
+      </p>
 
       {/* Exit */}
       <button

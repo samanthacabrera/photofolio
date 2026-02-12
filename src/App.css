@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Slackside+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dongle&family=Slackside+One&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +8,8 @@ body,
 html {
   padding: 0;
   margin: 0;
-  font-family: "Slackside One", cursive;
+  /* font-family: "Slackside One", cursive; */
+  font-family: "Dongle", sans-serif;
   text-transform: uppercase;
   background-color: #111211;
   color: rgba(245, 245, 245, 0.9);

@@ -96,7 +96,7 @@ export default function Header() {
 
           <button
             onClick={() => setMenuOpen(false)}
-            className="text-5xl opacity-60 hover:opacity-100 transition "
+            className="text-5xl opacity-60 bg-orange-200 hover:opacity-100 transition"
           >
             ×
           </button>

@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import photos from "./photos";
 import Lightbox from "./Lightbox";
+import ScrollToTop from "./ScrollToTop";
 
 function useScrollFade(ref) {
   useEffect(() => {
@@ -84,6 +85,7 @@ function Gallery() {
           onClose={() => setLightboxOpen(false)}
         />
       )}
+      <ScrollToTop />
     </section>
   );
 }

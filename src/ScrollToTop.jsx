@@ -5,16 +5,14 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollPosition = Math.ceil(
-        window.scrollY + window.innerHeight
-      );
+      const scrollPosition = window.scrollY + window.innerHeight;
       const pageHeight = document.documentElement.scrollHeight;
 
-      setVisible(scrollPosition >= pageHeight - 100);
+      setVisible(scrollPosition >= pageHeight - 120);
     };
 
     window.addEventListener("scroll", onScroll);
-    onScroll(); 
+    onScroll();
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -27,25 +25,32 @@ export default function ScrollToTop() {
   };
 
   return (
-    <div>
+    <div className="hidden md:block fixed bottom-28 left-1/2 -translate-x-1/2 z-50">
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
-        className={`hidden md:flex z-40 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center transition-opacity duration-500 hover:opacity-80
-          ${visible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`group flex flex-col items-center py-6 transition-all duration-700 ease-out
+        ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6 pointer-events-none"}
+        `}
       >
         <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
+          width="20"
+          height="40"
+          viewBox="0 0 24 48"
           fill="none"
-          stroke="currentColor"
-          strokeWidth="1.25"
-          className="transition duration-200 hover:-translate-y-2"
+          stroke="white"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="transition-all duration-500 ease-out group-hover:-translate-y-2"
         >
-          <path d="M12 19V5" />
-          <path d="M5 12l7-7 7 7" />
+          <path d="M12 38V10" />
+          <path d="M6 16l6-6 6 6" />
         </svg>
+
+        <span className="mt-4 text-xs tracking-[0.25em] uppercase text-white/70 transition-colors duration-500 group-hover:text-white">
+          Back to Top
+        </span>
       </button>
     </div>
   );

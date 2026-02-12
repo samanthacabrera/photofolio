@@ -61,15 +61,15 @@ function Hero() {
       <div className="absolute bottom-0 left-0 w-full h-screen bg-gradient-to-t from-[#111211] to-transparent z-40 pointer-events-none" />
 
       <div className="relative z-50 flex items-center justify-center h-screen pb-12">
-        <h2
+        <h1
           className={`
             text-2xl md:text-4xl tracking-[0.35em] text-white transition-all duration-[1200ms] ease-out
             ${titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
           `}
         >
-          <span className="opacity-80">JM</span>
+          <span className="opacity-90">JM</span>
           <span className="opacity-70">Photography</span>
-        </h2>
+        </h1>
       </div>
 
       <style>{`
