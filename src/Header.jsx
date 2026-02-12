@@ -75,7 +75,7 @@ export default function Header() {
       {!menuOpen && currentTitle && (
         <button
           onClick={() => setMenuOpen(true)}
-          className="uppercase tracking-[0.35em] text-sm"
+          className="text-lg uppercase tracking-[0.25em]"
         >
           {currentTitle}
         </button>
@@ -96,7 +96,7 @@ export default function Header() {
 
           <button
             onClick={() => setMenuOpen(false)}
-            className="text-5xl opacity-60 bg-orange-200 hover:opacity-100 transition"
+            className="text-5xl opacity-60 hover:opacity-100 transition"
           >
             ×
           </button>

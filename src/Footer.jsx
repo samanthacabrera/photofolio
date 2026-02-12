@@ -42,7 +42,7 @@ function Footer() {
       <div className="flex flex-col md:flex-row md:justify-between gap-2 md:gap-0">
         <p
           ref={emailRef}
-          className="group opacity-0 translate-y-3 transition-all duration-700 ease-out text-[11px] md:text-xs tracking-[0.12em] leading-relaxed"
+          className="group opacity-0 translate-y-3 transition-all duration-700 ease-out text-sm tracking-[0.12em] leading-relaxed"
         >
           For project inquiries or collaborations, you can best reach me at{" "}
           <a
@@ -57,7 +57,7 @@ function Footer() {
 
         <p
           ref={linkRef}
-          className="group opacity-0 translate-y-3 transition-all duration-700 ease-out text-[11px] md:text-xs tracking-[0.12em] leading-relaxed md:text-right"
+          className="group opacity-0 translate-y-3 transition-all duration-700 ease-out text-sm tracking-[0.12em] leading-relaxed md:text-right"
         >
           This site was made by{" "}
           <a

@@ -40,7 +40,7 @@ function About() {
       data-title="About"
       className="min-h-screen relative flex flex-col items-center justify-center max-w-6xl mx-6 md:mx-auto"
     >
-      <div className="text-center text-xs md:text-sm tracking-widest max-w-sm leading-loose mx-auto space-y-8">
+      <div className="text-center text-sm md:text-base tracking-widest max-w-sm leading-loose mx-auto space-y-8">
         <p
           ref={para1Ref}
           className="opacity-0 transform translate-y-6 transition-all duration-500 ease-out"

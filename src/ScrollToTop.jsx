@@ -25,7 +25,7 @@ export default function ScrollToTop() {
   };
 
   return (
-    <div className="hidden md:block fixed bottom-28 left-1/2 -translate-x-1/2 z-50">
+    <div className="hidden md:block relative top-36 left-1/2 -translate-x-10">
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
@@ -42,7 +42,7 @@ export default function ScrollToTop() {
           strokeWidth="1.3"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="transition-all duration-500 ease-out group-hover:-translate-y-2"
+          className="transition-transform duration-500 ease-out group-hover:-translate-y-2"
         >
           <path d="M12 38V10" />
           <path d="M6 16l6-6 6 6" />

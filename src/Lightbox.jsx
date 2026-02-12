@@ -100,7 +100,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
 
       {/* Location */}
       <p
-        className={` absolute top-1 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90
+        className={` absolute top-2 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90
           transition-[opacity,transform] duration-500 delay-300
           ${phase === "content"
             ? "opacity-100 translate-y-0"
@@ -112,7 +112,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
 
       {/* Count */}
       <p
-        className={`absolute bottom-2 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90
+        className={`absolute bottom-1 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90
           transition-[opacity,transform] duration-500 delay-400
           ${phase === "content"
             ? "opacity-100 translate-y-0"
@@ -125,7 +125,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
       {/* Exit */}
       <button
         onClick={onClose}
-        className={`absolute -top-2 right-2 text-3xl text-white/90
+        className={`absolute top-0 right-2 text-3xl text-white/90
           transition-[opacity,transform] duration-300 delay-500
           ${phase === "content"
             ? "opacity-100 translate-y-0"
