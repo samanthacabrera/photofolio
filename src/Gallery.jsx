@@ -61,8 +61,20 @@ function Gallery() {
       .filter((photo) => photo.category === selectedCategory);
   }, [selectedCategory]);
 
-  const handleClick = (id) => {
-    const index = flatPhotos.findIndex((p) => p.id === id);
+  const mobilePhotos = useMemo(() => {
+    const reversed = [...photos].reverse();
+    const landscapes = reversed.filter(
+      (photo) => photo.category === "landscape"
+    );
+    const architecture = reversed.filter(
+      (photo) => photo.category === "architecture"
+    );
+    return [...landscapes, ...architecture];
+  }, []);
+
+  const handleClick = (id, source) => {
+    const sourceArray = source === "mobile" ? mobilePhotos : flatPhotos;
+    const index = sourceArray.findIndex((p) => p.id === id);
     if (index !== -1) {
       setActivePhotoIndex(index);
       setLightboxOpen(true);
@@ -71,7 +83,7 @@ function Gallery() {
 
   return (
     <section id="gallery" data-title="Gallery" className="min-h-screen">
-      <div className="w-full flex justify-center">
+      <div className="hidden sm:flex w-full justify-center">
         <div className="flex space-x-4 ml-4 text-lg tracking-widest">
           <button
             onClick={() => setSelectedCategory("landscape")}
@@ -94,25 +106,41 @@ function Gallery() {
         </div>
       </div>
 
-      <div
-        className="grid w-full grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:max-w-[92rem] md:mx-auto">
+      {/* Mobile */}
+      <div className="grid w-full grid-cols-1 gap-4 p-4 sm:hidden">
+        {mobilePhotos.map((photo) => (
+          <GalleryItem
+            key={photo.id}
+            photo={photo}
+            onClick={(id) => handleClick(id, "mobile")}
+          />
+        ))}
+      </div>
+
+      {/* Desktop */}
+      <div className="hidden sm:grid w-full gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:max-w-[92rem] md:mx-auto">
         {flatPhotos.map((photo) => (
           <GalleryItem
             key={photo.id}
             photo={photo}
-            onClick={handleClick}
+            onClick={(id) => handleClick(id, "desktop")}
           />
         ))}
       </div>
 
       {lightboxOpen && (
         <Lightbox
-          photos={flatPhotos}
+          photos={
+            typeof window !== "undefined" && window.innerWidth < 640
+              ? mobilePhotos
+              : flatPhotos
+          }
           activeIndex={activePhotoIndex}
           setActiveIndex={setActivePhotoIndex}
           onClose={() => setLightboxOpen(false)}
         />
       )}
+
       <ScrollToTop />
     </section>
   );
