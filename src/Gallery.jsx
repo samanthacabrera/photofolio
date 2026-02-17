@@ -53,8 +53,13 @@ function GalleryItem({ photo, onClick }) {
 function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("landscape");
 
-  const flatPhotos = useMemo(() => [...photos].reverse(), []);
+  const flatPhotos = useMemo(() => {
+    return [...photos]
+      .reverse()
+      .filter((photo) => photo.category === selectedCategory);
+  }, [selectedCategory]);
 
   const handleClick = (id) => {
     const index = flatPhotos.findIndex((p) => p.id === id);
@@ -66,6 +71,29 @@ function Gallery() {
 
   return (
     <section id="gallery" data-title="Gallery" className="min-h-screen">
+      <div className="w-full flex justify-center">
+        <div className="flex space-x-4 ml-4 text-lg tracking-widest">
+          <button
+            onClick={() => setSelectedCategory("landscape")}
+            className={`transition-opacity ${
+              selectedCategory === "landscape"
+                ? "opacity-100"
+                : "opacity-40 hover:opacity-70"
+            }`}>
+            Landscape
+          </button>
+          <button
+            onClick={() => setSelectedCategory("architecture")}
+            className={`transition-opacity ${
+              selectedCategory === "architecture"
+                ? "opacity-100"
+                : "opacity-40 hover:opacity-70"
+            }`}>
+            Architecture
+          </button>
+        </div>
+      </div>
+
       <div
         className="grid w-full grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:max-w-[92rem] md:mx-auto">
         {flatPhotos.map((photo) => (
