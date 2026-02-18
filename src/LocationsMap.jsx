@@ -29,7 +29,7 @@ export default function LocationsMap() {
     });
 
   return (
-    <section id="map" data-title="Map" className="flex justify-center w-full min-h-screen relative">
+    <section id="map" data-title="Map" className="flex justify-center items-end w-full min-h-screen relative">
       <div className="w-full max-w-4xl h-[500px] relative z-0">
         <MapContainer
           center={[52, 10]} 
