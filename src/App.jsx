@@ -3,6 +3,7 @@ import Header from "./Header";
 import Hero from "./Hero";
 import About from "./About";
 import Gallery from "./Gallery";
+import LocationsMap from "./LocationsMap";
 import Footer from "./Footer";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
               <Hero />
               <About />
               <Gallery />
+              <LocationsMap />
             </div>
           }
         />

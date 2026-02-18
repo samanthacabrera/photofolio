@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "framer-motion": "^12.24.11",
+    "leaflet": "^1.9.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "^6.30.2"
   },
   "devDependencies": {
