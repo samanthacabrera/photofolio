@@ -25,7 +25,7 @@ export default function ScrollToTop() {
   };
 
   return (
-    <div className="hidden md:block relative top-36 left-1/2 -translate-x-10">
+    <div className="hidden md:block relative top-12 left-1/2 -translate-x-10">
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"

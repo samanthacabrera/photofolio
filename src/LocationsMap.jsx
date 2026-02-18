@@ -1,63 +1,70 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import React from "react";
+import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import L from "leaflet";
 import photos from "./photos";
 
-const markerIcon = new L.DivIcon({
-  className: "custom-marker",
-  html: `<div class="w-2 h-2 rounded-full bg-white"></div>`,
-  iconSize: [8, 8],
-});
+export default function LocationsMap() {
+  const mapRef = React.useRef(null);
 
-function LocationsMap() {
-  const locations = [
-    ...new Map(
-      photos
-        .filter(
-          (p) =>
-            typeof p.lat === "number" &&
-            typeof p.lng === "number"
-        )
-        .map((p) => [p.location, p])
-    ).values(),
-  ];
+  const photosWithCoords = photos.filter(
+    (p) => typeof p.lat === "number" && typeof p.lng === "number"
+  );
+
+  const createThumbnailIcon = (photo) =>
+    new L.DivIcon({
+      className: "custom-marker",
+      html: `<div style="
+        width: 36px;
+        height: 36px;
+        border-radius: 4px;
+        overflow: hidden;
+      ">
+        <img src="${photo.src}" alt="${photo.desc}" style="
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        "/>
+      </div>`,
+      iconSize: [36, 36],
+    });
 
   return (
-    <section
-      id="locations"
-      data-title="Locations"
-      className="min-h-screen flex flex-col justify-center px-6"
-    >
-      <div className="max-w-6xl mx-auto w-full">
-        <div className="w-full h-[500px]">
-          <MapContainer
-            center={[52.1326, 5.2913]} 
-            zoom={7}
-            scrollWheelZoom={false}
-            className="w-full h-full"
-          >
-            <TileLayer
-              attribution=""
-              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            />
+    <section id="map" data-title="Map" className="flex justify-center w-full min-h-screen relative">
+      <div className="w-full max-w-4xl h-[500px] relative z-0">
+        <MapContainer
+          center={[52, 10]} 
+          zoom={3}
+          scrollWheelZoom={true}
+          className="w-full h-full"
+          style={{ backgroundColor: "transparent" }}
+          zoomControl={false}
+          dragging={true}
+          attributionControl={false}
+          whenCreated={(map) => (mapRef.current = map)}
+        >
+          <TileLayer
+            attribution=""
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          />
 
-            {locations.map((photo) => (
-              <Marker
-                key={photo.location}
-                position={[photo.lat, photo.lng]}
-                icon={markerIcon}
+          {photosWithCoords.map((photo) => (
+            <Marker
+              key={photo.id}
+              position={[photo.lat, photo.lng]}
+              icon={createThumbnailIcon(photo)}
+            >
+              <Tooltip
+                direction="top"
+                offset={[0, -5]}
+                opacity={0.9}
+                className=""
               >
-                <Popup>
-                  <div className="text-xs tracking-wider">
-                    {photo.location}
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
-        </div>
+                {photo.desc} {photo.year}
+              </Tooltip>
+            </Marker>
+          ))}
+        </MapContainer>
       </div>
     </section>
   );
 }
-
-export default LocationsMap;

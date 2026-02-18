@@ -4,6 +4,7 @@ const MENU_ITEMS = [
   { label: "Home", hash: "#home" },
   { label: "About", hash: "#about" },
   { label: "Gallery", hash: "#gallery" },
+  { label: "Map", hash: "#map" },
 ];
 
 export default function Header() {
