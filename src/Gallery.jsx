@@ -35,6 +35,7 @@ function GalleryItem({ photo, onClick }) {
       <img
         src={photo.src}
         alt={photo.desc}
+        loading="lazy"
         className="w-full h-full object-cover"
       />
 

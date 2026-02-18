@@ -15,7 +15,7 @@ const photos = [
     { id: 14, src: "/photofolio/norway/DSC00474.JPG", location: "Norway", year: 2026, desc: "Ersfjordbotn", category: "landscape", featured: false },
     { id: 15, src: "/photofolio/norway/DSC00532.JPG", location: "Norway", year: 2026, desc: "Ersfjordbotn", category: "landscape", featured: false },
     { id: 16, src: "/photofolio/norway/DSC00466.JPG", location: "Norway", year: 2026, desc: "Ersfjordbotn", category: "landscape", featured: false },
-    { id: 17, src: "/photofolio/architecture/DSC03575.JPG", location: "Ireland", year: 2026, desc: "Dublin", category: "architecture", featured: false },
+    { id: 17, src: "/photofolio/architecture/DSC03575.JPG", location: "Ireland", year: 2025, desc: "Dublin", category: "architecture", featured: false },
     { id: 18, src: "/photofolio/architecture/DSC00791.JPG", location: "France", year: 2026, desc: "Paris", category: "architecture", featured: false },
 
 ]
