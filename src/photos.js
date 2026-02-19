@@ -17,7 +17,6 @@ const photos = [
     { id: 16, src: "/photofolio/norway/DSC00466.JPG", location: "Norway", lat: 69.651, lng: 18.915, year: 2026, desc: "Ersfjordbotn", category: "landscape", featured: false },
     // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     { id: 17, src: "/photofolio/architecture/DSC03575.JPG", location: "Ireland", lat: 53.34, lng: -6.26, year: 2025, desc: "Dublin", category: "architecture", featured: false },
-    { id: 18, src: "/photofolio/architecture/DSC00791.JPG", location: "France", lat: 48.85, lng: 2.35, year: 2026, desc: "Paris", category: "architecture", featured: false },
 ];
 
 export default photos;
