@@ -86,9 +86,8 @@ function Gallery() {
 
   return (
     <section id="gallery" data-title="Gallery" className="min-h-screen">
-      <div className="hidden sm:flex w-full justify-center">
+      <div className="hidden sm:flex w-full">
         <div className="flex items-center gap-4 ml-8 text-lg tracking-[0.25em]">
-
           <button
             onClick={() => setSelectedCategory("landscape")}
             className="relative uppercase transition-all duration-500"
@@ -103,8 +102,7 @@ function Gallery() {
               Landscape
             </span>
           </button>
-
-          <button
+           <button
             onClick={() => setSelectedCategory("architecture")}
             className="relative uppercase transition-all duration-500"
           >
@@ -118,10 +116,22 @@ function Gallery() {
               Architecture
             </span>
           </button>
-
+          <button
+            onClick={() => setSelectedCategory("macro")}
+            className="relative uppercase transition-all duration-500"
+          >
+            <span
+              className={`transition-opacity duration-500 ${
+                selectedCategory === "macro"
+                  ? "opacity-100"
+                  : "opacity-30 hover:opacity-60"
+              }`}
+            >
+              Macro
+            </span>
+          </button>
         </div>
       </div>
-
 
       {/* Mobile */}
       <div className="grid w-full grid-cols-1 gap-4 p-4 sm:hidden">
