@@ -25,12 +25,12 @@ const photos = [
     { id: 22, src: "/photofolio/architecture/DSC00750 2.JPG", location: "France", lat: 48.85, lng: 2.35, year: 2026, desc: "Paris", category: "architecture", featured: false },
     { id: 23, src: "/photofolio/architecture/DSC00779.JPG", location: "France", lat: 48.85, lng: 2.35, year: 2026, desc: "Paris", category: "architecture", featured: false },
     { id: 24, src: "/photofolio/architecture/DSC00787 2.JPG", location: "France", lat: 48.85, lng: 2.35, year: 2026, desc: "Paris", category: "architecture", featured: false },
-    { id: 25, src: "/photofolio/architecture/DSC00791 2.JPG", location: "France", lat: 48.85, lng: 2.35, year: 2026, desc: "Paris", category: "architecture", featured: false },
+    { id: 25, src: "/photofolio/architecture/DSC00748.JPG", location: "France", lat: 48.85, lng: 2.35, year: 2026, desc: "Paris", category: "architecture", featured: false },
+    { id: 26, src: "/photofolio/architecture/DSC00791.JPG", location: "France", lat: 48.85, lng: 2.35, year: 2026, desc: "Paris", category: "architecture", featured: false },
     // MACRO ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    { id: 26, src: "/photofolio/macro/DSC00260.JPG", location: "California", lat: 33.62, lng: -117.94, year: 2025, desc: "Newport Beach", category: "macro", featured: false },
-    { id: 27, src: "/photofolio/macro/DSC00265.JPG", location: "California", lat: 33.62, lng: -117.94, year: 2025, desc: "Newport Beach", category: "macro", featured: false },
-
-
+    { id: 27, src: "/photofolio/macro/DSC00260.JPG", location: "California", lat: 33.62, lng: -117.94, year: 2025, desc: "Newport Beach", category: "macro", featured: false },
+    { id: 28, src: "/photofolio/macro/DSC00265.JPG", location: "California", lat: 33.62, lng: -117.94, year: 2025, desc: "Newport Beach", category: "macro", featured: false },
+    { id: 29, src: "/photofolio/macro/DSC03789.JPG", location: "Ireland", lat: 53.34, lng: -6.26, year: 2025, desc: "Dublin", category: "macro", featured: false },
 ];
 
 export default photos;
