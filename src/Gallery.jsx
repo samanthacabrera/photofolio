@@ -66,10 +66,13 @@ function Gallery() {
     const landscapes = reversed.filter(
       (photo) => photo.category === "landscape"
     );
+    const macro = reversed.filter(
+      (photo) => photo.category === "macro"
+    );
     const architecture = reversed.filter(
       (photo) => photo.category === "architecture"
     );
-    return [...landscapes, ...architecture];
+    return [...landscapes, ...macro, ...architecture,];
   }, []);
 
   const handleClick = (id, source) => {
