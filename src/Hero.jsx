@@ -41,7 +41,7 @@ function Hero() {
       {prev !== null && (
         <img
           src={heroImages[prev].src}
-          alt={heroImages[prev].desc}
+          alt={heroImages[prev].city}
           className="absolute inset-0 w-full h-full object-cover animate-fade-out z-10"
         />
       )}
@@ -49,7 +49,7 @@ function Hero() {
       <img
         key={fadeKey} 
         src={heroImages[current].src}
-        alt={heroImages[current].desc}
+        alt={heroImages[current].city}
         className="absolute inset-0 w-full h-full object-cover animate-fade-in z-20"
         style={{
           transform: `scale(${activeTransform.scale}) translate(${activeTransform.x}%, ${activeTransform.y}%)`,

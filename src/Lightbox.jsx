@@ -88,7 +88,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
       >
         <img
           src={activePhoto.src}
-          alt={activePhoto.desc}
+          alt={activePhoto.city}
           onClick={(e) => e.stopPropagation()}
           className="w-full h-full object-contain select-none touch-pan-y
           md:w-screen md:h-screen md:object-cover md:px-6"
@@ -98,7 +98,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-8 md:bg-[#111211]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 md:bg-[#111211]" />
 
-      {/* Location */}
+      {/* country */}
       <p
         className={` absolute top-2 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90
           transition-[opacity,transform] duration-500 delay-300
@@ -107,7 +107,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
             : "opacity-0 translate-y-2"}
         `}
       >
-        {activePhoto.location} {activePhoto.year}
+        {activePhoto.country} {activePhoto.year}
       </p>
 
       {/* Count */}

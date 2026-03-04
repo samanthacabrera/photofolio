@@ -33,14 +33,14 @@ function GalleryItem({ photo, onClick }) {
       className="relative group cursor-pointer overflow-hidden bg-neutral-100 aspect-[3/2] opacity-0 transition-opacity duration-300 ease-out">
       <img
         src={photo.src}
-        alt={photo.desc}
+        alt={photo.city}
         loading="lazy"
         className="w-full h-full object-cover"
       />
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-full flex items-end space-x-1 z-10 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3">
         <span className="text-white/90 text-sm tracking-widest">
-          {photo.location}
+          {photo.country}
         </span>
         <span className="text-white/80 text-sm tracking-widest">
           {photo.year}
