@@ -30,7 +30,7 @@ function GalleryItem({ photo, onClick }) {
     <div
       ref={ref}
       onClick={() => onClick(photo.id)}
-      className="relative group cursor-pointer overflow-hidden bg-neutral-100 aspect-[3/2] opacity-0 transition-opacity duration-300 ease-out">
+      className="relative group cursor-pointer overflow-hidden bg-neutral-100 aspect-[3/2] opacity-0 hover:scale-95 transition-all duration-300 ease-out">
       <img
         src={photo.src}
         alt={photo.city}
@@ -38,7 +38,7 @@ function GalleryItem({ photo, onClick }) {
         className="w-full h-full object-cover"
       />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-full flex items-end space-x-1 z-10 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-full flex items-end space-x-1 z-10 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-300 p-3">
         <span className="text-white/90 text-sm tracking-widest">
           {photo.country}
         </span>

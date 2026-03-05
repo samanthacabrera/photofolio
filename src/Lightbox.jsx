@@ -1,10 +1,22 @@
 import { useEffect, useState } from "react";
 
 function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
-  const activePhoto = photos[activeIndex];
   const [phase, setPhase] = useState("idle");
+  const [virtualIndex, setVirtualIndex] = useState(activeIndex);
+
   const [touchStartX, setTouchStartX] = useState(null);
   const [touchEndX, setTouchEndX] = useState(null);
+
+  const visibleRange = 5; 
+
+  const getRealIndex = (i) =>
+    ((i % photos.length) + photos.length) % photos.length;
+
+  const activePhoto = photos[getRealIndex(virtualIndex)];
+
+  useEffect(() => {
+    setVirtualIndex(activeIndex);
+  }, [activeIndex]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -20,9 +32,9 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowRight") {
-        setActiveIndex((prev) => (prev + 1) % photos.length);
+        setVirtualIndex((v) => v + 1);
       } else if (e.key === "ArrowLeft") {
-        setActiveIndex((prev) => (prev - 1 + photos.length) % photos.length);
+        setVirtualIndex((v) => v - 1);
       } else if (e.key === "Escape") {
         onClose();
       }
@@ -30,7 +42,11 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [photos.length, setActiveIndex, onClose]);
+  }, [onClose]);
+
+  useEffect(() => {
+    setActiveIndex(getRealIndex(virtualIndex));
+  }, [virtualIndex]);
 
   const handleTouchStart = (e) => {
     setTouchStartX(e.touches[0].clientX);
@@ -47,9 +63,9 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
     const threshold = 50;
 
     if (distance > threshold) {
-      setActiveIndex((prev) => (prev + 1) % photos.length);
+      setVirtualIndex((v) => v + 1);
     } else if (distance < -threshold) {
-      setActiveIndex((prev) => (prev - 1 + photos.length) % photos.length);
+      setVirtualIndex((v) => v - 1);
     }
 
     setTouchStartX(null);
@@ -58,22 +74,36 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
 
   if (!activePhoto) return null;
 
+  const visiblePhotos = [];
+
+  for (let i = -visibleRange; i <= visibleRange; i++) {
+    const index = virtualIndex + i;
+    const photo = photos[getRealIndex(index)];
+
+    visiblePhotos.push({
+      photo,
+      virtual: index,
+      real: getRealIndex(index),
+    });
+  }
+
   return (
     <div
       className={`
         fixed inset-0 z-50
         transition-[opacity,backdrop-filter] duration-700 ease-out
-        ${phase !== "idle"
-          ? "opacity-100 bg-black/80 backdrop-blur-md"
-          : "opacity-0 bg-black/0 backdrop-blur-0"}
+        ${
+          phase !== "idle"
+            ? "opacity-100 bg-black/80 backdrop-blur-md"
+            : "opacity-0 bg-black/0 backdrop-blur-0"
+        }
       `}
       onClick={onClose}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-
-      {/* MOBILE */}
+      {/* Mobile */}
       <div className="md:hidden absolute inset-0">
         <img
           src={activePhoto.src}
@@ -83,7 +113,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
         />
       </div>
 
-      {/* DESKTOP */}
+      {/* Desktop */}
       <div
         className="hidden md:flex absolute inset-0 items-center justify-center overflow-hidden px-24"
         onClick={(e) => e.stopPropagation()}
@@ -91,28 +121,30 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
         <div
           className="flex items-center gap-10 transition-transform duration-700 ease-[cubic-bezier(.19,1,.22,1)]"
           style={{
-            transform: `translateX(calc(50% - ${activeIndex * 640 + 300}px))`
+            transform: `translateX(calc(50% - ${visibleRange * 640 + 300}px))`,
           }}
         >
-          {photos.map((photo, index) => {
-            const isActive = index === activeIndex;
+          {visiblePhotos.map(({ photo, virtual, real }) => {
+            const isActive = virtual === virtualIndex;
 
             return (
               <div
-                key={photo.id}
+                key={`${photo.id}-${virtual}`}
                 className="flex-shrink-0 flex justify-center"
                 style={{ width: "600px" }}
               >
                 <img
                   src={photo.src}
                   alt=""
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => setVirtualIndex(virtual)}
                   className={`
                     w-full object-cover rounded-sm cursor-pointer
                     transition-all duration-500 ease-out
-                    ${isActive
-                      ? "scale-100 opacity-100"
-                      : "scale-75 opacity-40 hover:opacity-70"}
+                    ${
+                      isActive
+                        ? "scale-100 opacity-100"
+                        : "scale-75 opacity-40 hover:opacity-70"
+                    }
                   `}
                 />
               </div>
@@ -120,7 +152,6 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
           })}
         </div>
       </div>
-   
 
       {/* Country + Year */}
       <p className="absolute top-4 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90">
@@ -129,10 +160,10 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
 
       {/* Count */}
       <p className="absolute bottom-4 inset-x-0 text-center text-sm tracking-[0.35em] text-white/90">
-        {activeIndex + 1} / {photos.length}
+        {getRealIndex(virtualIndex) + 1} / {photos.length}
       </p>
 
-      {/* Exit Button */}
+      {/* Exit */}
       <button
         onClick={onClose}
         className="absolute top-4 right-6 text-3xl text-white/90 hover:opacity-70"

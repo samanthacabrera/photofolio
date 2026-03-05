@@ -24,11 +24,11 @@ button:hover {
 }
 
 ::selection {
-  background-color: #80e1f7;
+  background-color: #ffffff;
   color: #000000;
 }
 
 ::-moz-selection {
-  background-color: #80e1f7;
+  background-color: #ffffff;
   color: #000000;
 }
