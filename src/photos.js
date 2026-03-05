@@ -23,7 +23,7 @@ const photos = [
     { id: 22, src: "/photofolio/architecture/DSC03575.JPG", country: "Ireland", city: "Dublin", lat: 53.34, lng: -6.26, year: 2025, category: "architecture", featured: false },
     { id: 23, src: "/photofolio/architecture/DSC00750 2.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
     { id: 24, src: "/photofolio/architecture/DSC00779.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
-    { id: 25, src: "/photofolio/architecture/DSC00787 2.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
+    // { id: 25, src: "/photofolio/architecture/DSC00787 2.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
     { id: 26, src: "/photofolio/architecture/DSC00748.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
     { id: 27, src: "/photofolio/architecture/DSC00791.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
     { id: 28, src: "/photofolio/architecture/DSC01011.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "architecture", featured: false },
