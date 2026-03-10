@@ -33,8 +33,11 @@ const photos = [
     { id: 31, src: "/photofolio/macro/DSC00265.JPG", country: "California", city: "Newport Beach", lat: 33.62, lng: -117.94, year: 2025, category: "macro", featured: false },
     { id: 32, src: "/photofolio/macro/DSC03789.JPG", country: "Ireland", city: "Dublin", lat: 53.34, lng: -6.26, year: 2025, category: "macro", featured: false },
     { id: 33, src: "/photofolio/macro/DSC01025.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "macro", featured: false },
-    { id: 34, src: "/photofolio/macro/DSC01043.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "macro", featured: false },
-    { id: 35, src: "/photofolio/macro/DSC01395.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "macro", featured: false },
+    { id: 34, src: "/photofolio/macro/DSC01384.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "macro", featured: false },
+    { id: 35, src: "/photofolio/macro/DSC01043.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "macro", featured: false },
+    { id: 36, src: "/photofolio/macro/DSC01394.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "macro", featured: false },
+    { id: 37, src: "/photofolio/macro/DSC01395.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "macro", featured: false },
+    // { id: 38, src: "/photofolio/macro/DSC01393.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "macro", featured: false },
 ];
 
 export default photos;
