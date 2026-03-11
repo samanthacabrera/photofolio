@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 const MENU_ITEMS = [
   { label: "Home", hash: "#home" },
   { label: "About", hash: "#about" },
-  { label: "Gallery", hash: "#gallery" },
+  { label: "Landscape", hash: "#landscape" },
+  { label: "Macro", hash: "#macro" },
+  { label: "Architecture", hash: "#architecture" },
   // { label: "Map", hash: "#map" },
 ];
 
