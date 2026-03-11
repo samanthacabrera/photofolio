@@ -1,8 +1,8 @@
 const photos = [
     // LANDSCAPE ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    { id: 1, src: "/photofolio/bahamas/IMG_0323.JPG", country: "Bahamas", city: "Nassau", lat: 25.04, lng: -77.3, year: 2021, category: "landscape", featured: false },
+    // { id: 1, src: "/photofolio/bahamas/IMG_0323.JPG", country: "Bahamas", city: "Nassau", lat: 25.04, lng: -77.3, year: 2021, category: "landscape", featured: false },
     { id: 2, src: "/photofolio/usa/IMG_5073 2.jpg", country: "Colorado", city: "Red Rocks Park", lat: 39.66, lng: -105.2, year: 2025, category: "landscape", featured: false },
-    { id: 3, src: "/photofolio/usa/IMG_5075.jpg", country: "California", city: "Newport Beach", lat: 33.62, lng: -117.94, year: 2025, category: "landscape", featured: false },
+    // { id: 3, src: "/photofolio/usa/IMG_5075.jpg", country: "California", city: "Newport Beach", lat: 33.62, lng: -117.94, year: 2025, category: "landscape", featured: false },
     { id: 4, src: "/photofolio/usa/DSC00910.JPG", country: "California", city: "Newport Beach", lat: 33.62, lng: -117.94, year: 2025, category: "landscape", featured: false },
     { id: 5, src: "/photofolio/portugal/DSC02283.JPG", country: "Portugal", city: "Seven Hanging Valleys", lat: 37.090, lng: -8.2, year: 2025, category: "landscape", featured: false },
     { id: 6, src: "/photofolio/portugal/DSC02552.JPG", country: "Portugal", city: "Seven Hanging Valleys", lat: 37.093, lng: -8.21, year: 2025, category: "landscape", featured: true },
