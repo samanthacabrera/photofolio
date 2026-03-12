@@ -9,7 +9,7 @@ const photos = [
     { id: 7, src: "/photofolio/portugal/DSC02615.JPG", country: "Portugal", city: "Seven Hanging Valleys", lat: 37.089, lng: -8.22, year: 2025, category: "landscape", featured: false },
     { id: 8, src: "/photofolio/portugal/DSC02534.JPG", country: "Portugal", city: "Seven Hanging Valleys", lat: 37.088, lng: -8.23, year: 2025, category: "landscape", featured: true },
     { id: 9, src: "/photofolio/italy/DSC03257.JPG", country: "Italy", city: "Lake Como", lat: 46, lng: 9.293, year: 2025, category: "landscape", featured: false },
-    { id: 10, src: "/photofolio/italy/DSC03244.JPG", country: "Italy", city: "Lake Como", lat: 45.99, lng: 9.295, year: 2025, category: "landscape", featured: false },
+    { id: 10, src: "/photofolio/italy/DSC03244.JPG", country: "Italy", city: "Lake Como", lat: 45.99, lng: 9.295, year: 2025, category: "landscape", featured: true },
     { id: 11, src: "/photofolio/ireland/DSC04136.JPG", country: "Ireland", city: "Cliffs of Moher", lat: 53.015, lng: -9.399, year: 2025, category: "landscape", featured: true },
     { id: 12, src: "/photofolio/ireland/DSC03798.JPG", country: "Ireland", city: "Howth Cliff", lat: 53.4, lng: -6.1, year: 2025, category: "landscape", featured: true },
     { id: 13, src: "/photofolio/ireland/DSC04133.JPG", country: "Ireland", city: "Cliffs of Moher", lat: 53.013, lng: -9.398, year: 2025, category: "landscape", featured: false },
