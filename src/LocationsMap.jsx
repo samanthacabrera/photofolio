@@ -1,44 +1,31 @@
-import React from "react";
-import { MapContainer, TileLayer, Marker, Tooltip, Polyline, Popup } from "react-leaflet";
+import React, { useEffect, useState, useRef } from "react";
+import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import L from "leaflet";
 import photos from "./photos";
 
 export default function LocationsMap() {
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [lines, setLines] = React.useState([]); 
+  const [lines, setLines] = useState([]);
+  const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
+  const animationRef = useRef(null); 
 
   const photosWithCoords = photos
     .filter((p) => typeof p.lat === "number" && typeof p.lng === "number")
     .sort((a, b) => a.year - b.year);
 
-  const createThumbnailIcon = (photo) =>
-    new L.DivIcon({
-      className: "photo-marker",
-      html: `
-        <div style="
-          width:70px;
-          background:white;
-          padding:4px;
-          border-radius:6px;
-          box-shadow:0 4px 10px rgba(0,0,0,0.4);
-        ">
-          <img src="${photo.src}" style="
-            width:100%;
-            height:50px;
-            object-fit:cover;
-            border-radius:3px;
-          "/>
-        </div>
-      `,
-      iconSize: [70, 70],
-      iconAnchor: [35, 70],
+  const groupedPhotos = React.useMemo(() => {
+    const map = new Map();
+    photosWithCoords.forEach((photo) => {
+      const key = `${photo.lat},${photo.lng}`;
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(photo);
     });
+    return Array.from(map.values());
+  }, [photosWithCoords]);
 
-  const createCurve = (start, end) => {
+  const createCurve = (start, end, steps = 50) => {
     const latlngs = [];
     const midLat = (start[0] + end[0]) / 2;
-    const midLng = (start[1] + end[1]) / 2 + 5; 
-    const steps = 50;
+    const midLng = (start[1] + end[1]) / 2 + 5;
     for (let t = 0; t <= 1; t += 1 / steps) {
       const lat =
         (1 - t) * (1 - t) * start[0] + 2 * (1 - t) * t * midLat + t * t * end[0];
@@ -49,48 +36,71 @@ export default function LocationsMap() {
     return latlngs;
   };
 
-  React.useEffect(() => {
-    if (photosWithCoords.length < 2) return;
+  const startAnimation = () => {
+    if (groupedPhotos.length < 2) return;
 
-    let index = 0;
+    setLines([]);
+    setCurrentGroupIndex(0);
 
-    const interval = setInterval(() => {
-      if (index >= photosWithCoords.length - 1) {
-        clearInterval(interval);
+    let lineSegments = [];
+    let groupIndex = 0;
+    let step = 0;
+    let curve = [];
+
+    animationRef.current = setInterval(() => {
+      if (groupIndex >= groupedPhotos.length - 1) {
+        clearInterval(animationRef.current);
         return;
       }
 
-      const start = [photosWithCoords[index].lat, photosWithCoords[index].lng];
-      const end = [photosWithCoords[index + 1].lat, photosWithCoords[index + 1].lng];
-      const curve = createCurve(start, end);
+      if (step === 0) {
+        const start = [
+          groupedPhotos[groupIndex][0].lat,
+          groupedPhotos[groupIndex][0].lng,
+        ];
+        const end = [
+          groupedPhotos[groupIndex + 1][0].lat,
+          groupedPhotos[groupIndex + 1][0].lng,
+        ];
+        curve = createCurve(start, end, 50);
+      }
 
-      let step = 1;
-      const lineInterval = setInterval(() => {
-        setLines((prev) => {
-          const newLines = [...prev];
-          if (!newLines[index]) newLines[index] = [];
-          newLines[index] = curve.slice(0, step + 1); 
-          return newLines;
-        });
-        step++;
-        if (step >= curve.length) clearInterval(lineInterval);
-      }, 15);
+      lineSegments[groupIndex] = curve.slice(0, step + 1);
+      setLines([...lineSegments]);
 
-      index++;
-      setCurrentIndex(index);
-    }, 2000);
+      step++;
 
-    return () => clearInterval(interval);
+      if (step >= curve.length) {
+        setCurrentGroupIndex(groupIndex + 1);
+        groupIndex++;
+        step = 0;
+        curve = [];
+      }
+    }, 15);
+  };
+
+  useEffect(() => {
+    startAnimation();
+    return () => clearInterval(animationRef.current);
   }, []);
 
-  const visiblePhotos = photosWithCoords.slice(0, currentIndex + 1);
-  const currentPhoto = visiblePhotos[currentIndex] || photosWithCoords[0];
-  const currentYear = currentPhoto?.year || new Date().getFullYear();
-  const currentCountry = currentPhoto?.country || "Unknown";
+  const handleReplay = () => {
+    clearInterval(animationRef.current);
+    startAnimation();
+  };
 
   return (
-    <section className="w-full min-h-screen flex flex-col items-center justify-center">
-      <div className="w-screen h-[600px] relative">
+    <div className="w-full h-screen flex flex-col">
+      <div className="flex justify-center p-4">
+        <button
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          onClick={handleReplay}
+        >
+          Replay
+        </button>
+      </div>
+
+      <div className="flex-1">
         <MapContainer
           bounds={L.latLngBounds(photosWithCoords.map((p) => [p.lat, p.lng]))}
           className="w-full h-full"
@@ -105,56 +115,28 @@ export default function LocationsMap() {
         >
           <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
-          {visiblePhotos.map((photo, i) => (
-            <Marker
-              key={photo.id}
-              position={[photo.lat, photo.lng]}
-              icon={createThumbnailIcon(photo)}
-            >
-              <Tooltip direction="top" offset={[0, -10]}>
-                {photo.desc}
-              </Tooltip>
-              {i === currentIndex && (
-                <Popup closeButton={false} autoClose={false}>
-                  <div className="text-xl font-bold">{photo.year}</div>
-                </Popup>
-              )}
-            </Marker>
-          ))}
-
+          {/* Lines */}
           {lines.map(
             (segment, i) =>
               segment && segment.length > 1 && (
                 <Polyline
-                  key={i}
+                  key={`line-${i}`}
                   positions={segment}
-                  pathOptions={{
-                    color: "white",
-                    weight: 2,
-                    opacity: 0.8,
-                  }}
+                  pathOptions={{ color: "white", weight: 2, opacity: 0.8 }}
                 />
               )
           )}
 
-          <Marker
-            position={[72, -40]} 
-            icon={new L.DivIcon({
-              className: "map-heading",
-              html: `<div style="
-                color:white;
-                font-size:14px;
-                text-align:center;
-                text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-                padding:4px 12px;
-              ">
-                ${currentYear}  ${currentCountry}
-              </div>`,
-              iconAnchor: [0, 0],
-            })}
-          />
+          {groupedPhotos
+            .slice(0, currentGroupIndex + 1)
+            .map((group, i) => (
+              <Marker
+                key={`pin-${i}`}
+                position={[group[0].lat, group[0].lng]}
+              />
+            ))}
         </MapContainer>
       </div>
-    </section>
+    </div>
   );
 }
