@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Polyline, Tooltip } from "react-leaflet";
 import L from "leaflet";
 import photos from "./photos";
 
@@ -36,7 +36,6 @@ export default function LocationsMap() {
     return latlngs;
   };
 
-  // Animation logic
   const startAnimation = () => {
     if (groupedPhotos.length < 2) return;
 
@@ -90,43 +89,50 @@ export default function LocationsMap() {
     startAnimation();
   };
 
-  const ThumbnailMarker = ({ photos }) => {
-    const [index, setIndex] = useState(0);
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setIndex((prev) => (prev + 1) % photos.length);
-      }, 1500); 
-      return () => clearInterval(interval);
-    }, [photos.length]);
+const ThumbnailMarker = ({ photos }) => {
+  const [index, setIndex] = useState(0);
 
-    const photo = photos[index];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % photos.length);
+    }, 1500);
+    return () => clearInterval(interval);
+  }, [photos.length]);
 
-    const icon = new L.DivIcon({
-      className: "photo-marker",
-      html: `
-        <div style="
-          width:70px;
-          height:50px;
-          background:white;
-          padding:2px;
-          border-radius:6px;
-          box-shadow:0 4px 10px rgba(0,0,0,0.4);
-        ">
-          <img src="${photo.src}" style="
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            border-radius:3px;
-          "/>
-        </div>
-      `,
-      iconSize: [70, 50],
-      iconAnchor: [35, 50],
-    });
+  const photo = photos[index];
 
-    return <Marker position={[photo.lat, photo.lng]} icon={icon} />;
-  };
+  const icon = new L.DivIcon({
+    className: "photo-marker",
+    html: `<div style="
+      width:70px;
+      height:50px;
+      background:white;
+      padding:2px;
+      border-radius:6px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.4);
+    ">
+      <img src="${photo.src}" style="
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:3px;
+      "/>
+    </div>`,
+    iconSize: [70, 50],
+    iconAnchor: [35, 50],
+  });
 
+  return (
+    <Marker position={[photo.lat, photo.lng]} icon={icon} interactive={true}>
+      <Tooltip direction="top" offset={[0, -10]} opacity={0.9} interactive={true}>
+        <span style={{ fontWeight: "bold" }}>
+          {photo.country || "Unknown"} - {photo.year}
+        </span>
+      </Tooltip>
+    </Marker>
+  );
+};
+  
   return (
     <div className="w-full h-screen flex flex-col">
       <div className="flex justify-center p-4">
