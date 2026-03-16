@@ -6,7 +6,7 @@ import photos from "./photos";
 export default function LocationsMap() {
   const [lines, setLines] = useState([]);
   const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
-  const animationRef = useRef(null); 
+  const animationRef = useRef(null);
 
   const photosWithCoords = photos
     .filter((p) => typeof p.lat === "number" && typeof p.lng === "number")
@@ -36,6 +36,7 @@ export default function LocationsMap() {
     return latlngs;
   };
 
+  // Animation logic
   const startAnimation = () => {
     if (groupedPhotos.length < 2) return;
 
@@ -89,6 +90,43 @@ export default function LocationsMap() {
     startAnimation();
   };
 
+  const ThumbnailMarker = ({ photos }) => {
+    const [index, setIndex] = useState(0);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setIndex((prev) => (prev + 1) % photos.length);
+      }, 1500); 
+      return () => clearInterval(interval);
+    }, [photos.length]);
+
+    const photo = photos[index];
+
+    const icon = new L.DivIcon({
+      className: "photo-marker",
+      html: `
+        <div style="
+          width:70px;
+          height:50px;
+          background:white;
+          padding:2px;
+          border-radius:6px;
+          box-shadow:0 4px 10px rgba(0,0,0,0.4);
+        ">
+          <img src="${photo.src}" style="
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            border-radius:3px;
+          "/>
+        </div>
+      `,
+      iconSize: [70, 50],
+      iconAnchor: [35, 50],
+    });
+
+    return <Marker position={[photo.lat, photo.lng]} icon={icon} />;
+  };
+
   return (
     <div className="w-full h-screen flex flex-col">
       <div className="flex justify-center p-4">
@@ -115,7 +153,6 @@ export default function LocationsMap() {
         >
           <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
-          {/* Lines */}
           {lines.map(
             (segment, i) =>
               segment && segment.length > 1 && (
@@ -130,10 +167,7 @@ export default function LocationsMap() {
           {groupedPhotos
             .slice(0, currentGroupIndex + 1)
             .map((group, i) => (
-              <Marker
-                key={`pin-${i}`}
-                position={[group[0].lat, group[0].lng]}
-              />
+              <ThumbnailMarker key={`thumb-${i}`} photos={group} />
             ))}
         </MapContainer>
       </div>
