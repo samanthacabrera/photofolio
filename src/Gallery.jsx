@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import photos from "./photos";
 import Lightbox from "./Lightbox";
+import Filter from "./Filter";
 
 function GalleryItem({ photo, index, hoveredId, setHoveredId, onClick }) {
   const isActive = hoveredId === photo.id;
@@ -9,9 +10,7 @@ function GalleryItem({ photo, index, hoveredId, setHoveredId, onClick }) {
   return (
     <motion.div
       layout
-      onHoverStart={() => {
-        setTimeout(() => setHoveredId(photo.id), 120);
-      }}
+      onHoverStart={() => setTimeout(() => setHoveredId(photo.id), 120)}
       onHoverEnd={() => setHoveredId(null)}
       onClick={() => onClick(photo.id)}
       className="relative cursor-pointer overflow-hidden"
@@ -34,9 +33,7 @@ function GalleryItem({ photo, index, hoveredId, setHoveredId, onClick }) {
       />
       <motion.div
         className="absolute inset-0 flex items-end p-3 bg-black/20"
-        animate={{
-          opacity: isActive ? 1 : 0,
-        }}
+        animate={{ opacity: isActive ? 1 : 0 }}
         transition={{ duration: 0.5 }}
       >
         <span className="text-white text-xs tracking-widest">
@@ -47,28 +44,55 @@ function GalleryItem({ photo, index, hoveredId, setHoveredId, onClick }) {
   );
 }
 
-function Gallery() {
+export default function Gallery() {
   const [hoveredId, setHoveredId] = useState(null);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState({
+      country: "all",
+      category: "all",
+      year: "all",
+      featured: "all",
+    });
 
-  const allPhotos = useMemo(() => [...photos].reverse(), []);
+    const filters = useMemo(() => ({
+      country: [...new Set(photos.map(p => p.country))],
+      category: [...new Set(photos.map(p => p.category))],
+      year: [...new Set(photos.map(p => p.year))],
+      featured: ["true", "false"],
+    }), []);
 
-  const handleClick = (id) => {
-    const index = allPhotos.findIndex((p) => p.id === id);
-    if (index !== -1) {
-      setActivePhotoIndex(index);
-      setLightboxOpen(true);
-    }
-  };
+    const filteredPhotos = useMemo(() => {
+      return photos.filter(photo => {
+        return Object.keys(selectedFilters).every(field => {
+          if (selectedFilters[field] === "all") return true;
+          if (field === "featured") return photo[field] === (selectedFilters[field] === "true");
+          return photo[field] === selectedFilters[field];
+        });
+      }).reverse(); 
+    }, [selectedFilters]);
+
+    const handleClick = (id) => {
+      const index = filteredPhotos.findIndex(p => p.id === id);
+      if (index !== -1) {
+        setActivePhotoIndex(index);
+        setLightboxOpen(true);
+      }
+    };
 
   return (
     <div>
+      <Filter
+        filters={filters}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+      />
+
       <motion.div
         layout
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-4"
       >
-        {allPhotos.map((photo, i) => (
+        {filteredPhotos.map((photo, i) => (
           <GalleryItem
             key={photo.id}
             photo={photo}
@@ -82,7 +106,7 @@ function Gallery() {
 
       {lightboxOpen && (
         <Lightbox
-          photos={allPhotos}
+          photos={filteredPhotos}
           activeIndex={activePhotoIndex}
           setActiveIndex={setActivePhotoIndex}
           onClose={() => setLightboxOpen(false)}
@@ -91,5 +115,3 @@ function Gallery() {
     </div>
   );
 }
-
-export default Gallery;
