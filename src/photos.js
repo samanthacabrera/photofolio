@@ -1,4 +1,14 @@
 const photos = [
+    // ARCHITECTURE ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    { id: 21, src: "/photofolio/architecture/DSC01273.JPG", country: "The Netherlands", city: "Leiden", lat: 52.16, lng: 4.48, year: 2025, category: "architecture", featured: false },
+    { id: 22, src: "/photofolio/architecture/DSC03575.JPG", country: "Ireland", city: "Dublin", lat: 53.34, lng: -6.26, year: 2025, category: "architecture", featured: false },
+    { id: 23, src: "/photofolio/architecture/DSC00750 2.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
+    { id: 24, src: "/photofolio/architecture/DSC00779.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
+    // { id: 25, src: "/photofolio/architecture/DSC00787 2.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
+    { id: 26, src: "/photofolio/architecture/DSC00748.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
+    { id: 27, src: "/photofolio/architecture/DSC00791.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
+    { id: 28, src: "/photofolio/architecture/DSC01011.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "architecture", featured: false },
+    { id: 29, src: "/photofolio/architecture/DSC01396.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "architecture", featured: false },
     // LANDSCAPE ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // { id: 1, src: "/photofolio/bahamas/IMG_0323.JPG", country: "Bahamas", city: "Nassau", lat: 25.04, lng: -77.3, year: 2021, category: "landscape", featured: false },
     { id: 2, src: "/photofolio/usa/IMG_5073 2.jpg", country: "Colorado", city: "Red Rocks Park", lat: 39.66, lng: -105.2, year: 2025, category: "landscape", featured: false },
@@ -18,16 +28,6 @@ const photos = [
     { id: 18, src: "/photofolio/norway/DSC00532.JPG", country: "Norway", city: "Ersfjordbotn", lat: 69.654, lng: 18.91, year: 2026, category: "landscape", featured: false },
     { id: 19, src: "/photofolio/norway/DSC00466.JPG", country: "Norway", city: "Ersfjordbotn", lat: 69.651, lng: 18.915, year: 2026, category: "landscape", featured: false },
     { id: 20, src: "/photofolio/morocco/DSC01323.JPG", country: "Morocco", city: "Sahara Desert", lat: 31.62, lng: -7.59, year: 2026, category: "landscape", featured: false },
-    // ARCHITECTURE ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    { id: 21, src: "/photofolio/architecture/DSC01273.JPG", country: "The Netherlands", city: "Leiden", lat: 52.16, lng: 4.48, year: 2025, category: "architecture", featured: false },
-    { id: 22, src: "/photofolio/architecture/DSC03575.JPG", country: "Ireland", city: "Dublin", lat: 53.34, lng: -6.26, year: 2025, category: "architecture", featured: false },
-    { id: 23, src: "/photofolio/architecture/DSC00750 2.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
-    { id: 24, src: "/photofolio/architecture/DSC00779.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
-    // { id: 25, src: "/photofolio/architecture/DSC00787 2.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
-    { id: 26, src: "/photofolio/architecture/DSC00748.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
-    { id: 27, src: "/photofolio/architecture/DSC00791.JPG", country: "France", city: "Paris", lat: 48.85, lng: 2.35, year: 2026, category: "architecture", featured: false },
-    { id: 28, src: "/photofolio/architecture/DSC01011.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "architecture", featured: false },
-    { id: 29, src: "/photofolio/architecture/DSC01396.JPG", country: "Morocco", city: "Marrakesh", lat: 31.62, lng: -7.59, year: 2026, category: "architecture", featured: false },
     // MACRO ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     { id: 30, src: "/photofolio/macro/DSC00260.JPG", country: "California", city: "Newport Beach", lat: 33.62, lng: -117.94, year: 2025, category: "macro", featured: false },
     { id: 31, src: "/photofolio/macro/DSC00265.JPG", country: "California", city: "Newport Beach", lat: 33.62, lng: -117.94, year: 2025, category: "macro", featured: false },

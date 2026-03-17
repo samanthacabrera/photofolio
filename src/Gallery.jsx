@@ -1,66 +1,58 @@
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import photos from "./photos";
 import Lightbox from "./Lightbox";
 
-function useScrollFade(ref) {
-  useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        el.style.opacity = entry.intersectionRatio;
-      },
-      {
-        threshold: Array.from({ length: 20 }, (_, i) => i / 20),
-      }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [ref]);
-}
-
-function GalleryItem({ photo, onClick }) {
-  const ref = useRef(null);
-  useScrollFade(ref);
+function GalleryItem({ photo, index, hoveredId, setHoveredId, onClick }) {
+  const isActive = hoveredId === photo.id;
 
   return (
-    <div
-      ref={ref}
+    <motion.div
+      layout
+      onHoverStart={() => {
+        setTimeout(() => setHoveredId(photo.id), 120);
+      }}
+      onHoverEnd={() => setHoveredId(null)}
       onClick={() => onClick(photo.id)}
-      className="relative group cursor-pointer overflow-hidden bg-neutral-100 aspect-[3/2] opacity-0 hover:scale-95 transition-all duration-300 ease-out"
+      className="relative cursor-pointer overflow-hidden"
+      style={{
+        gridColumn: isActive ? "span 2" : "span 1",
+        gridRow: isActive ? "span 2" : "span 1",
+      }}
+      transition={{
+        layout: {
+          duration: 1.2,
+          ease: [0.22, 1, 0.36, 1],
+          delay: index * 0.015,
+        },
+      }}
     >
-      <img
+      <motion.img
         src={photo.src}
         alt={photo.city}
-        loading="lazy"
         className="w-full h-full object-cover"
       />
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-full flex items-end space-x-1 z-10 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-300 p-3">
-        <span className="text-white/90 text-sm tracking-widest">{photo.country}</span>
-        <span className="text-white/80 text-sm tracking-widest">{photo.year}</span>
-      </div>
-    </div>
+      <motion.div
+        className="absolute inset-0 flex items-end p-3 bg-black/20"
+        animate={{
+          opacity: isActive ? 1 : 0,
+        }}
+        transition={{ duration: 0.5 }}
+      >
+        <span className="text-white text-xs tracking-widest">
+          {photo.country} {photo.year}
+        </span>
+      </motion.div>
+    </motion.div>
   );
 }
 
 function Gallery() {
+  const [hoveredId, setHoveredId] = useState(null);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  const categories = useMemo(() => {
-    const reversed = [...photos].reverse();
-    return {
-      landscape: reversed.filter((p) => p.category === "landscape"),
-      macro: reversed.filter((p) => p.category === "macro"),
-      architecture: reversed.filter((p) => p.category === "architecture"),
-    };
-  }, []);
-
-  const allPhotos = useMemo(
-    () => [...categories.landscape, ...categories.macro, ...categories.architecture],
-    [categories]
-  );
+  const allPhotos = useMemo(() => [...photos].reverse(), []);
 
   const handleClick = (id) => {
     const index = allPhotos.findIndex((p) => p.id === id);
@@ -72,21 +64,21 @@ function Gallery() {
 
   return (
     <div>
-      {["landscape", "macro", "architecture"].map((cat) => (
-        <section
-          key={cat}
-          id={cat} 
-          data-title={cat.charAt(0).toUpperCase() + cat.slice(1)} 
-          className="py-2 px-4 scroll-mt-12"
-        >
-
-          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {categories[cat].map((photo) => (
-              <GalleryItem key={photo.id} photo={photo} onClick={handleClick} />
-            ))}
-          </div>
-        </section>
-      ))}
+      <motion.div
+        layout
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-4"
+      >
+        {allPhotos.map((photo, i) => (
+          <GalleryItem
+            key={photo.id}
+            photo={photo}
+            index={i}
+            hoveredId={hoveredId}
+            setHoveredId={setHoveredId}
+            onClick={handleClick}
+          />
+        ))}
+      </motion.div>
 
       {lightboxOpen && (
         <Lightbox
