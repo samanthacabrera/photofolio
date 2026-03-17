@@ -51,7 +51,7 @@ export default function About() {
         <h1
           ref={titleRef}
           onClick={() => setAnimationTrigger(prev => prev + 1)}
-          className="text-2xl md:text-4xl mb-10 tracking-[0.35em] opacity-0 transform translate-y-6 transition-all duration-500 ease-out cursor-pointer"
+          className="text-2xl md:text-3xl mb-10 tracking-[0.35em] opacity-0 transform translate-y-6 transition-all duration-500 ease-out cursor-pointer"
         >
           <span className="opacity-90">JM</span>
           <span className="opacity-70">Photography</span>

@@ -49,17 +49,15 @@ export default function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
-      country: "all",
-      category: "all",
+      category: "all",  
       year: "all",
-      featured: "all",
+      country: "all",
     });
 
     const filters = useMemo(() => ({
-      country: [...new Set(photos.map(p => p.country))],
-      category: [...new Set(photos.map(p => p.category))],
       year: [...new Set(photos.map(p => p.year))],
-      featured: ["true", "false"],
+      category: [...new Set(photos.map(p => p.category))],
+      country: [...new Set(photos.map(p => p.country))],
     }), []);
 
     const filteredPhotos = useMemo(() => {
