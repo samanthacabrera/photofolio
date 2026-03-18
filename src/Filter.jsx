@@ -19,13 +19,21 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
     setSelectedFilters((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleReset = () => {
+    const resetFilters = {};
+    Object.keys(filters).forEach((field) => {
+      resetFilters[field] = "all";
+    });
+    setSelectedFilters(resetFilters);
+  };
+
   return (
     <>
       <button
-        className="fixed top-6 right-6 z-50 px-4 py-2 rounded-lg bg-white/10 dark:bg-black/10 backdrop-blur-sm text-lg text-white/80 hover:-translate-y-1 transition font-light tracking-[0.25em] uppercase"
+        className="sticky top-4 left-full mx-4 z-50 backdrop-blur-sm text-lg text-white opacity-70 hover:opacity-100 hover:scale-95 transition-all duration-300 font-light tracking-[0.25em] uppercase"
         onClick={() => setIsOpen(true)}
       >
-        Filters
+        Filter
       </button>
 
       <AnimatePresence>
@@ -54,7 +62,7 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
                 ✕
               </button>
 
-              <h2 className="text-lg font-medium tracking-widest text-white/80">
+              <h2 className="text-md tracking-[0.25em] text-white/80">
                 Filter Gallery By: 
               </h2>
 
@@ -92,6 +100,12 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
                   </div>
                 ))}
               </div>
+              <button
+                onClick={handleReset}
+                className="self-end px-3 py-1 my-2 rounded-lg text-lg text-white/80 bg-black/20 dark:bg-white/10 hover:bg-black/30 dark:hover:bg-white/20 text-sm tracking-wide font-light transition-colors"
+              >
+                Reset All
+              </button>
             </motion.div>
           </>
         )}
