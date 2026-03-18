@@ -4,14 +4,51 @@ import photos from "./photos";
 import Lightbox from "./Lightbox";
 import Filter from "./Filter";
 
-function GalleryItem({ photo, index, hoveredId, setHoveredId, onClick }) {
+function GalleryItem({
+  photo,
+  index,
+  hoveredId,
+  setHoveredId,
+  isAnimating,
+  setIsAnimating,
+  onClick,
+}) {
   const isActive = hoveredId === photo.id;
 
   return (
     <motion.div
       layout
-      onHoverStart={() => setTimeout(() => setHoveredId(photo.id), 120)}
-      onHoverEnd={() => setHoveredId(null)}
+      onMouseMove={(e) => {
+        if (isAnimating && !isActive) return;
+
+        const rect = e.currentTarget.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const distanceX = Math.abs(x - centerX);
+        const distanceY = Math.abs(y - centerY);
+
+        const thresholdX = rect.width * 0.4;
+        const thresholdY = rect.height * 0.4;
+
+        if (distanceX < thresholdX && distanceY < thresholdY) {
+          if (!isActive) {
+            setIsAnimating(true);      
+            setHoveredId(photo.id);    
+          }
+        } else {
+          if (isActive) {
+            setHoveredId(null);
+          }
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isAnimating) setHoveredId(null);
+      }}
       onClick={() => onClick(photo.id)}
       className="relative cursor-pointer overflow-hidden"
       style={{
@@ -25,12 +62,16 @@ function GalleryItem({ photo, index, hoveredId, setHoveredId, onClick }) {
           delay: index * 0.015,
         },
       }}
+      onLayoutAnimationComplete={() => {
+        setIsAnimating(false); 
+      }}
     >
       <motion.img
         src={photo.src}
         alt={photo.city}
         className="w-full h-full object-cover"
       />
+
       <motion.div
         className="absolute inset-0 flex items-end p-3 bg-black/20"
         animate={{ opacity: isActive ? 1 : 0 }}
@@ -46,37 +87,45 @@ function GalleryItem({ photo, index, hoveredId, setHoveredId, onClick }) {
 
 export default function Gallery() {
   const [hoveredId, setHoveredId] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+
   const [selectedFilters, setSelectedFilters] = useState({
-      category: "all",  
-      year: "all",
-      country: "all",
-    });
+    category: "all",
+    year: "all",
+    country: "all",
+  });
 
-    const filters = useMemo(() => ({
-      year: [...new Set(photos.map(p => p.year))],
-      category: [...new Set(photos.map(p => p.category))],
-      country: [...new Set(photos.map(p => p.country))],
-    }), []);
+  const filters = useMemo(
+    () => ({
+      year: [...new Set(photos.map((p) => p.year))],
+      category: [...new Set(photos.map((p) => p.category))],
+      country: [...new Set(photos.map((p) => p.country))],
+    }),
+    []
+  );
 
-    const filteredPhotos = useMemo(() => {
-      return photos.filter(photo => {
-        return Object.keys(selectedFilters).every(field => {
+  const filteredPhotos = useMemo(() => {
+    return photos
+      .filter((photo) => {
+        return Object.keys(selectedFilters).every((field) => {
           if (selectedFilters[field] === "all") return true;
-          if (field === "featured") return photo[field] === (selectedFilters[field] === "true");
+          if (field === "featured")
+            return photo[field] === (selectedFilters[field] === "true");
           return photo[field] === selectedFilters[field];
         });
-      }).reverse(); 
-    }, [selectedFilters]);
+      })
+      .reverse();
+  }, [selectedFilters]);
 
-    const handleClick = (id) => {
-      const index = filteredPhotos.findIndex(p => p.id === id);
-      if (index !== -1) {
-        setActivePhotoIndex(index);
-        setLightboxOpen(true);
-      }
-    };
+  const handleClick = (id) => {
+    const index = filteredPhotos.findIndex((p) => p.id === id);
+    if (index !== -1) {
+      setActivePhotoIndex(index);
+      setLightboxOpen(true);
+    }
+  };
 
   return (
     <div>
@@ -86,21 +135,27 @@ export default function Gallery() {
         setSelectedFilters={setSelectedFilters}
       />
 
-      <motion.div
-        layout
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-4"
-      >
-        {filteredPhotos.map((photo, i) => (
-          <GalleryItem
-            key={photo.id}
-            photo={photo}
-            index={i}
-            hoveredId={hoveredId}
-            setHoveredId={setHoveredId}
-            onClick={handleClick}
-          />
-        ))}
-      </motion.div>
+      <div className="w-full flex justify-center">
+        <div className="w-full md:w-2/3">
+          <motion.div
+            layout
+            className="grid sm:grid-cols-2 md:grid-cols-3 auto-rows-[180px] md:auto-rows-[220px] gap-4"
+          >
+            {filteredPhotos.map((photo, i) => (
+              <GalleryItem
+                key={photo.id}
+                photo={photo}
+                index={i}
+                hoveredId={hoveredId}
+                setHoveredId={setHoveredId}
+                isAnimating={isAnimating}
+                setIsAnimating={setIsAnimating}
+                onClick={handleClick}
+              />
+            ))}
+          </motion.div>
+        </div>
+      </div>
 
       {lightboxOpen && (
         <Lightbox
