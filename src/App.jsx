@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./Header";
-// import Hero from "./Hero";
 import About from "./About";
 import Gallery from "./Gallery";
 import ScrollToTop from "./ScrollToTop";
@@ -15,7 +14,6 @@ export default function App() {
           path="/photofolio/"
           element={
             <div className="flex flex-col space-y-20 pb-20 md:pb-60 overflow-x-hidden">
-              {/* <Hero /> */}
               <About />
               <Gallery />
               <ScrollToTop />
