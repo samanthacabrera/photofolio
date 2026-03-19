@@ -41,18 +41,13 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
   return (
     <>
       <button
-        className="sticky left-full z-50 px-4 py-6
-                  text-white text-lg font-light tracking-[0.25em] uppercase
-                  shadow-lg border border-white/20
-                  rounded-r-lg rounded-tr-lg
+        className="sticky top-4 left-4 z-50 px-4 py-6
+                  bg-[#111211] text-white text-sm font-light tracking-[0.25em] hover:tracking-widest uppercase
+                  shadow-lg 
+                  rounded-lg 
                   flex items-center justify-center
-                  hover:scale-95 hover:bg-white hover:text-black transition-all duration-300
-                  writing-mode-vertical-rl text-orientation-mixed"
-        style={{
-          writingMode: "vertical-rl",
-          textOrientation: "mixed",
-          transform: "translateY(100%) rotate(180deg) ",
-        }}
+                  hover:scale-95 hover:border transition-all duration-300"
+
         onClick={() => setIsOpen(true)}
       >
         Filter
@@ -61,6 +56,7 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Overlay */}
             <motion.div
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
               initial={{ opacity: 0 }}
@@ -69,50 +65,52 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
               onClick={() => setIsOpen(false)}
             />
 
+            {/* Drawer */}
             <motion.div
               ref={drawerRef}
-              className="fixed top-0 right-0 h-full w-72 md:w-80 bg-white/10 dark:bg-black/10 backdrop-blur-md shadow-2xl z-50 flex flex-col p-6 space-y-6 overflow-y-auto text-right"
-              initial={{ x: '100%' }}
+              className="fixed top-0 left-0 h-full w-72 md:w-80 bg-white/10 dark:bg-black/10 backdrop-blur-md z-50 flex flex-col p-6 space-y-6 overflow-y-auto text-center"
+              initial={{ x: '-100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              exit={{ x: '-100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             >
+              {/* Close Button */}
               <button
-                className="self-end text-white/70 hover:text-white dark:hover:text-white transition-colors"
+                className="self-end text-white/70 hover:text-white transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 ✕
               </button>
 
-              <h2 className="text-md tracking-[0.25em] text-white/80">
-                Filter Gallery By: 
+              <h2 className="text-white/80 tracking-[0.25em] my-4">
+                Filter Gallery By
               </h2>
 
               <div className="flex flex-col gap-4">
-                {Object.keys(filters).map((field) => (
-                  <div key={field} className="flex flex-col items-end">
-                    <span className="font-medium text-white/70 text-xl mb-2 tracking-wide font-light">
+                {Object.keys(filters).map(field => (
+                  <div key={field} className="flex flex-col items-center">
+                    <span className="tracking-[0.2em] text-white/70 text-lg my-6 font-light">
                       {field.charAt(0).toUpperCase() + field.slice(1)}
                     </span>
-                    <div className="flex flex-wrap justify-end gap-2">
+                    <div className="flex flex-wrap justify-center gap-2">
                       <button
                         onClick={() => handleSelect(field, 'all')}
-                        className={`px-3 py-1 rounded-lg text-lg font-light tracking-wide transition-colors ${
+                        className={`px-3 py-1 rounded-md text-white/70 transition-colors ${
                           selectedFilters[field] === 'all'
                             ? 'bg-black/30 text-white'
-                            : 'bg-black/10 text-white/70 hover:bg-white/20 dark:hover:bg-black/20'
+                            : 'hover:bg-white/20 dark:hover:bg-black/20'
                         }`}
                       >
                         All
                       </button>
-                      {filters[field].map((option) => (
+                      {filters[field].map(option => (
                         <button
                           key={option}
                           onClick={() => handleSelect(field, option)}
-                          className={`px-3 py-1 rounded-lg text-lg font-light tracking-wide transition-colors ${
+                          className={`px-3 py-1 rounded-md text-white/70 transition-colors ${
                             selectedFilters[field] === option
                               ? 'bg-black/30 text-white'
-                              : 'bg-black/10 text-white/70 hover:bg-white/20 dark:hover:bg-black/20'
+                              : 'hover:bg-white/20 dark:hover:bg-black/20'
                           }`}
                         >
                           {option}
@@ -122,9 +120,10 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
                   </div>
                 ))}
               </div>
+
               <button
                 onClick={handleReset}
-                className="self-end px-3 py-1 my-2 rounded-lg text-lg text-white/80 bg-black/20 dark:bg-white/10 hover:bg-black/30 dark:hover:bg-white/20 text-sm tracking-wide font-light transition-colors"
+                className="mt-4 px-3 py-1 rounded-md text-white/80 bg-black/20 hover:bg-black/30 transition-colors "
               >
                 Reset All
               </button>
