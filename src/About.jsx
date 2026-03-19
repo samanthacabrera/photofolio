@@ -57,12 +57,12 @@ export default function About() {
         <h1
           ref={titleRef}
           onClick={() => setTrigger(t => t + 1)}
-          className="group cursor-pointer text-3xl md:text-4xl tracking-[0.4em] font-light opacity-0"
+          className="absolute top-6 left-6 group cursor-pointer text-xl md:text-2xl tracking-[0.4em] font-light opacity-0"
         >
           <span className="inline-block transition-all duration-700 group-hover:tracking-[0.6em]">
             JM
           </span>
-          <span className="ml-3 opacity-60 transition-opacity duration-500 group-hover:opacity-100">
+          <span className="ml-2 opacity-60 transition-opacity duration-500 group-hover:opacity-100">
             Photography
           </span>
         </h1>
