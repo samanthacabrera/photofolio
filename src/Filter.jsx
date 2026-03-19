@@ -30,7 +30,18 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
   return (
     <>
       <button
-        className="sticky top-4 left-full mx-4 z-50 backdrop-blur-sm text-lg text-white opacity-70 hover:opacity-100 hover:scale-95 transition-all duration-300 font-light tracking-[0.25em] uppercase"
+        className="sticky top-4 left-full z-50 px-4 py-6
+                  text-white text-lg font-light tracking-[0.25em] uppercase
+                  shadow-lg border hover:tracking-[0.3em]
+                  rounded-r-lg rounded-tr-lg
+                  flex items-center justify-center
+                  hover:scale-95 hover:bg-white hover:text-black transition-all duration-300
+                  writing-mode-vertical-rl text-orientation-mixed"
+        style={{
+          writingMode: "vertical-rl",
+          textOrientation: "mixed",
+          transform: "rotate(180deg)",
+        }}
         onClick={() => setIsOpen(true)}
       >
         Filter
