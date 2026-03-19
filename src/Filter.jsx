@@ -6,6 +6,17 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
   const drawerRef = useRef(null);
 
   useEffect(() => {
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [isOpen]);
+
+  useEffect(() => {
     const handleClickOutside = (e) => {
       if (drawerRef.current && !drawerRef.current.contains(e.target)) {
         setIsOpen(false);
@@ -30,9 +41,9 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
   return (
     <>
       <button
-        className="sticky top-4 left-full z-50 px-4 py-6
+        className="sticky left-full z-50 px-4 py-6
                   text-white text-lg font-light tracking-[0.25em] uppercase
-                  shadow-lg border hover:tracking-[0.3em]
+                  shadow-lg border border-white/20
                   rounded-r-lg rounded-tr-lg
                   flex items-center justify-center
                   hover:scale-95 hover:bg-white hover:text-black transition-all duration-300
@@ -40,7 +51,7 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
         style={{
           writingMode: "vertical-rl",
           textOrientation: "mixed",
-          transform: "rotate(180deg)",
+          transform: "translateY(100%) rotate(180deg) ",
         }}
         onClick={() => setIsOpen(true)}
       >

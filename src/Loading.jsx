@@ -34,7 +34,7 @@ export default function Loading({ onFinish }) {
   }, [onFinish]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white">
+    <div className="min-h-screen flex items-center justify-center bg-[#111211] text-white">
       <h1
         ref={titleRef}
         className="group text-3xl md:text-4xl tracking-[0.4em] font-light"
