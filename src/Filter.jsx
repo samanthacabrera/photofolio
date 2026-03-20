@@ -41,7 +41,7 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
   return (
     <>
       <button
-        className="sticky top-4 left-4 z-50 w-12 h-12 flex items-center justify-center
+        className="fixed top-6 left-4 z-50 w-12 h-12 flex items-center justify-center
                   rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/60 text-white/60 hover:text-white transition-all duration-300"
         onClick={() => setIsOpen(true)}
         aria-label="Open filters"
