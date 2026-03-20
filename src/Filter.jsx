@@ -41,22 +41,26 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
   return (
     <>
       <button
-        className="sticky top-4 left-4 z-50 px-4 py-6
-                  bg-[#111211] text-white text-sm font-light tracking-[0.25em] hover:tracking-widest uppercase
-                  shadow-lg 
-                  rounded-lg 
-                  flex items-center justify-center
-                  hover:scale-95 hover:border transition-all duration-300"
-
+        className="sticky top-4 left-4 z-50 w-12 h-12 flex items-center justify-center
+                  rounded-full bg-white/10 hover:bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/70 text-white/60 hover:text-white transition-all duration-300"
         onClick={() => setIsOpen(true)}
+        aria-label="Open filters"
       >
-        Filter
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M7 12h10M10 18h4" />
+        </svg>
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Overlay */}
             <motion.div
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
               initial={{ opacity: 0 }}
@@ -65,41 +69,37 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Drawer */}
             <motion.div
               ref={drawerRef}
-              className="fixed top-0 left-0 h-full w-72 md:w-80 bg-white/10 dark:bg-black/10 backdrop-blur-md z-50 flex flex-col p-6 space-y-6 overflow-y-auto text-center"
+              className="fixed top-0 left-0 h-full w-72 md:w-80 bg-white/10 dark:bg-black/10 backdrop-blur-md z-50 flex flex-col p-6 overflow-y-auto text-center"
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             >
-              {/* Close Button */}
               <button
-                className="self-end text-white/70 hover:text-white transition-colors"
+                className="self-start text-white/40 hover:text-white/80 transition-colors text-lg"
                 onClick={() => setIsOpen(false)}
               >
                 ✕
               </button>
 
-              <h2 className="text-white/80 tracking-[0.25em] my-4">
-                Filter Gallery By
-              </h2>
-
               <div className="flex flex-col gap-4">
                 {Object.keys(filters).map(field => (
                   <div key={field} className="flex flex-col items-center">
-                    <span className="tracking-[0.2em] text-white/70 text-lg my-6 font-light">
+                    <span className="tracking-[0.25em] text-white/50 text-lg my-6 font-light uppercase">
                       {field.charAt(0).toUpperCase() + field.slice(1)}
                     </span>
                     <div className="flex flex-wrap justify-center gap-2">
                       <button
                         onClick={() => handleSelect(field, 'all')}
-                        className={`px-3 py-1 rounded-md text-white/70 transition-colors ${
-                          selectedFilters[field] === 'all'
-                            ? 'bg-black/30 text-white'
-                            : 'hover:bg-white/20 dark:hover:bg-black/20'
-                        }`}
+                        className={`px-3 py-1 rounded-full text-sm tracking-wide
+                                    border transition-all duration-300
+                                    ${
+                                      selectedFilters[field] === 'all'
+                                        ? 'border-white/40 text-white bg-white/10'
+                                        : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 hover:bg-white/5'
+                                    }`}
                       >
                         All
                       </button>
@@ -107,11 +107,13 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
                         <button
                           key={option}
                           onClick={() => handleSelect(field, option)}
-                          className={`px-3 py-1 rounded-md text-white/70 transition-colors ${
-                            selectedFilters[field] === option
-                              ? 'bg-black/30 text-white'
-                              : 'hover:bg-white/20 dark:hover:bg-black/20'
-                          }`}
+                          className={`px-3 py-1 rounded-full tracking-wide
+                                      border transition-all duration-300
+                                      ${
+                                        selectedFilters[field] === option
+                                          ? 'border-white/40 text-white bg-white/10'
+                                          : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 hover:bg-white/5'
+                                      }`}
                         >
                           {option}
                         </button>
@@ -123,7 +125,9 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
 
               <button
                 onClick={handleReset}
-                className="mt-4 px-3 py-1 rounded-md text-white/80 bg-black/20 hover:bg-black/30 transition-colors "
+                className="mt-12 px-4 py-2 rounded-full text-sm tracking-[0.2em] uppercase
+                border border-white/10 text-white/50 hover:border-white/30 hover:text-white hover:bg-white/5
+                transition-all duration-300"
               >
                 Reset All
               </button>
