@@ -4,90 +4,38 @@ import photos from "./photos";
 import Lightbox from "./Lightbox";
 import Filter from "./Filter";
 
-function GalleryItem({
-  photo,
-  index,
-  hoveredId,
-  setHoveredId,
-  isAnimating,
-  setIsAnimating,
-  onClick,
-}) {
+function GalleryItem({ photo, hoveredId, setHoveredId, onClick }) {
   const isActive = hoveredId === photo.id;
 
   return (
     <motion.div
       layout
-      onMouseMove={(e) => {
-        if (isAnimating && !isActive) return;
-
-        const rect = e.currentTarget.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const distanceX = Math.abs(x - centerX);
-        const distanceY = Math.abs(y - centerY);
-
-        const thresholdX = rect.width * 0.4;
-        const thresholdY = rect.height * 0.4;
-
-        if (distanceX < thresholdX && distanceY < thresholdY) {
-          if (!isActive) {
-            setIsAnimating(true);      
-            setHoveredId(photo.id);    
-          }
-        } else {
-          if (isActive) {
-            setHoveredId(null);
-          }
-        }
-      }}
-      onMouseLeave={() => {
-        if (!isAnimating) setHoveredId(null);
-      }}
+      onMouseEnter={() => setHoveredId(photo.id)}
+      onMouseLeave={() => setHoveredId(null)}
       onClick={() => onClick(photo.id)}
-      className="relative cursor-pointer overflow-hidden"
+      className="relative cursor-pointer overflow-hidden rounded-lg"
       style={{
         gridColumn: isActive ? "span 2" : "span 1",
         gridRow: isActive ? "span 2" : "span 1",
       }}
       transition={{
         layout: {
-          duration: 1.2,
+          duration: 0.6,
           ease: [0.22, 1, 0.36, 1],
-          delay: index * 0.015,
         },
       }}
-      onLayoutAnimationComplete={() => {
-        setIsAnimating(false); 
-      }}
     >
-      <motion.img
+      <img
         src={photo.src}
         alt={photo.city}
         className="w-full h-full object-cover"
       />
-
-      <motion.div
-        className="absolute inset-0 flex items-end p-3 bg-black/20"
-        animate={{ opacity: isActive ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <span className="text-white text-xs tracking-widest">
-          {photo.country} {photo.year}
-        </span>
-      </motion.div>
     </motion.div>
   );
 }
 
 export default function Gallery() {
   const [hoveredId, setHoveredId] = useState(null);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -141,15 +89,12 @@ export default function Gallery() {
             layout
             className="grid sm:grid-cols-2 md:grid-cols-3 auto-rows-[180px] md:auto-rows-[220px] gap-4"
           >
-            {filteredPhotos.map((photo, i) => (
+            {filteredPhotos.map((photo) => (
               <GalleryItem
                 key={photo.id}
                 photo={photo}
-                index={i}
                 hoveredId={hoveredId}
                 setHoveredId={setHoveredId}
-                isAnimating={isAnimating}
-                setIsAnimating={setIsAnimating}
                 onClick={handleClick}
               />
             ))}
