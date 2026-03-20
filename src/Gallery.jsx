@@ -85,20 +85,26 @@ export default function Gallery() {
 
       <div className="w-full flex justify-center">
         <div className="w-full md:w-2/3">
-          <motion.div
-            layout
-            className="grid sm:grid-cols-2 md:grid-cols-3 auto-rows-[180px] md:auto-rows-[220px] gap-4"
-          >
-            {filteredPhotos.map((photo) => (
-              <GalleryItem
-                key={photo.id}
-                photo={photo}
-                hoveredId={hoveredId}
-                setHoveredId={setHoveredId}
-                onClick={handleClick}
-              />
-            ))}
-          </motion.div>
+          {filteredPhotos.length > 0 ? (
+            <motion.div
+              layout
+              className="grid sm:grid-cols-2 md:grid-cols-3 auto-rows-[180px] md:auto-rows-[220px] gap-4"
+            >
+              {filteredPhotos.map((photo) => (
+                <GalleryItem
+                  key={photo.id}
+                  photo={photo}
+                  hoveredId={hoveredId}
+                  setHoveredId={setHoveredId}
+                  onClick={handleClick}
+                />
+              ))}
+            </motion.div>
+          ) : (
+            <div className="text-center py-20 text-white/30 text-lg tracking-wide font-light">
+              No photos match your selected filters.
+            </div>
+          )}
         </div>
       </div>
 

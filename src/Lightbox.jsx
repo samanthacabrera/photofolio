@@ -118,34 +118,23 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
         className="hidden md:flex absolute inset-0 items-center justify-center overflow-hidden px-24"
         onClick={(e) => e.stopPropagation()}
       >
-        <div
-          className="flex items-center gap-10 transition-transform duration-700 ease-[cubic-bezier(.19,1,.22,1)]"
-          style={{
-            transform: `translateX(calc(50% - ${visibleRange * 640 + 300}px))`,
-          }}
-        >
-          {visiblePhotos.map(({ photo, virtual, real }) => {
+        <div className="flex items-center gap-10 transition-transform duration-700 ease-[cubic-bezier(.19,1,.22,1)]">
+          {visiblePhotos.map(({ photo, virtual }) => {
             const isActive = virtual === virtualIndex;
 
             return (
               <div
                 key={`${photo.id}-${virtual}`}
-                className="flex-shrink-0 flex justify-center"
+                className={`flex-shrink-0 flex justify-center ${
+                  isActive ? "" : "opacity-40 scale-75 hover:opacity-70"
+                }`}
                 style={{ width: "600px" }}
               >
                 <img
                   src={photo.src}
                   alt=""
                   onClick={() => setVirtualIndex(virtual)}
-                  className={`
-                    w-full object-cover rounded-sm cursor-pointer
-                    transition-all duration-500 ease-out
-                    ${
-                      isActive
-                        ? "scale-100 opacity-100"
-                        : "scale-75 opacity-40 hover:opacity-70"
-                    }
-                  `}
+                  className="w-full object-cover rounded-sm cursor-pointer transition-all duration-500 ease-out"
                 />
               </div>
             );
