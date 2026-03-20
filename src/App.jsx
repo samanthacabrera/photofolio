@@ -21,7 +21,7 @@ export default function App() {
         <Route
           path="/photofolio/"
           element={
-            <div className="flex flex-col space-y-20 pb-20 md:pb-60">
+            <div className="flex flex-col space-y-20 pb-20 md:pb-60 overflow-x-hidden">
               <About />
               <Gallery />
               <ScrollToTop />

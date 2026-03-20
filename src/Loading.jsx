@@ -37,7 +37,7 @@ export default function Loading({ onFinish }) {
     <div className="min-h-screen flex items-center justify-center bg-[#111211] text-white">
       <h1
         ref={titleRef}
-        className="group text-3xl md:text-4xl tracking-[0.4em] font-light"
+        className="group text-2xl md:text-3xl tracking-[0.4em] font-light"
       >
         <span className="inline-block transition-all duration-700 group-hover:tracking-[0.6em]">
           JM
