@@ -63,17 +63,17 @@ export default function About() {
         </span>
       </h1>
 
-      <div className="flex flex-col items-center gap-12 mt-[30vh] max-w-6xl px-6 text-white/80">
-        <span ref={p1} className="opacity-0 text-lg leading-loose tracking-wide">
-          I am a photographer based in The Netherlands. I am self-taught and started photographing in 2020.
+      <div className="flex flex-col items-center gap-1 mt-[30vh] md:mt-[40vh] mx-4 text-white/80">
+        <span ref={p1} className="opacity-0 text-4xl leading-loose tracking-[0.4em] mr-auto">
+          I am a photographer based in The Netherlands.
         </span>
 
-        <p ref={p2} className="opacity-0 text-lg leading-loose tracking-wide mr-auto">
-          All photos are captured with a Sony Alpha a6000 under natural light.
+        <p ref={p2} className="opacity-0 text-lg leading-loose tracking-[0.4em] mr-auto">
+          I am self-taught and started photographing in 2020.
         </p>
 
-        <p ref={p3} className="opacity-0 text-lg leading-loose tracking-wide mr-auto">
-          Below is a collection of photos from places I’ve visited that felt worth holding onto.
+        <p ref={p3} className="opacity-0 text-lg leading-loose tracking-[0.4em] mr-auto">
+          All photos are captured with a Sony Alpha a6000 under natural light.
         </p>
       </div>
     </section>
