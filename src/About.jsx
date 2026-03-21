@@ -64,15 +64,15 @@ export default function About() {
       </h1>
 
       <div className="flex flex-col items-center gap-1 mt-[30vh] md:mt-[40vh] mx-4 text-white/80">
-        <span ref={p1} className="opacity-0 text-4xl leading-loose tracking-[0.4em] mr-auto">
+        <span ref={p1} className="opacity-0 text-2xl leading-loose tracking-[0.4em] mr-auto">
           I am a photographer based in The Netherlands.
         </span>
 
-        <p ref={p2} className="opacity-0 text-lg leading-loose tracking-[0.4em] mr-auto">
+        <p ref={p2} className="opacity-0 text-md leading-loose tracking-[0.4em] mr-auto">
           I am self-taught and started photographing in 2020.
         </p>
 
-        <p ref={p3} className="opacity-0 text-lg leading-loose tracking-[0.4em] mr-auto">
+        <p ref={p3} className="opacity-0 text-md leading-loose tracking-[0.4em] mr-auto">
           All photos are captured with a Sony Alpha a6000 under natural light.
         </p>
       </div>

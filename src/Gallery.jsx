@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import photos from "./photos";
 import Lightbox from "./Lightbox";
@@ -38,12 +38,35 @@ export default function Gallery() {
   const [hoveredId, setHoveredId] = useState(null);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const galleryRef = useRef(null);
 
   const [selectedFilters, setSelectedFilters] = useState({
     category: "all",
     year: "all",
     country: "all",
   });
+
+  useEffect(() => {
+    const node = galleryRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowFilter(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -300px 0px", 
+      }
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.unobserve(node);
+    };
+  }, []);
 
   const filters = useMemo(
     () => ({
@@ -77,16 +100,27 @@ export default function Gallery() {
 
   return (
     <div>
-      <Filter
-        filters={filters}
-        selectedFilters={selectedFilters}
-        setSelectedFilters={setSelectedFilters}
-      />
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{
+            opacity: showFilter ? 1 : 0,
+            y: showFilter ? 0 : -20,
+            pointerEvents: showFilter ? "auto" : "none",
+          }}
+          transition={{ duration: 0.4 }}
+        >
+          <Filter
+            filters={filters}
+            selectedFilters={selectedFilters}
+            setSelectedFilters={setSelectedFilters}
+          />
+        </motion.div>
 
       <div className="w-full flex justify-center">
         <div className="w-full md:w-2/3">
           {filteredPhotos.length > 0 ? (
             <motion.div
+              ref={galleryRef}
               layout
               className="grid sm:grid-cols-2 md:grid-cols-3 auto-rows-[180px] md:auto-rows-[220px] gap-4"
             >
