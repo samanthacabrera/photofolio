@@ -4,8 +4,37 @@ import photos from "./photos";
 import Lightbox from "./Lightbox";
 import Filter from "./Filter";
 
-function GalleryItem({ photo, hoveredId, setHoveredId, onClick }) {
+// Custom hook to detect if screen is md or larger
+function useIsMdUp() {
+  const [isMdUp, setIsMdUp] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => setIsMdUp(window.innerWidth >= 768); // Tailwind md breakpoint
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  return isMdUp;
+}
+
+function GalleryItem({ photo, hoveredId, setHoveredId, onClick, isMdUp }) {
   const isActive = hoveredId === photo.id;
+
+  if (!isMdUp) {
+    return (
+      <div
+        onClick={() => onClick(photo.id)}
+        className="relative cursor-pointer overflow-hidden rounded-lg my-1 mx-4"
+      >
+        <img
+          src={photo.src}
+          alt={photo.city}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -40,6 +69,7 @@ export default function Gallery() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const galleryRef = useRef(null);
+  const isMdUp = useIsMdUp();
 
   const [selectedFilters, setSelectedFilters] = useState({
     category: "all",
@@ -52,20 +82,12 @@ export default function Gallery() {
     if (!node) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShowFilter(entry.isIntersecting);
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -300px 0px", 
-      }
+      ([entry]) => setShowFilter(entry.isIntersecting),
+      { threshold: 0.1, rootMargin: "0px 0px -300px 0px" }
     );
 
     observer.observe(node);
-
-    return () => {
-      observer.unobserve(node);
-    };
+    return () => observer.unobserve(node);
   }, []);
 
   const filters = useMemo(
@@ -79,14 +101,14 @@ export default function Gallery() {
 
   const filteredPhotos = useMemo(() => {
     return photos
-      .filter((photo) => {
-        return Object.keys(selectedFilters).every((field) => {
+      .filter((photo) =>
+        Object.keys(selectedFilters).every((field) => {
           if (selectedFilters[field] === "all") return true;
           if (field === "featured")
             return photo[field] === (selectedFilters[field] === "true");
           return photo[field] === selectedFilters[field];
-        });
-      })
+        })
+      )
       .reverse();
   }, [selectedFilters]);
 
@@ -100,29 +122,32 @@ export default function Gallery() {
 
   return (
     <div>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{
-            opacity: showFilter ? 1 : 0,
-            y: showFilter ? 0 : -20,
-            pointerEvents: showFilter ? "auto" : "none",
-          }}
-          transition={{ duration: 0.4 }}
-        >
-          <Filter
-            filters={filters}
-            selectedFilters={selectedFilters}
-            setSelectedFilters={setSelectedFilters}
-          />
-        </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{
+          opacity: showFilter ? 1 : 0,
+          y: showFilter ? 0 : -20,
+          pointerEvents: showFilter ? "auto" : "none",
+        }}
+        transition={{ duration: 0.4 }}
+      >
+        <Filter
+          filters={filters}
+          selectedFilters={selectedFilters}
+          setSelectedFilters={setSelectedFilters}
+        />
+      </motion.div>
 
       <div className="w-full flex justify-center">
         <div className="w-full md:w-2/3">
           {filteredPhotos.length > 0 ? (
-            <motion.div
+            <div
               ref={galleryRef}
-              layout
-              className="grid sm:grid-cols-2 md:grid-cols-3 auto-rows-[180px] md:auto-rows-[220px] gap-4"
+              className={`grid gap-4 ${
+                isMdUp
+                  ? "md:grid-cols-3 auto-rows-[220px]"
+                  : "grid-cols-1 auto-rows-auto"
+              }`}
             >
               {filteredPhotos.map((photo) => (
                 <GalleryItem
@@ -131,9 +156,10 @@ export default function Gallery() {
                   hoveredId={hoveredId}
                   setHoveredId={setHoveredId}
                   onClick={handleClick}
+                  isMdUp={isMdUp}
                 />
               ))}
-            </motion.div>
+            </div>
           ) : (
             <div className="text-center py-20 text-white/30 text-lg tracking-wide font-light">
               No photos match your selected filters.

@@ -63,8 +63,8 @@ export default function About() {
         </span>
       </h1>
 
-      <div className="flex flex-col items-center gap-1 mt-[30vh] md:mt-[40vh] mx-4 text-white/80">
-        <span ref={p1} className="opacity-0 text-2xl leading-loose tracking-[0.4em] mr-auto">
+      <div className="flex flex-col items-center gap-1 mt-[40vh] mx-4 text-white/80">
+        <span ref={p1} className="opacity-0 text-md md:text-2xl leading-loose tracking-[0.4em] mr-auto">
           I am a photographer based in The Netherlands.
         </span>
 
