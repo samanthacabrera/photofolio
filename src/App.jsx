@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import About from "./About";
+// import About from "./About";
 import Gallery from "./Gallery";
 import Footer from "./Footer";
 import Loading from "./Loading";
@@ -18,8 +18,8 @@ export default function App() {
         <Route
           path="/photofolio/"
           element={
-            <div className="flex flex-col space-y-20 pb-6 md:pb-80 overflow-x-hidden">
-              <About />
+            <div className="flex flex-col space-y-20 py-8 md:py-20 overflow-x-hidden">
+              {/* <About /> */}
               <Gallery />
             </div>
           }

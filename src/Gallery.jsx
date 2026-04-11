@@ -4,12 +4,11 @@ import photos from "./photos";
 import Lightbox from "./Lightbox";
 import Filter from "./Filter";
 
-// Custom hook to detect if screen is md or larger
 function useIsMdUp() {
   const [isMdUp, setIsMdUp] = useState(false);
 
   useEffect(() => {
-    const checkScreen = () => setIsMdUp(window.innerWidth >= 768); // Tailwind md breakpoint
+    const checkScreen = () => setIsMdUp(window.innerWidth >= 768); 
     checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
@@ -122,6 +121,15 @@ export default function Gallery() {
 
   return (
     <div>
+      <h1 className="group text-center m-1 pb-6 md:pb-20 text-2xl md:text-3xl tracking-[0.4em] font-light"
+      >
+        <span className="inline-block transition-all duration-700 group-hover:tracking-[0.6em]">
+          JM
+        </span>
+        <span className="ml-3 opacity-70 transition-opacity duration-500 group-hover:opacity-100">
+          Photography
+        </span>
+      </h1>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{

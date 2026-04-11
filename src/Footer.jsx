@@ -44,15 +44,14 @@ function Footer() {
           ref={emailRef}
           className="group opacity-0 translate-y-3 transition-all duration-700 ease-out text-sm tracking-[0.12em] leading-relaxed"
         >
-          For project inquiries or collaborations, you can best reach me at{" "}
+          {" "}
           <a
             href="mailto:justinamiller1023@gmail.com"
             className="relative inline-block transition-colors duration-300 group-hover:text-white/70"
           >
-            justinamiller1023@gmail.com
+            contact
             <span className="absolute left-0 -bottom-[2px] h-[1px] w-0 bg-white/70 transition-all duration-500 ease-out group-hover:w-full"></span>
           </a>
-          .
         </p>
 
         <p
