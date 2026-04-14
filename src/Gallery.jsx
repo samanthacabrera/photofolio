@@ -66,7 +66,6 @@ export default function Gallery() {
   const [hoveredId, setHoveredId] = useState(null);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
   const galleryRef = useRef(null);
   const isMdUp = useIsMdUp();
 
@@ -75,19 +74,6 @@ export default function Gallery() {
     year: "all",
     country: "all",
   });
-
-  useEffect(() => {
-    const node = galleryRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowFilter(entry.isIntersecting),
-      { threshold: 0.1, rootMargin: "0px 0px -300px 0px" }
-    );
-
-    observer.observe(node);
-    return () => observer.unobserve(node);
-  }, []);
 
   const filters = useMemo(
     () => ({
@@ -131,13 +117,6 @@ export default function Gallery() {
         </span>
       </h1>
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{
-          opacity: showFilter ? 1 : 0,
-          y: showFilter ? 0 : -20,
-          pointerEvents: showFilter ? "auto" : "none",
-        }}
-        transition={{ duration: 0.4 }}
       >
         <Filter
           filters={filters}
