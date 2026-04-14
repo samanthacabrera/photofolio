@@ -1,25 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
-export default function FilterDrawer({ filters, selectedFilters, setSelectedFilters }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const drawerRef = useRef(null);
-
-  useEffect(() => {
-  if (isOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
-  return () => {
-    document.body.style.overflow = "";
-  };
-}, [isOpen]);
+export default function Filter({ filters, selectedFilters, setSelectedFilters }) {
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (drawerRef.current && !drawerRef.current.contains(e.target)) {
-        setIsOpen(false);
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -28,27 +16,24 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
 
   const handleSelect = (field, value) => {
     setSelectedFilters((prev) => ({ ...prev, [field]: value }));
+    setOpen(false);
   };
 
-  const handleReset = () => {
-    const resetFilters = {};
-    Object.keys(filters).forEach((field) => {
-      resetFilters[field] = "all";
-    });
-    setSelectedFilters(resetFilters);
+  const reset = () => {
+    const r = {};
+    Object.keys(filters).forEach((f) => (r[f] = "all"));
+    setSelectedFilters(r);
   };
 
   return (
-    <>
+    <div ref={wrapperRef} className="relative z-50 flex flex-col items-end">
       <button
-        className="fixed top-6 left-4 z-50 w-12 h-12 flex items-center justify-center
-                  rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/60 text-white/60 hover:text-white transition-all duration-300"
-        onClick={() => setIsOpen(true)}
-        aria-label="Open filters"
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center justify-center w-10 h-10 border border-white/20 hover:border-white/60 transition rounded-sm group"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6"
+          className="w-4 h-4 text-white/60 group-hover:text-white transition"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -58,83 +43,57 @@ export default function FilterDrawer({ filters, selectedFilters, setSelectedFilt
         </svg>
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-            />
-
-            <motion.div
-              ref={drawerRef}
-              className="fixed top-0 left-0 h-full w-72 md:w-80 bg-white/10 dark:bg-black/10 backdrop-blur-md z-50 flex flex-col p-6 overflow-y-auto text-center"
-              initial={{ x: '-100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '-100%' }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            >
-              <button
-                className="self-start text-white/40 hover:text-white/80 transition-colors text-lg"
-                onClick={() => setIsOpen(false)}
-              >
-                ✕
-              </button>
-
-              <div className="flex flex-col gap-4">
-                {Object.keys(filters).map(field => (
-                  <div key={field} className="flex flex-col items-center">
-                    <span className="tracking-[0.25em] text-white/50 text-lg my-6 font-light uppercase">
-                      {field.charAt(0).toUpperCase() + field.slice(1)}
-                    </span>
-                    <div className="flex flex-wrap justify-center gap-2">
-                      <button
-                        onClick={() => handleSelect(field, 'all')}
-                        className={`px-3 py-1 rounded-full text-sm tracking-wide
-                                    border transition-all duration-300
-                                    ${
-                                      selectedFilters[field] === 'all'
-                                        ? 'border-white/40 text-white bg-white/10'
-                                        : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 hover:bg-white/5'
-                                    }`}
-                      >
-                        All
-                      </button>
-                      {filters[field].map(option => (
-                        <button
-                          key={option}
-                          onClick={() => handleSelect(field, option)}
-                          className={`px-3 py-1 rounded-full tracking-wide
-                                      border transition-all duration-300
-                                      ${
-                                        selectedFilters[field] === option
-                                          ? 'border-white/40 text-white bg-white/10'
-                                          : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/80 hover:bg-white/5'
-                                      }`}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+      <div
+        className={`absolute top-12 right-0 w-64 border-b border-x border-white/10 bg-[#111211] backdrop-blur-xl rounded-2xl shadow-2xl transition-all duration-300 ${
+          open
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-2 pointer-events-none"
+        }`}
+      >
+        <div className="">
+          {Object.keys(filters).map((field) => (
+            <div key={field} className="border-t border-white/10 pt-2 px-3">
+              <div className="text-[10px] tracking-[0.4em] uppercase text-white/40 text-right font-semibold mb-2">
+                {field}
               </div>
 
               <button
-                onClick={handleReset}
-                className="mt-12 px-4 py-2 rounded-full text-sm tracking-[0.2em] uppercase
-                border border-white/10 text-white/50 hover:border-white/30 hover:text-white hover:bg-white/5
-                transition-all duration-300"
+                onClick={() => handleSelect(field, "all")}
+                className={`w-full text-right p-1 text-[11px] tracking-[0.3em] uppercase transition ${
+                  selectedFilters[field] === "all"
+                    ? "text-white"
+                    : "text-white/40 hover:text-white"
+                }`}
               >
-                Reset All
+                ALL
               </button>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+
+              {filters[field].map((option) => (
+                <button
+                  key={option}
+                  onClick={() => handleSelect(field, option)}
+                  className={`w-full text-right p-1 text-[11px] tracking-[0.3em] uppercase transition ${
+                    selectedFilters[field] === option
+                      ? "text-white"
+                      : "text-white/40 hover:text-white"
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          ))}
+
+          <div className="border-t border-white/10 mt-2 pt-2 px-3">
+            <button
+              onClick={reset}
+              className="text-[10px] text-center w-full tracking-[0.4em] uppercase text-white/30 hover:text-white/70 transition"
+            >
+              RESET
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

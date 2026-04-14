@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import photos from "./photos";
 import Lightbox from "./Lightbox";
-import Filter from "./Filter";
+import Header from "./Header";
 
 function useIsMdUp() {
   const [isMdUp, setIsMdUp] = useState(false);
@@ -36,8 +36,8 @@ function GalleryItem({ photo, onClick, isMdUp }) {
   return (
     <motion.div
       onClick={() => onClick(photo.id)}
-      className="relative cursor-pointer overflow-hidden rounded-lg"
-      whileHover={{ scale: 1.02 }}
+      className="relative cursor-pointer overflow-hidden"
+      whileHover={{ scale: 0.98, opacity: 0.90 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <img
@@ -52,7 +52,6 @@ function GalleryItem({ photo, onClick, isMdUp }) {
 export default function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const galleryRef = useRef(null);
   const isMdUp = useIsMdUp();
 
   const [selectedFilters, setSelectedFilters] = useState({
@@ -75,8 +74,6 @@ export default function Gallery() {
       .filter((photo) =>
         Object.keys(selectedFilters).every((field) => {
           if (selectedFilters[field] === "all") return true;
-          if (field === "featured")
-            return photo[field] === (selectedFilters[field] === "true");
           return photo[field] === selectedFilters[field];
         })
       )
@@ -93,30 +90,19 @@ export default function Gallery() {
 
   return (
     <div>
-      <h1 className="group text-center m-1 pt-6 pb-6 md:pb-20 text-xl md:text-2xl tracking-[0.4em] font-light">
-        <span className="inline-block transition-all duration-700 group-hover:tracking-[0.6em]">
-          JM
-        </span>
-        <span className="ml-3 opacity-70 transition-opacity duration-500 group-hover:opacity-100">
-          Photography
-        </span>
-      </h1>
-      <motion.div>
-        <Filter
-          filters={filters}
-          selectedFilters={selectedFilters}
-          setSelectedFilters={setSelectedFilters}
-        />
-      </motion.div>
+      <Header
+        filters={filters}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+      />
 
-      <div className="w-full flex justify-center">
+      <div className="min-h-[70vh] w-full flex justify-center">
         <div className="w-full md:w-2/3">
           {filteredPhotos.length > 0 ? (
             <div
-              ref={galleryRef}
               className={`grid gap-6 ${
                 isMdUp
-                  ? "md:grid-cols-4 auto-rows-auto"
+                  ? "md:grid-cols-2 auto-rows-auto"
                   : "grid-cols-1 auto-rows-auto"
               }`}
             >

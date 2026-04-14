@@ -37,7 +37,7 @@ function Footer() {
     <section
       id="contact"
       data-title="Contact"
-      className="w-full p-4 md:p-8"
+      className="relative bottom-0 w-full p-4 md:p-8"
     >
       <div className="flex flex-col md:flex-row md:justify-between gap-2 md:gap-0">
         <p
