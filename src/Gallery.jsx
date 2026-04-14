@@ -8,7 +8,7 @@ function useIsMdUp() {
   const [isMdUp, setIsMdUp] = useState(false);
 
   useEffect(() => {
-    const checkScreen = () => setIsMdUp(window.innerWidth >= 768); 
+    const checkScreen = () => setIsMdUp(window.innerWidth >= 768);
     checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
@@ -17,14 +17,12 @@ function useIsMdUp() {
   return isMdUp;
 }
 
-function GalleryItem({ photo, hoveredId, setHoveredId, onClick, isMdUp }) {
-  const isActive = hoveredId === photo.id;
-
+function GalleryItem({ photo, onClick, isMdUp }) {
   if (!isMdUp) {
     return (
       <div
         onClick={() => onClick(photo.id)}
-        className="relative cursor-pointer overflow-hidden rounded-lg my-1 mx-4"
+        className="relative cursor-pointer overflow-hidden rounded my-1 mx-4"
       >
         <img
           src={photo.src}
@@ -37,21 +35,10 @@ function GalleryItem({ photo, hoveredId, setHoveredId, onClick, isMdUp }) {
 
   return (
     <motion.div
-      layout
-      onMouseEnter={() => setHoveredId(photo.id)}
-      onMouseLeave={() => setHoveredId(null)}
       onClick={() => onClick(photo.id)}
       className="relative cursor-pointer overflow-hidden rounded-lg"
-      style={{
-        gridColumn: isActive ? "span 2" : "span 1",
-        gridRow: isActive ? "span 2" : "span 1",
-      }}
-      transition={{
-        layout: {
-          duration: 0.6,
-          ease: [0.22, 1, 0.36, 1],
-        },
-      }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <img
         src={photo.src}
@@ -63,7 +50,6 @@ function GalleryItem({ photo, hoveredId, setHoveredId, onClick, isMdUp }) {
 }
 
 export default function Gallery() {
-  const [hoveredId, setHoveredId] = useState(null);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const galleryRef = useRef(null);
@@ -107,8 +93,7 @@ export default function Gallery() {
 
   return (
     <div>
-      <h1 className="group text-center m-1 pb-6 md:pb-20 text-2xl md:text-3xl tracking-[0.4em] font-light"
-      >
+      <h1 className="group text-center m-1 pt-6 pb-6 md:pb-20 text-xl md:text-2xl tracking-[0.4em] font-light">
         <span className="inline-block transition-all duration-700 group-hover:tracking-[0.6em]">
           JM
         </span>
@@ -116,8 +101,7 @@ export default function Gallery() {
           Photography
         </span>
       </h1>
-      <motion.div
-      >
+      <motion.div>
         <Filter
           filters={filters}
           selectedFilters={selectedFilters}
@@ -130,9 +114,9 @@ export default function Gallery() {
           {filteredPhotos.length > 0 ? (
             <div
               ref={galleryRef}
-              className={`grid gap-4 ${
+              className={`grid gap-6 ${
                 isMdUp
-                  ? "md:grid-cols-3 auto-rows-[220px]"
+                  ? "md:grid-cols-4 auto-rows-auto"
                   : "grid-cols-1 auto-rows-auto"
               }`}
             >
@@ -140,8 +124,6 @@ export default function Gallery() {
                 <GalleryItem
                   key={photo.id}
                   photo={photo}
-                  hoveredId={hoveredId}
-                  setHoveredId={setHoveredId}
                   onClick={handleClick}
                   isMdUp={isMdUp}
                 />

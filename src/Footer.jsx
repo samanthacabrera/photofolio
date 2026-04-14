@@ -49,7 +49,7 @@ function Footer() {
             href="mailto:justinamiller1023@gmail.com"
             className="relative inline-block transition-colors duration-300 group-hover:text-white/70"
           >
-            contact
+            Contact
             <span className="absolute left-0 -bottom-[2px] h-[1px] w-0 bg-white/70 transition-all duration-500 ease-out group-hover:w-full"></span>
           </a>
         </p>
@@ -58,17 +58,15 @@ function Footer() {
           ref={linkRef}
           className="group opacity-0 translate-y-3 transition-all duration-700 ease-out text-sm tracking-[0.12em] leading-relaxed md:text-right"
         >
-          This site was made by{" "}
           <a
             href="https://samoontha.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="relative inline-block transition-colors duration-300 group-hover:text-white/70"
           >
-            Sam Cabrera
+            Special Thanks
             <span className="absolute left-0 -bottom-[2px] h-[1px] w-0 bg-white/70 transition-all duration-500 ease-out group-hover:w-full"></span>
           </a>
-          .
         </p>
       </div>
     </section>

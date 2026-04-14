@@ -18,7 +18,7 @@ export default function App() {
         <Route
           path="/photofolio/"
           element={
-            <div className="flex flex-col space-y-20 py-8 md:py-20 overflow-x-hidden">
+            <div className="flex flex-col space-y-20 overflow-x-hidden">
               {/* <About /> */}
               <Gallery />
             </div>
