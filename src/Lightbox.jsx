@@ -126,7 +126,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
               <div
                 key={`${photo.id}-${virtual}`}
                 className={`flex-shrink-0 flex justify-center ${
-                  isActive ? "" : "opacity-40 scale-75 hover:opacity-70"
+                  isActive ? "" : "opacity-40 scale-75"
                 }`}
                 style={{ width: "600px" }}
               >
