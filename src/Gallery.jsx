@@ -18,6 +18,8 @@ function useIsMdUp() {
 }
 
 function GalleryItem({ photo, onClick, isMdUp }) {
+  const info = `${photo.city}   ${photo.year}`;
+
   if (!isMdUp) {
     return (
       <div
@@ -36,8 +38,8 @@ function GalleryItem({ photo, onClick, isMdUp }) {
   return (
     <motion.div
       onClick={() => onClick(photo.id)}
-      className="relative cursor-pointer overflow-hidden"
-      whileHover={{ scale: 0.98, opacity: 0.90 }}
+      className="relative cursor-pointer overflow-hidden group"
+      whileHover={{ scale: 0.99 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <img
@@ -45,6 +47,12 @@ function GalleryItem({ photo, onClick, isMdUp }) {
         alt={photo.city}
         className="w-full h-full object-cover"
       />
+
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:bg-black/30 transition-opacity duration-500 flex items-end p-4 md:p-6">
+        <div className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-white">
+          {info}
+        </div>
+      </div>
     </motion.div>
   );
 }

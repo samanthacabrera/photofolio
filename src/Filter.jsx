@@ -44,7 +44,7 @@ export default function Filter({ filters, selectedFilters, setSelectedFilters })
       </button>
 
       <div
-        className={`absolute top-12 right-0 w-64 border-b border-x border-black bg-[#000900] backdrop-blur-xl rounded-2xl shadow-2xl transition-all duration-300 ${
+        className={`absolute top-12 right-0 w-64 border-black bg-[#000900] backdrop-blur-xl rounded-2xl shadow-2xl transition-all duration-300 ${
           open
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-2 pointer-events-none"
@@ -84,10 +84,10 @@ export default function Filter({ filters, selectedFilters, setSelectedFilters })
             </div>
           ))}
 
-          <div className="border-t border-white/10 mt-2 pt-2 px-3">
+          <div className="border-t border-white/10 mt-2 py-2 px-3">
             <button
               onClick={reset}
-              className="text-[10px] text-center w-full tracking-[0.4em] uppercase text-white/30 hover:text-white/70 transition"
+              className="text-[10px] text-center w-full tracking-[0.4em] uppercase text-white/40 hover:text-white transition"
             >
               RESET
             </button>
