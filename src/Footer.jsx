@@ -16,10 +16,10 @@ function useScrollFade(delay = 0) {
           }, delay);
         } else {
           el.style.opacity = 0;
-          el.style.transform = "translateY(12px)";
+          el.style.transform = "translateY(24px)";
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     observer.observe(el);
@@ -30,46 +30,50 @@ function useScrollFade(delay = 0) {
 }
 
 function Footer() {
-  const emailRef = useScrollFade(0);
-  const linkRef = useScrollFade(250);
+  const linksRef = useScrollFade(0);
+  const topRef = useScrollFade(180);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <section
-      id="contact"
-      data-title="Contact"
-      className="relative bottom-0 w-full p-4 md:p-8"
-    >
-      <div className="flex flex-col md:flex-row md:justify-between gap-2 md:gap-0">
-        <p
-          ref={emailRef}
-          className="group opacity-0 translate-y-3 transition-all duration-700 ease-out text-sm tracking-[0.12em] leading-relaxed"
-        >
-          {" "}
-          <a
-            href="mailto:justinamiller1023@gmail.com"
-            className="relative inline-block transition-colors duration-300 group-hover:text-white/70"
-          >
-            Contact
-            <span className="absolute left-0 -bottom-[2px] h-[1px] w-0 bg-white/70 transition-all duration-500 ease-out group-hover:w-full"></span>
-          </a>
-        </p>
+    <footer className="w-full flex justify-center pt-24 md:pt-40 pb-16 md:pb-24 px-6 md:px-0">
+      <div className="w-full md:w-2/3 flex flex-col items-center gap-6 md:gap-8">
+        <div className="w-full h-px bg-white/20" />
 
-        <p
-          ref={linkRef}
-          className="group opacity-0 translate-y-3 transition-all duration-700 ease-out text-sm tracking-[0.12em] leading-relaxed md:text-right"
-        >
-          <a
-            href="https://samoontha.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative inline-block transition-colors duration-300 group-hover:text-white/70"
+        <div className="w-full flex flex-col md:flex-row md:items-end md:justify-between gap-16 md:gap-0">
+          <div
+            ref={linksRef}
+            className="opacity-0 translate-y-6 transition-all duration-700 ease-out flex flex-col md:flex-row gap-6 md:gap-10"
           >
-            Special Thanks
-            <span className="absolute left-0 -bottom-[2px] h-[1px] w-0 bg-white/70 transition-all duration-500 ease-out group-hover:w-full"></span>
-          </a>
-        </p>
+            <a
+              href="mailto:justinamiller1023@gmail.com"
+              className="text-sm font-light tracking-[0.3em] text-white/80 hover:text-white transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white/80 after:transition-all after:duration-300 md:hover:after:w-full"
+            >
+              Contact
+            </a>
+
+            <a
+              href="https://samoontha.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-light tracking-[0.3em] text-white/80 hover:text-white transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white/80 after:transition-all after:duration-300 md:hover:after:w-full"
+            >
+              Credits
+            </a>
+          </div>
+
+          <button
+            ref={topRef}
+            onClick={scrollToTop}
+            className="text-[9px] font-light tracking-[0.3em] uppercase text-white/80 hover:text-white transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white/80 after:transition-all after:duration-300 md:hover:after:w-full"
+          >
+            Back to top
+          </button>
+        </div>
       </div>
-    </section>
+    </footer>
   );
 }
 

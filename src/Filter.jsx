@@ -29,11 +29,11 @@ export default function Filter({ filters, selectedFilters, setSelectedFilters })
     <div ref={wrapperRef} className="relative z-50 flex flex-col items-end">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center justify-center w-10 h-10 border border-white/20 hover:border-white/60 transition rounded-sm group"
+        className="flex items-center justify-center w-10 h-10 border border-white/40 hover:border-white/60 transition rounded-sm group"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-4 h-4 text-white/60 group-hover:text-white transition"
+          className="w-6 h-6 text-white/80 group-hover:text-white transition"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -44,7 +44,7 @@ export default function Filter({ filters, selectedFilters, setSelectedFilters })
       </button>
 
       <div
-        className={`absolute top-12 right-0 w-64 border-b border-x border-white/10 bg-[#111211] backdrop-blur-xl rounded-2xl shadow-2xl transition-all duration-300 ${
+        className={`absolute top-12 right-0 w-64 border-b border-x border-black bg-[#000900] backdrop-blur-xl rounded-2xl shadow-2xl transition-all duration-300 ${
           open
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-2 pointer-events-none"
