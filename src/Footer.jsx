@@ -49,7 +49,7 @@ function Footer() {
           >
             <a
               href="mailto:justinamiller1023@gmail.com"
-              className="text-sm font-light tracking-[0.3em] text-white/80 hover:text-white transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white/80 after:transition-all after:duration-300 md:hover:after:w-full"
+              className="text-sm font-light tracking-widest hover:tracking-[0.2em] text-white/80 hover:text-white/100 transition-all duration-500"
             >
               Contact
             </a>
@@ -58,7 +58,7 @@ function Footer() {
               href="https://samoontha.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-light tracking-[0.3em] text-white/80 hover:text-white transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white/80 after:transition-all after:duration-300 md:hover:after:w-full"
+              className="text-sm font-light tracking-widest hover:tracking-[0.2em] text-white/80 hover:text-white/100 transition-all duration-500"
             >
               Credits
             </a>
@@ -67,7 +67,7 @@ function Footer() {
           <button
             ref={topRef}
             onClick={scrollToTop}
-            className="text-[9px] font-light tracking-[0.3em] uppercase text-white/80 hover:text-white transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white/80 after:transition-all after:duration-300 md:hover:after:w-full"
+            className="text-[9px] font-light tracking-widest hover:tracking-[0.2em] uppercase text-white/80 hover:text-white/100 transition-all duration-500"
           >
             Back to top
           </button>
