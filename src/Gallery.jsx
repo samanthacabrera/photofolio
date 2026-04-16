@@ -24,13 +24,16 @@ function GalleryItem({ photo, onClick, isMdUp }) {
     return (
       <div
         onClick={() => onClick(photo.id)}
-        className="relative cursor-pointer overflow-hidden rounded my-1 mx-4"
+        className="relative flex flex-col space-y-4 my-1 mx-4"
       >
         <img
           src={photo.src}
           alt={photo.city}
           className="w-full h-full object-cover"
         />
+        <p className="tracking-[0.15em]">
+          {info}
+        </p>
       </div>
     );
   }
@@ -108,7 +111,7 @@ export default function Gallery() {
         <div className="w-full md:w-2/3">
           {filteredPhotos.length > 0 ? (
             <div
-              className={`grid gap-6 ${
+              className={`grid gap-2 md:gap-6 ${
                 isMdUp
                   ? "md:grid-cols-2 auto-rows-auto"
                   : "grid-cols-1 auto-rows-auto"
