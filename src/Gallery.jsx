@@ -110,24 +110,24 @@ export default function Gallery() {
 
   const categoryTiles = [
     {
-      key: "all",
-      label: "All",
-      photo: "/photofolio/public/ireland/DSC04136.JPG",
-    },
-    {
       key: "macro",
       label: "Macro",
-      photo: "/photofolio/public/macro/DSC01025.JPG",
+      photo: "macro/DSC01654.JPG"
     },
     {
       key: "landscape",
       label: "Landscape",
-      photo: "/photofolio/public/portugal/DSC02552.JPG",
+      photo: "ireland/DSC03798.JPG",
     },
     {
       key: "architecture",
       label: "Architecture",
-      photo: "/photofolio/public/architecture/DSC01396.JPG",
+      photo: "architecture/DSC01396.JPG",
+    },
+    {
+      key: "all",
+      label: "All",
+      photo: "macro/DSC01043.JPG",
     },
   ];
 
@@ -146,12 +146,12 @@ export default function Gallery() {
               <div
                 key={tile.key}
                 onClick={() => handleCategoryClick(tile.key)}
-                className="relative cursor-pointer overflow-hidden group h-48 md:h-96 hover:scale-[0.99] tranisition duration-300"
+                className="relative cursor-pointer overflow-hidden group h-[30vh] hover:scale-[0.99] tranisition duration-300"
               >
                 <img
                   src={tile.photo}
                   alt={tile.label}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover "
                 />
                 <div className="absolute inset-0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                   <span className="text-white text-lg tracking-[0.3em] uppercase">
