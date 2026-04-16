@@ -48,6 +48,13 @@ function Footer() {
             className="opacity-0 translate-y-6 transition-all duration-700 ease-out flex flex-col md:flex-row gap-6 md:gap-10"
           >
             <a
+              href="/"
+              className="text-sm font-light tracking-widest hover:tracking-[0.2em] text-white/80 hover:text-white/100 transition-all duration-500"
+            >
+              Home
+            </a>
+
+            <a
               href="mailto:justinamiller1023@gmail.com"
               className="text-sm font-light tracking-widest hover:tracking-[0.2em] text-white/80 hover:text-white/100 transition-all duration-500"
             >

@@ -31,7 +31,9 @@ function GalleryItem({ photo, onClick, isMdUp }) {
           alt={photo.city}
           className="w-full h-full object-cover"
         />
-        <p className="text-white/70 font-light tracking-[0.2em] italic">{info}</p>
+        <p className="text-white/70 font-light tracking-[0.2em] italic">
+          {info}
+        </p>
       </div>
     );
   }
@@ -103,6 +105,7 @@ export default function Gallery() {
       category,
     }));
     setShowCategoryGrid(false);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const categoryTiles = [
@@ -124,7 +127,7 @@ export default function Gallery() {
     {
       key: "architecture",
       label: "Architecture",
-      photo: "/photofolio/public/architecture/DSC01396.JPG"
+      photo: "/photofolio/public/architecture/DSC01396.JPG",
     },
   ];
 
