@@ -49,14 +49,14 @@ function Footer() {
           >
             <a
               href="/photofolio"
-              className="text-sm font-light tracking-widest hover:tracking-[0.2em] text-white/80 hover:text-white/100 transition-all duration-500"
+              className="text-sm font-light tracking-widest text-white/80 hover:text-white/100 transition-all duration-500"
             >
               Home
             </a>
 
             <a
               href="mailto:justinamiller1023@gmail.com"
-              className="text-sm font-light tracking-widest hover:tracking-[0.2em] text-white/80 hover:text-white/100 transition-all duration-500"
+              className="text-sm font-light tracking-widest text-white/80 hover:text-white transition-all duration-500"
             >
               Contact
             </a>
@@ -65,7 +65,7 @@ function Footer() {
               href="https://samoontha.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-light tracking-widest hover:tracking-[0.2em] text-white/80 hover:text-white/100 transition-all duration-500"
+              className="text-sm font-light tracking-widest text-white/80 hover:text-white/100 transition-all duration-500"
             >
               Credits
             </a>
@@ -74,7 +74,7 @@ function Footer() {
           <button
             ref={topRef}
             onClick={scrollToTop}
-            className="text-[9px] font-light tracking-widest hover:tracking-[0.2em] uppercase text-white/80 hover:text-white/100 transition-all duration-500"
+            className="text-[9px] font-light tracking-widest uppercase text-white/80 hover:text-white/100 transition-all duration-500"
           >
             Back to top
           </button>

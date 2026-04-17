@@ -42,7 +42,7 @@ function GalleryItem({ photo, onClick, isMdUp }) {
     <motion.div
       onClick={() => onClick(photo.id)}
       className="relative cursor-pointer overflow-hidden group"
-      whileHover={{ scale: 0.99 }}
+      whileHover={{ scale: 0.995 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <img
@@ -50,8 +50,8 @@ function GalleryItem({ photo, onClick, isMdUp }) {
         alt={photo.city}
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 group-hover:bg-black/30 transition-opacity duration-500 flex items-end p-4 italic">
-        <div className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-white">
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+        <div className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-white/80 italic">
           {info}
         </div>
       </div>
@@ -108,28 +108,7 @@ export default function Gallery() {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
-  const categoryTiles = [
-    {
-      key: "macro",
-      label: "Macro",
-      photo: "macro/DSC01654.JPG"
-    },
-    {
-      key: "landscape",
-      label: "Landscape",
-      photo: "ireland/DSC03798.JPG",
-    },
-    {
-      key: "architecture",
-      label: "Architecture",
-      photo: "architecture/DSC01396.JPG",
-    },
-    {
-      key: "all",
-      label: "All",
-      photo: "macro/DSC01043.JPG",
-    },
-  ];
+  const categories = ["macro", "landscape", "architecture", "all"];
 
   return (
     <div>
@@ -141,24 +120,27 @@ export default function Gallery() {
 
       <div className="min-h-[70vh] w-full flex justify-center">
         {isMdUp && showCategoryGrid ? (
-          <div className="w-full md:w-2/3 flex flex-col gap-6">
-            {categoryTiles.map((tile) => (
-              <div
-                key={tile.key}
-                onClick={() => handleCategoryClick(tile.key)}
-                className="relative cursor-pointer overflow-hidden group h-[30vh] hover:scale-[0.99] tranisition duration-300"
+          <div className="w-full md:w-2/3 flex flex-col">
+            {categories.map((category, index) => (
+              <motion.div
+                key={category}
+                onClick={() => handleCategoryClick(category)}
+                className="cursor-pointer py-10 border-b border-white/10 flex items-baseline justify-between"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.05 }}
               >
-                <img
-                  src={tile.photo}
-                  alt={tile.label}
-                  className="w-full h-full object-cover "
-                />
-                <div className="absolute inset-0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                  <span className="text-white text-lg tracking-[0.3em] uppercase">
-                    {tile.label}
+                <div className="flex items-baseline gap-6">
+                  <span className="text-white/80 tracking-[0.3em]">
+                    0{index + 1}
+                  </span>
+                  <span className="text-white/80 text-lg md:text-xl tracking-[0.2em] uppercase font-light hover:text-white hover:tracking-[0.2rem] transition-all duration-500">
+                    {category}
                   </span>
                 </div>
-              </div>
+
+                <div className="h-px w-12 bg-white/20 group-hover:w-24 transition-all duration-500" />
+              </motion.div>
             ))}
           </div>
         ) : (
