@@ -63,7 +63,6 @@ export default function Gallery() {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const isMdUp = useIsMdUp();
-  const [showCategoryGrid, setShowCategoryGrid] = useState(true);
 
   const [selectedFilters, setSelectedFilters] = useState({
     category: "all",
@@ -99,17 +98,6 @@ export default function Gallery() {
     }
   };
 
-  const handleCategoryClick = (category) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      category,
-    }));
-    setShowCategoryGrid(false);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  };
-
-  const categories = ["macro", "landscape", "architecture", "all"];
-
   return (
     <div>
       <Header
@@ -119,56 +107,30 @@ export default function Gallery() {
       />
 
       <div className="min-h-[70vh] w-full flex justify-center">
-        {isMdUp && showCategoryGrid ? (
-          <div className="w-full md:w-2/3 flex flex-col">
-            {categories.map((category, index) => (
-              <motion.div
-                key={category}
-                onClick={() => handleCategoryClick(category)}
-                className="cursor-pointer py-10 border-b border-white/10 flex items-baseline justify-between"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.05 }}
-              >
-                <div className="flex items-baseline gap-6">
-                  <span className="text-white/80 tracking-[0.3em]">
-                    0{index + 1}
-                  </span>
-                  <span className="text-white/80 text-lg md:text-xl tracking-[0.2em] uppercase font-light hover:text-white hover:tracking-[0.2rem] transition-all duration-500">
-                    {category}
-                  </span>
-                </div>
-
-                <div className="h-px w-12 bg-white/20 group-hover:w-24 transition-all duration-500" />
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          <div className="w-full md:w-2/3">
-            {filteredPhotos.length > 0 ? (
-              <div
-                className={`grid gap-2 md:gap-6 ${
-                  isMdUp
-                    ? "md:grid-cols-2 auto-rows-auto"
-                    : "grid-cols-1 auto-rows-auto"
-                }`}
-              >
-                {filteredPhotos.map((photo) => (
-                  <GalleryItem
-                    key={photo.id}
-                    photo={photo}
-                    onClick={handleClick}
-                    isMdUp={isMdUp}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-20 text-white/30 text-lg tracking-wide font-light">
-                No photos match your selected filters.
-              </div>
-            )}
-          </div>
-        )}
+        <div className="w-full md:w-2/3">
+          {filteredPhotos.length > 0 ? (
+            <div
+              className={`grid gap-2 md:gap-6 ${
+                isMdUp
+                  ? "md:grid-cols-2 auto-rows-auto"
+                  : "grid-cols-1 auto-rows-auto"
+              }`}
+            >
+              {filteredPhotos.map((photo) => (
+                <GalleryItem
+                  key={photo.id}
+                  photo={photo}
+                  onClick={handleClick}
+                  isMdUp={isMdUp}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 text-white/30 text-lg tracking-wide font-light">
+              No photos match your selected filters.
+            </div>
+          )}
+        </div>
       </div>
 
       {lightboxOpen && (
