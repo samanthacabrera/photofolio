@@ -17,9 +17,7 @@ function useIsMdUp() {
   return isMdUp;
 }
 
-function GalleryItem({ photo, onClick, isMdUp }) {
-  const info = `${photo.city}   ${photo.year}`;
-
+function GalleryItem({ photo, onClick, isMdUp, index }) {
   if (!isMdUp) {
     return (
       <div
@@ -31,9 +29,6 @@ function GalleryItem({ photo, onClick, isMdUp }) {
           alt={photo.city}
           className="w-full h-full object-cover"
         />
-        <p className="text-white/70 font-light tracking-[0.2em] italic">
-          {info}
-        </p>
       </div>
     );
   }
@@ -41,18 +36,28 @@ function GalleryItem({ photo, onClick, isMdUp }) {
   return (
     <motion.div
       onClick={() => onClick(photo.id)}
-      className="relative cursor-pointer overflow-hidden group"
-      whileHover={{ scale: 0.995 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="group cursor-pointer flex flex-col"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-120px" }}
+      transition={{ duration: 0.9, delay: index * 0.02, ease: [0.22, 1, 0.36, 1] }}
     >
-      <img
-        src={photo.src}
-        alt={photo.city}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-        <div className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-white/80 italic">
-          {info}
+      <div className="relative w-full overflow-hidden">
+        <img
+          src={photo.src}
+          alt={photo.city}
+          className="w-full h-auto object-cover"
+        />
+
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition duration-500 flex items-end">
+          <div className="flex justify-between items-between p-6 opacity-0 group-hover:opacity-100 transition duration-500">
+            <div className="text-white/90 tracking-[0.4em] uppercase text-[8px]">
+              {photo.city}
+            </div>
+            <div className="text-white/90 tracking-[0.4em] uppercase text-[8px]">
+              {photo.year}
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -87,7 +92,7 @@ export default function Gallery() {
           return photo[field] === selectedFilters[field];
         })
       )
-      .reverse();
+      .sort((a, b) => b.id - a.id);
   }, [selectedFilters]);
 
   const handleClick = (id) => {
@@ -107,24 +112,34 @@ export default function Gallery() {
       />
 
       <div className="min-h-[70vh] w-full flex justify-center">
-        <div className="w-full md:w-2/3">
+        <div className="w-full md:w-[80%]">
           {filteredPhotos.length > 0 ? (
-            <div
-              className={`grid gap-2 md:gap-6 ${
-                isMdUp
-                  ? "md:grid-cols-2 auto-rows-auto"
-                  : "grid-cols-1 auto-rows-auto"
-              }`}
-            >
-              {filteredPhotos.map((photo) => (
-                <GalleryItem
-                  key={photo.id}
-                  photo={photo}
-                  onClick={handleClick}
-                  isMdUp={isMdUp}
-                />
-              ))}
-            </div>
+            isMdUp ? (
+              <div className="md:columns-3 gap-4">
+                {filteredPhotos.map((photo, index) => (
+                  <div key={photo.id} className="break-inside-avoid mb-4">
+                    <GalleryItem
+                      photo={photo}
+                      onClick={handleClick}
+                      isMdUp={isMdUp}
+                      index={index}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-16">
+                {filteredPhotos.map((photo, index) => (
+                  <GalleryItem
+                    key={photo.id}
+                    photo={photo}
+                    onClick={handleClick}
+                    isMdUp={isMdUp}
+                    index={index}
+                  />
+                ))}
+              </div>
+            )
           ) : (
             <div className="text-center py-20 text-white/30 text-lg tracking-wide font-light">
               No photos match your selected filters.

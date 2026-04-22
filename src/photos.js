@@ -4,7 +4,7 @@ const photos = [
     { id: 22, src: "/photofolio/architecture/DSC03575.JPG", country: "Ireland", city: "Dublin", year: 2025, category: "architecture" },
     { id: 23, src: "/photofolio/architecture/DSC00750 2.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
     { id: 24, src: "/photofolio/architecture/DSC00779.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
-    // { id: 25, src: "/photofolio/architecture/DSC00787 2.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
+    { id: 25, src: "/photofolio/architecture/DSC00787 2.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
     { id: 26, src: "/photofolio/architecture/DSC00748.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
     { id: 27, src: "/photofolio/architecture/DSC00791.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
     { id: 28, src: "/photofolio/architecture/DSC01011.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
