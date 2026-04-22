@@ -29,6 +29,11 @@ function GalleryItem({ photo, onClick, isMdUp, index }) {
           alt={photo.city}
           className="w-full h-full object-cover"
         />
+
+        <div className="flex justify-between text-[8px] tracking-[0.4em] uppercase text-white/70 px-1">
+          <span>{photo.city}</span>
+          <span>{photo.year}</span>
+        </div>
       </div>
     );
   }
@@ -50,7 +55,7 @@ function GalleryItem({ photo, onClick, isMdUp, index }) {
         />
 
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition duration-500 flex items-end">
-          <div className="flex justify-between items-between p-6 opacity-0 group-hover:opacity-100 transition duration-500">
+          <div className="flex justify-between items-between p-6 opacity-0 group-hover:opacity-100 transition duration-500 w-full">
             <div className="text-white/90 tracking-[0.4em] uppercase text-[8px]">
               {photo.city}
             </div>
@@ -128,7 +133,7 @@ export default function Gallery() {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col space-y-16">
+              <div className="flex flex-col space-y-4">
                 {filteredPhotos.map((photo, index) => (
                   <GalleryItem
                     key={photo.id}
