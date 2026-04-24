@@ -37,8 +37,8 @@ export default function Header({
 
           <div className="md:col-span-8 flex flex-col gap-3">
             <a href="/photofolio" className="uppercase flex flex-col">
-              <span className="text-white/80 hover:text-white transition text-4xl md:text-6xl font-extralight tracking-wide">
-                JM <span className="opacity-80 -ml-3 md:-ml-5">Photography</span>
+              <span className="text-white/80 hover:text-white transition text-3xl md:text-4xl font-extralight tracking-wide">
+                JM <span className="opacity-80 -ml-2 md:-ml-3">Photography</span>
               </span>
             </a>
 

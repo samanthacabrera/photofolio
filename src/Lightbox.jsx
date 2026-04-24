@@ -104,7 +104,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
       onTouchEnd={handleTouchEnd}
     >
       {/* Mobile */}
-      <div className="md:hidden absolute inset-0">
+      <div className="md:hidden absolute inset-0 p-12">
         <img
           src={activePhoto.src}
           alt=""
@@ -115,7 +115,7 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
 
       {/* Desktop */}
       <div
-        className="hidden md:flex absolute inset-0 items-center justify-center overflow-hidden px-24"
+        className="hidden md:flex absolute inset-0 items-center justify-center px-24"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-10 transition-transform duration-700 ease-[cubic-bezier(.19,1,.22,1)]">
@@ -128,13 +128,16 @@ function Lightbox({ photos, activeIndex, setActiveIndex, onClose }) {
                 className={`flex-shrink-0 flex justify-center ${
                   isActive ? "" : "opacity-40 scale-75"
                 }`}
-                style={{ width: "600px" }}
+                style={{
+                  width: "600px",
+                  maxHeight: "85vh",
+                }}
               >
                 <img
                   src={photo.src}
                   alt=""
                   onClick={() => setVirtualIndex(virtual)}
-                  className="w-full object-cover rounded-sm cursor-pointer transition-all duration-500 ease-out"
+                  className="w-full max-h-[85vh] object-contain rounded-sm cursor-pointer transition-all duration-500 ease-out"
                 />
               </div>
             );
