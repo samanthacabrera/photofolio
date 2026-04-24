@@ -39,7 +39,7 @@ function Footer() {
 
   return (
     <footer className="w-full flex justify-center pt-24 md:pt-40 pb-16 md:pb-24">
-      <div className="w-full max-w-[80%] flex flex-col items-center gap-6 md:gap-8">
+      <div className="w-full px-4  md:px-0 md:max-w-[80%] flex flex-col items-center gap-6 md:gap-8">
         <div className="w-full h-px bg-white/20" />
 
         <div className="w-full flex flex-col md:flex-row md:items-end md:justify-between gap-16 md:gap-0">

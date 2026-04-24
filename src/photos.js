@@ -9,6 +9,9 @@ const photos = [
     { id: 27, src: "/photofolio/architecture/DSC00791.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
     { id: 28, src: "/photofolio/architecture/DSC01011.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
     { id: 29, src: "/photofolio/architecture/DSC01396.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
+    { id: 30, src: "/photofolio/architecture/DSC01353.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
+
+
 
     // LANDSCAPE ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     { id: 1, src: "/photofolio/bahamas/IMG_0323.JPG", country: "Bahamas", city: "Nassau", year: 2021, category: "landscape" },
@@ -25,10 +28,10 @@ const photos = [
     { id: 12, src: "/photofolio/ireland/DSC03798.JPG", country: "Ireland", city: "Howth Cliff", year: 2025, category: "landscape" },
     { id: 13, src: "/photofolio/ireland/DSC04133.JPG", country: "Ireland", city: "Cliffs of Moher", year: 2025, category: "landscape" },
     { id: 14, src: "/photofolio/ireland/DSC04158.JPG", country: "Ireland", city: "Cliffs of Moher", year: 2025, category: "landscape" },
-    // { id: 18, src: "/photofolio/norway/DSC00532.JPG", country: "Norway", city: "Ersfjordbotn", year: 2026, category: "landscape" },
-    // { id: 19, src: "/photofolio/norway/DSC00466.JPG", country: "Norway", city: "Ersfjordbotn", year: 2026, category: "landscape" },
-    // { id: 17, src: "/photofolio/norway/DSC00422.JPG", country: "Norway", city: "Tromso", year: 2026, category: "landscape" },
-    // { id: 20, src: "/photofolio/morocco/DSC01323.JPG", country: "Morocco", city: "Sahara Desert", year: 2026, category: "landscape" },
+    { id: 18, src: "/photofolio/norway/DSC00532.JPG", country: "Norway", city: "Ersfjordbotn", year: 2026, category: "landscape" },
+    { id: 19, src: "/photofolio/norway/DSC00466.JPG", country: "Norway", city: "Ersfjordbotn", year: 2026, category: "landscape" },
+    { id: 17, src: "/photofolio/norway/DSC00422.JPG", country: "Norway", city: "Tromso", year: 2026, category: "landscape" },
+    { id: 20, src: "/photofolio/morocco/DSC01323.JPG", country: "Morocco", city: "Sahara Desert", year: 2026, category: "landscape" },
 
     // MACRO ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     { id: 30, src: "/photofolio/macro/DSC00260.JPG", country: "California", city: "Newport Beach", year: 2025, category: "macro" },
