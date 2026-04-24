@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Masonry from "react-masonry-css";
 import photos from "./photos";
 import Lightbox from "./Lightbox";
 import Header from "./Header";
@@ -120,18 +121,21 @@ export default function Gallery() {
         <div className="w-full md:w-[80%]">
           {filteredPhotos.length > 0 ? (
             isMdUp ? (
-              <div className="md:columns-3 gap-4">
+              <Masonry
+                breakpointCols={{ default: 3, 1024: 2, 640: 1 }}
+                className="flex w-full gap-4"
+                columnClassName="flex flex-col gap-4"
+              >
                 {filteredPhotos.map((photo, index) => (
-                  <div key={photo.id} className="break-inside-avoid mb-4">
-                    <GalleryItem
-                      photo={photo}
-                      onClick={handleClick}
-                      isMdUp={isMdUp}
-                      index={index}
-                    />
-                  </div>
+                  <GalleryItem
+                    key={photo.id}
+                    photo={photo}
+                    onClick={handleClick}
+                    isMdUp={isMdUp}
+                    index={index}
+                  />
                 ))}
-              </div>
+              </Masonry>
             ) : (
               <div className="flex flex-col space-y-4">
                 {filteredPhotos.map((photo, index) => (

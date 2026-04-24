@@ -42,7 +42,7 @@ export default function Loading({ onFinish }) {
         <span className="inline-block transition-all duration-700 group-hover:tracking-[0.6em]">
           JM
         </span>
-        <span className="ml-3 opacity-70 transition-opacity duration-500 group-hover:opacity-100">
+        <span className="opacity-70 transition-opacity duration-500 group-hover:opacity-100">
           Photography
         </span>
       </h1>

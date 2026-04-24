@@ -32,23 +32,22 @@ const photos = [
     { id: 24, src: "/photofolio/architecture/DSC00748.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
     { id: 25, src: "/photofolio/architecture/DSC00791.JPG", country: "France", city: "Paris", year: 2026, category: "architecture" },
 
-    { id: 26, src: "/photofolio/architecture/DSC01011.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
-    { id: 27, src: "/photofolio/architecture/DSC01396.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
-    { id: 28, src: "/photofolio/architecture/DSC01353.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
-    { id: 29, src: "/photofolio/morocco/DSC01323.JPG", country: "Morocco", city: "Sahara Desert", year: 2026, category: "landscape" },
-    { id: 30, src: "/photofolio/macro/DSC01025.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "macro" },
-    { id: 31, src: "/photofolio/macro/DSC01043.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "macro" },
-    { id: 32, src: "/photofolio/macro/DSC01394.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "macro" },
-    { id: 33, src: "/photofolio/macro/DSC01395.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "macro" },
+    { id: 26, src: "/photofolio/macro/DSC01672.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
+    { id: 27, src: "/photofolio/architecture/DSC01273.JPG", country: "The Netherlands", city: "Leiden", year: 2025, category: "architecture" },
+    { id: 28, src: "/photofolio/macro/DSC01637.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
+    { id: 29, src: "/photofolio/macro/DSC01565.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
+    { id: 30, src: "/photofolio/macro/DSC01604.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
+    { id: 31, src: "/photofolio/macro/DSC01654.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
+    { id: 32, src: "/photofolio/macro/DSC01599.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
 
-    { id: 34, src: "/photofolio/architecture/DSC01273.JPG", country: "The Netherlands", city: "Leiden", year: 2025, category: "architecture" },
-    { id: 35, src: "/photofolio/macro/DSC01672.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
-    { id: 36, src: "/photofolio/macro/DSC01637.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
-    { id: 37, src: "/photofolio/macro/DSC01565.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
-    { id: 38, src: "/photofolio/macro/DSC01604.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
-    { id: 39, src: "/photofolio/macro/DSC01654.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
-    { id: 40, src: "/photofolio/macro/DSC01599.JPG", country: "The Netherlands", city: "Keukenhof", year: 2026, category: "macro" },
-
+    { id: 33, src: "/photofolio/macro/DSC01394.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "macro" },
+    { id: 34, src: "/photofolio/morocco/DSC01323.JPG", country: "Morocco", city: "Sahara Desert", year: 2026, category: "landscape" },
+    { id: 35, src: "/photofolio/macro/DSC01025.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "macro" },
+    { id: 36, src: "/photofolio/macro/DSC01395.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "macro" },
+    { id: 37, src: "/photofolio/macro/DSC01043.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "macro" },
+    { id: 38, src: "/photofolio/architecture/DSC01011.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
+    { id: 39, src: "/photofolio/architecture/DSC01353.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
+    { id: 40, src: "/photofolio/architecture/DSC01396.JPG", country: "Morocco", city: "Marrakesh", year: 2026, category: "architecture" },
 ];
 
 export default photos;
