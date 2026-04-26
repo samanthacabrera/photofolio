@@ -56,7 +56,7 @@ function GalleryItem({ photo, onClick, isMdUp, index }) {
         />
 
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition duration-500 flex items-end">
-          <div className="flex justify-between items-between p-6 opacity-0 group-hover:opacity-100 transition duration-500 w-full">
+          <div className="flex justify-between items-between p-2 opacity-0 group-hover:opacity-100 transition duration-500 w-full">
             <div className="text-white/90 tracking-[0.4em] uppercase text-[8px]">
               {photo.city}
             </div>

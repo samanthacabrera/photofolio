@@ -37,14 +37,14 @@ export default function Header({
 
           <div className="md:col-span-8 flex flex-col gap-3">
             <a href="/photofolio" className="uppercase flex flex-col">
-              <span className="text-white/80 hover:text-white transition text-3xl md:text-4xl font-extralight tracking-wide">
+              <span className="text-white/80 hover:text-white transition text-3xl md:text-4xl font-extralight tracking-wider">
                 JM <span className="opacity-80 -ml-2 md:-ml-3">Photography</span>
               </span>
             </a>
 
-            <div className="relative pl-0 md:pl-2 flex flex-col gap-6 text-white/60">
-              <p className="text-xs md:text-base tracking-[0.3em] leading-loose">
-                All photos are captured with a Sony Alpha a6000 under natural light.
+            <div className="relative flex flex-col gap-6 text-white/60">
+              <p className="text-sm md:text-base tracking-widest">
+                All photos captured with Sony Alpha a6000 under natural light.
               </p>
             </div>
           </div>
