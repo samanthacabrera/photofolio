@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function Loading({ onFinish }) {
+export default function Loading() {
   const titleRef = useRef(null);
 
   useEffect(() => {
@@ -25,16 +25,10 @@ export default function Loading({ onFinish }) {
       el.style.opacity = "0";
       el.style.filter = "blur(10px)";
     }, 2000);
-
-    const timer = setTimeout(() => {
-      onFinish();
-    }, 2500);
-
-    return () => clearTimeout(timer);
-  }, [onFinish]);
+  }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#111211] text-white">
+    <div className="min-h-screen flex items-center justify-center bg-[#000900] text-white">
       <h1
         ref={titleRef}
         className="group text-white/80 hover:text-white transition text-2xl md:text-4xl font-extralight tracking-wide"
