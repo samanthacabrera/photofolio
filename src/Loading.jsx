@@ -31,12 +31,12 @@ export default function Loading() {
     <div className="min-h-screen flex items-center justify-center bg-[#000900] text-white">
       <h1
         ref={titleRef}
-        className="group text-white/80 hover:text-white transition text-2xl md:text-4xl font-extralight tracking-wide"
+        className="text-white/80 text-2xl md:text-4xl font-extralight tracking-wide"
       >
-        <span className="inline-block transition-all duration-700 group-hover:tracking-[0.6em]">
+        <span className="inline-block">
           JM
         </span>
-        <span className="opacity-70 transition-opacity duration-500 group-hover:opacity-100">
+        <span className="opacity-70">
           Photography
         </span>
       </h1>
