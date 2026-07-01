@@ -32,27 +32,19 @@ export default function Header({
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="w-full md:w-[80%] min-h-[60px] flex flex-col justify-between">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-
-          <div className="md:col-span-8 flex flex-col gap-3">
+      <div className="w-full">
+          <div className="text-center">
             <a
               href="/photofolio"
-              className="group text-white/80 transition text-2xl md:text-4xl font-light tracking-[0.2em]"
+              className="group text-white/80 transition text-xl md:text-2xl font-light tracking-[0.2em]"
             >
-              <span className="inline-block transition-all duration-700 font-medium">
+              <span className="inline-block transition-all duration-700 font-medium pt-1 pb-4">
                 JM
               </span>
               <span>
                 Photography
               </span>
             </a>
-
-            <div className="relative flex flex-col gap-6 text-white/70">
-              <p className="text-sm md:text-base tracking-widest">
-                All photos captured with Sony Alpha a6000 under natural light.
-              </p>
-            </div>
           </div>
 
           <Filter
@@ -60,8 +52,6 @@ export default function Header({
             selectedFilters={selectedFilters}
             setSelectedFilters={setSelectedFilters}
           />
-
-        </div>
       </div>
     </header>
   );
