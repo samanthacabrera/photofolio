@@ -36,7 +36,7 @@ export default function Loading() {
         <span className="inline-block">
           JM
         </span>
-        <span className="opacity-70">
+        <span className="text-neutral-400">
           Photography
         </span>
       </h1>

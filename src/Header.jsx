@@ -38,10 +38,10 @@ export default function Header({
               href="/photofolio"
               className="group text-white/80 transition text-xl md:text-2xl font-light tracking-[0.2em]"
             >
-              <span className="inline-block transition-all duration-700 font-medium pt-1 pb-4">
+              <span className="inline-block transition-all duration-700 pt-1 pb-4">
                 JM
               </span>
-              <span>
+              <span className="text-neutral-400">
                 Photography
               </span>
             </a>
