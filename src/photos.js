@@ -53,10 +53,13 @@ const photos = [
     { id: 42, src: "/photofolio/portugal/IMG_5985.jpg", country: "Portugal", city: "Madeira", year: 2026, category: "landscape" },
     { id: 44, src: "/photofolio/portugal/IMG_5982.jpg", country: "Portugal", city: "Madeira", year: 2026, category: "landscape" },
     { id: 43, src: "/photofolio/portugal/IMG_5984.jpg", country: "Portugal", city: "Madeira", year: 2026, category: "landscape" },
-    { id: 45, src: "/photofolio/portugal/DSC01991.jpg", country: "Portugal", city: "Mad", year: 2026, category: "landscape" },
+    { id: 45, src: "/photofolio/portugal/DSC01991.jpg", country: "Portugal", city: "Madeira", year: 2026, category: "landscape" },
     { id: 46, src: "/photofolio/portugal/IMG_6034.jpg", country: "Portugal", city: "Madeira", year: 2026, category: "landscape" },
     { id: 47, src: "/photofolio/portugal/DSC02362.jpg", country: "Portugal", city: "Madeira", year: 2026, category: "landscape" },
 
+    { id: 48, src: "/photofolio/greece/IMG_6254.JPG", country: "Greece", city: "Crete", year: 2026, category: "landscape" },
+    { id: 49, src: "/photofolio/greece/IMG_6244.JPG", country: "Greece", city: "Athens", year: 2026, category: "architecture" },
+    { id: 50, src: "/photofolio/greece/IMG_6249.JPG", country: "Greece", city: "Athens", year: 2026, category: "architecture" },
 ];
 
 export default photos;
