@@ -36,11 +36,6 @@ export default function Header({
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
 
           <div className="md:col-span-8 flex flex-col gap-3">
-            {/* <a href="/photofolio" className="uppercase flex flex-col">
-              <span className="text-white/80 hover:text-white transition text-3xl md:text-4xl font-extralight tracking-wider">
-                JM <span className="opacity-80 -ml-2 md:-ml-3">Photography</span>
-              </span>
-            </a> */}
             <a
               href="/photofolio"
               className="group text-white/80 transition text-2xl md:text-4xl font-light tracking-[0.2em]"
