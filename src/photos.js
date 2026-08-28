@@ -60,6 +60,13 @@ const photos = [
     { id: 48, src: "/photofolio/greece/IMG_6254.JPG", country: "Greece", city: "Crete", year: 2026, category: "landscape" },
     { id: 49, src: "/photofolio/greece/IMG_6244.JPG", country: "Greece", city: "Athens", year: 2026, category: "architecture" },
     { id: 50, src: "/photofolio/greece/IMG_6249.JPG", country: "Greece", city: "Athens", year: 2026, category: "architecture" },
+
+    { id: 51, src: "/photofolio/tmb/DSC01152.JPG", country: "France", city: "Chamonix", year: 2026, category: "landscape" },
+    { id: 52, src: "/photofolio/tmb/DSC01238.JPG", country: "France", city: "Aiguille du Midi", year: 2026, category: "landscape" },
+    { id: 53, src: "/photofolio/tmb/DSC02160.JPG", country: "Switzerland", city: "Val Ferret", year: 2026, category: "landscape" },
+    { id: 54, src: "/photofolio/tmb/DSC02200.JPG", country: "Switzerland", city: "Val Ferret", year: 2026, category: "landscape" },
+    { id: 55, src: "/photofolio/tmb/DSC02281.JPG", country: "Italy", city: "Grand Col Ferret", year: 2026, category: "landscape" },
+
 ];
 
 export default photos;
